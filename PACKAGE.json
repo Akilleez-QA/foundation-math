@@ -1,0 +1,17 @@
+{
+  "name": "foundation-math",
+  "candidate": "standalone-gpl3-20261026",
+  "distribution": "explicit-allowlist-source-zip",
+  "python_requires": ">=3.10",
+  "dependencies": [],
+  "license": "GPL-3.0-only",
+  "license_state": "owner_selected_first_party_scope_in_NOTICE",
+  "capabilities": [
+    "exact_mathematical_kernels",
+    "finite_check_receipts",
+    "supplied_evidence_reports"
+  ],
+  "scientific_acceptance": false,
+  "copyright": "Copyright (c) 2026 Akilleez-QA",
+  "release_kind": "source_candidate"
+}
