@@ -1,5 +1,5 @@
 {
-  "candidate": "source-binding-v2-20261026",
+  "candidate": "scalar-control-v1-20261027",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -15,24 +15,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2475,
+      "bytes": 2720,
       "path": "NOTICE.md",
-      "sha256": "d73ba0358bb2843ca8fcb4c008b19c3f51c7233a047881df74b681c813254cd1"
+      "sha256": "02f853046a4a1f93dedca16a5869359ad87f32f38683c93263a19233701995d1"
     },
     {
-      "bytes": 567,
+      "bytes": 609,
       "path": "PACKAGE.json",
-      "sha256": "aaee456951b4f62dbf20e8d30cc3e8d408d14e4b275f502e8ba5b3ada147d71d"
+      "sha256": "caca117b8779059b14fd14c711264034a621d4a912152a4dd5baa6bfcefaf29a"
     },
     {
-      "bytes": 2162,
+      "bytes": 2586,
       "path": "PROVENANCE.md",
-      "sha256": "9c957ab73dffa8765754f8e93f9f48c9030195c715d7787959d37de2de5bda61"
+      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
     },
     {
-      "bytes": 4692,
+      "bytes": 4975,
       "path": "README.md",
-      "sha256": "d363e3f520634dda1463df6412b1ad671448b3a919ea5c1e0d57e37c12a16ba8"
+      "sha256": "8b5f6acae09cb8f83d6cd2cda96feb013403d56baaf3b68ab90153e44e2aa58b"
     },
     {
       "byte_preserved": false,
@@ -45,6 +45,11 @@
       "bytes": 1828,
       "path": "docs/RELEASE-CHECKLIST.md",
       "sha256": "97ee3c20cbe3cde0260de03f9781f113a4d49d2ab4ae52d89ade7fb3859cd236"
+    },
+    {
+      "bytes": 3309,
+      "path": "docs/SCALAR-CONTROL.md",
+      "sha256": "8d77c755c4d1f8b5bf13dba4ec03f07163b8d10cd7bf33510e440c1260cc56ae"
     },
     {
       "bytes": 3365,
@@ -74,6 +79,16 @@
       "bytes": 2130,
       "path": "examples/research-regression.problem.json",
       "sha256": "f6c5db8425630f0501c69ce54e93bbd8087178e371fbb73d4a3dbe48abef3307"
+    },
+    {
+      "bytes": 139,
+      "path": "fm_control/__init__.py",
+      "sha256": "172fef0cf6c93277dcf35f139494a8b94775d96714bdd802f17886ff69df9e50"
+    },
+    {
+      "bytes": 2323,
+      "path": "fm_control/scalar.py",
+      "sha256": "2b766e60dd1fcd85cd3d4f28ccee6fa549d739eb54e4ffea8ebd5327a83af844"
     },
     {
       "byte_preserved": true,
@@ -192,6 +207,11 @@
       "path": "tests/test_problem.py",
       "sha256": "5eb73a45452a9b77789bffdb0341ae426156e5718e28a7598f29b50e06f11b9e",
       "source_sha256": "fecea353544fd272cb7d95638dafc1f822345e6351da7d2373a45979eaa7021b"
+    },
+    {
+      "bytes": 3064,
+      "path": "tests/test_scalar_control.py",
+      "sha256": "8e08ea104104b658e9717205ae712d6328f79e683a426c74838901cad48c8690"
     },
     {
       "bytes": 6200,

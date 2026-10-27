@@ -88,3 +88,9 @@ the Free Software Foundation notice and verbatim-copy permission.
 The intended release process promotes an explicitly selected, tested development
 snapshot after review; it is not a blanket directory sync. See
 [the release checklist](docs/RELEASE-CHECKLIST.md).
+
+## Exact scalar control certificates
+
+`fm_control` adds model-conditional one-step safe-action intervals and a
+two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
+This is not a physical simulator, general controller or equipment-safety approval.

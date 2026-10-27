@@ -32,3 +32,11 @@ examples and packaging tools remain byte-identical to public baseline
 Hashes and structural comparison do not prove mathematical correctness, privacy,
 rights, or scientific acceptance. No historical execution receipt was rewritten
 to impersonate this candidate's evidence.
+
+## Scalar one-step control addition (2026-10-27)
+
+Built on public commit 2d26df9acc3a8a38e21e0c5ddfb8f558535e7399.
+New fm_control code is elementary interval algebra with synthetic witnesses.
+Prior runtime modules are unchanged. No external physical data or private
+application code is included. The normalization regression reflects an actual
+prototype defect; validation claims are limited to the stated model and tests.

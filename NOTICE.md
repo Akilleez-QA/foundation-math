@@ -9,7 +9,7 @@ The owner selects GNU General Public License version 3 only (SPDX:
 distribution. This is not an "or later" grant. The complete license is in LICENSE.
 The software is supplied without warranty; see LICENSE sections 15 and 16.
 
-Covered first-party paths are `fm_research/`, `fm_mapper/`, the nine selected
+Covered first-party paths are `fm_research/`, `fm_mapper/`, `fm_control/`, the nine selected
 runtime files under `vendor/foundation-math-v014/`, `tests/`, `examples/`, `tools/`,
 `docs/`, and the first-party root documentation and metadata, as enumerated in
 `SOURCE-MANIFEST.json`. The root manifest itself is included in that scope.
@@ -43,3 +43,7 @@ commit `a005aefe5ee54fa1c07a81bae2c93466ebcc49a1`, blob
 `f6cdd22a6c1fbc887e08a215cb4beb3c47048041`:
 [license source](https://github.com/Akilleez-QA/foundation-engine/blob/a005aefe5ee54fa1c07a81bae2c93466ebcc49a1/LICENSE).
 This copies the license text, not any Engine implementation.
+
+The 2026-10-27 scalar-control addition consists of newly authored generic
+exact interval algebra, synthetic tests and documentation under GPL-3.0-only.
+It includes no private application implementation or physical property data.

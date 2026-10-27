@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "source-binding-v2-20261026",
+  "candidate": "scalar-control-v1-20261027",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],
@@ -9,7 +9,8 @@
   "capabilities": [
     "exact_mathematical_kernels",
     "finite_check_receipts",
-    "supplied_evidence_reports"
+    "supplied_evidence_reports",
+    "exact_scalar_one_step_certificates"
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Akilleez-QA",
