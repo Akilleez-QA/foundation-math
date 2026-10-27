@@ -151,13 +151,38 @@ def load_spec(source):
     return spec
 
 
-def _source_hash():
-    """Bind the research module bytes (sorted filenames) and pinned catalog hash."""
-    h = sha256(vendor.catalog_sha256().encode())
-    for path in sorted(Path(__file__).parent.glob('*.py')):
-        h.update(path.name.encode() + b'\0' + path.read_bytes() + b'\0')
-    return h.hexdigest()
+# Exact selected mathematical source closure; no mapper, tests or archive inputs.
+_SOURCE_FILES = (
+    'fm_research/__init__.py', 'fm_research/__main__.py',
+    'fm_research/field.py', 'fm_research/p1.py', 'fm_research/problem.py',
+    'fm_research/rank.py', 'fm_research/twoi.py', 'fm_research/vendor.py',
+    'vendor/foundation-math-v014/character_ring/__init__.py',
+    'vendor/foundation-math-v014/character_ring/contract.py',
+    'vendor/foundation-math-v014/character_ring/producer.py',
+    'vendor/foundation-math-v014/character_ring/verifier.py',
+    'vendor/foundation-math-v014/character_ring/catalog.json',
+    'vendor/foundation-math-v014/split_bundle/__init__.py',
+    'vendor/foundation-math-v014/split_bundle/contract.py',
+    'vendor/foundation-math-v014/split_bundle/producer.py',
+    'vendor/foundation-math-v014/split_bundle/verifier.py',
+)
 
+
+def _source_hash():
+    """Version-2 identity of the selected mathematical source bytes on disk.
+
+    This includes the retained independent vendor verifiers conservatively,
+    even when a particular check does not invoke them. It is not authentication
+    of loaded code, the interpreter, or the truth of a mathematical claim.
+    """
+    vendor.catalog_sha256()  # Preserve the fixed-catalog integrity check.
+    h = sha256(b'fm-research-source/2\0')
+    prefix = 'vendor/foundation-math-v014/'
+    for relative in sorted(_SOURCE_FILES):
+        path = (vendor.VENDOR / relative[len(prefix):] if relative.startswith(prefix)
+                else Path(__file__).parent / relative.removeprefix('fm_research/'))
+        h.update(relative.encode('utf-8') + b'\0' + sha256(path.read_bytes()).digest())
+    return h.hexdigest()
 
 @dataclass(frozen=True)
 class Evidence:

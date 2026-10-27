@@ -1,7 +1,7 @@
 # Candidate verification scope
 
 2026-10-26, Python 3.12.14, Linux. The selected source-tree candidate passed
-**48 tests normally and 48 with Python optimization enabled**. CLI subprocesses
+**54 tests normally and 54 with Python optimization enabled**. CLI subprocesses
 inherit optimization mode and disable site-package loading. Import-origin checks
 confirm the research layer, mapper, and selected vendor modules load from this
 source tree.
@@ -12,12 +12,14 @@ source tree.
 | Derived standalone ProblemSpec/dependency/integrity/CLI checks | 5 |
 | Generic synthetic mapper contract and title-correction regressions | 33 |
 | New synthetic explicit-manifest packaging checks | 3 |
+| New selected-source fingerprint and stale-receipt checks | 6 |
 
 These are authored software contract checks, not independent mathematical
 acceptance or blind evaluation. A previously disclosed mapper title defect is a
-regression case, not fresh unseen evidence. A preliminary 45-test run also passed;
-the three packaging tests were subsequently added, followed by both 48-test runs.
-No failed test or resource interruption occurred in those runs.
+regression case, not fresh unseen evidence. The prior licensed baseline passed
+48 methods; this source-binding revision adds six. Its dependency mutation
+subcases are not independent scientific evidence. No failed test or resource
+interruption occurred in either new 54-test run.
 
 ## Execution boundaries
 
@@ -39,11 +41,10 @@ receipt rather than inferred from this document.
 
 ## Boundaries still open
 
-The owner selected GPL-3.0-only for the covered first-party files. The standalone
-baseline passed selected-file release-boundary review; this licensed revision is
-a license/documentation/metadata-only delta and requires its own bounded final
-review. Fresh licensed-candidate normal/optimized runs, archive rebuilds and
-extraction checks are recorded in its exact-artifact release receipt. Neither
+GPL-3.0-only remains unchanged. This revision modifies the mathematical source
+fingerprint and adds bounded synthetic regression tests; it requires exact-delta
+review. Fresh candidate normal/optimized runs, archive rebuilds and extraction
+checks are recorded in its exact-artifact release receipt. Neither
 local tests nor license selection attest public publication. Source-tree tests do
 not establish a wheel/pip installation, every supported Python/OS combination,
 the full historical v0.14 suite, formal proof, real geometry, physical validation,

@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "standalone-gpl3-20261026",
+  "candidate": "source-binding-v2-20261026",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],
@@ -13,5 +13,6 @@
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Akilleez-QA",
-  "release_kind": "source_candidate"
+  "release_kind": "source_candidate",
+  "source_binding_format": "fm-research-source/2"
 }

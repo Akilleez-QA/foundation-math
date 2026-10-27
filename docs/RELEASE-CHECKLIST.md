@@ -20,9 +20,10 @@
 This process is intended for tested promotions of development snapshots. It does
 not configure a schedule, deployment, credentials, hosted CI, or public writes.
 
-## This licensed candidate
+## This source-binding candidate
 
-The owner selected GPL-3.0-only on 2026-10-26. The previously reviewed standalone
-file set is unchanged except for license, documentation and metadata. Runtime,
-test, example and packaging-tool bytes remain identical. Final delta review and
-remote publication verification are separate from preparing this local artifact.
+GPL-3.0-only remains unchanged. Relative to the public licensed baseline, this
+candidate changes only the research source fingerprint and dependency list,
+adds six synthetic regression methods and updates related docs/metadata. Exact
+source-delta review, bounded checks, archive reproduction and remote publication
+verification remain distinct steps. Historical receipts are not relabeled.

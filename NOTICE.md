@@ -31,9 +31,12 @@ historical v0.14 distribution.
 
 The standalone extraction dated 2026-10-26 preserves selected mathematical
 modules and corrects the distribution boundary to a check-only research CLI,
-with synthetic tests and examples. The present licensed revision changes only
-licensing, documentation and metadata relative to that reviewed standalone
-candidate; all runtime, test, example and packaging-tool bytes remain unchanged.
+with synthetic tests and examples. The initial licensed revision changed only
+licensing, documentation and metadata. This subsequent source-binding revision,
+also dated 2026-10-26, changes only the research source fingerprint and its declared
+dependencies, adds synthetic regression tests, and updates related documentation
+and metadata. Mathematical kernels, prior tests, examples and packaging tools
+remain unchanged from the public baseline.
 
 LICENSE was copied byte-for-byte from the public Foundation Engine LICENSE at
 commit `a005aefe5ee54fa1c07a81bae2c93466ebcc49a1`, blob

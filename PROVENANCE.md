@@ -5,9 +5,11 @@ Its exact selected file identities appear in `SOURCE-MANIFEST.json`.
 
 - Six `fm_research` modules are byte-preserved: initialization, field arithmetic,
   ranks, character API, split-bundle API, and the pinned catalog loader.
-- `fm_research/problem.py` retains its 17 mathematical/check/accounting
-  definitions unchanged in AST. The standalone module omits non-mathematical
-  projection helpers and their unused import. The CLI is check-only.
+- The initial standalone `fm_research/problem.py` retained 17 existing
+  definitions. This source-binding revision changes only `_source_hash` and adds
+  its explicit dependency list; the other 16 definitions are AST-identical to
+  the public baseline. Kernel algorithms and conditional gate logic are unchanged.
+  The CLI remains check-only.
 - Nine selected v0.14 runtime files are byte-preserved under
   `vendor/foundation-math-v014/`. This subset is not the full v0.14 release.
 - All three `fm_mapper` runtime modules are byte-preserved from corrected v2.
@@ -21,9 +23,11 @@ Its exact selected file identities appear in `SOURCE-MANIFEST.json`.
 
 The owner selected GPL-3.0-only for the covered first-party files on 2026-10-26;
 NOTICE.md reconciles the earlier unselected license state and identifies the exact
-scope. This licensed revision changes only licensing, documentation and metadata;
-runtime, tests, examples and packaging tools are byte-identical to the reviewed
-standalone baseline. The source manifest pins the new distribution.
+scope. The initial licensed revision changed only licensing, documentation and
+metadata. This subsequent revision binds the 17 selected mathematical source
+files and adds six synthetic regression tests. Other runtime modules, prior tests,
+examples and packaging tools remain byte-identical to public baseline
+`e492473632e413504ffe450a604fd4eb33e2a559`. The source manifest pins this revision.
 
 Hashes and structural comparison do not prove mathematical correctness, privacy,
 rights, or scientific acceptance. No historical execution receipt was rewritten

@@ -1,5 +1,5 @@
 {
-  "candidate": "standalone-gpl3-20261026",
+  "candidate": "source-binding-v2-20261026",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -15,24 +15,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2264,
+      "bytes": 2475,
       "path": "NOTICE.md",
-      "sha256": "a787c62c9075cff408e546562995eb82b687bd04f08b0c57dae8860927a140cf"
+      "sha256": "d73ba0358bb2843ca8fcb4c008b19c3f51c7233a047881df74b681c813254cd1"
     },
     {
-      "bytes": 514,
+      "bytes": 567,
       "path": "PACKAGE.json",
-      "sha256": "8c7bd705ca2ab5de6702a248c3577dc7345e6895cc6a0b52495b8eb57ee9d851"
+      "sha256": "aaee456951b4f62dbf20e8d30cc3e8d408d14e4b275f502e8ba5b3ada147d71d"
     },
     {
-      "bytes": 1874,
+      "bytes": 2162,
       "path": "PROVENANCE.md",
-      "sha256": "761c6ca246006a2f13d84ba4ff8e2b30a469b3a7ea03489016d7d779695bda01"
+      "sha256": "9c957ab73dffa8765754f8e93f9f48c9030195c715d7787959d37de2de5bda61"
     },
     {
-      "bytes": 4299,
+      "bytes": 4692,
       "path": "README.md",
-      "sha256": "66937f40c190f7c84c21fddeb2027389d413068a60569be60a2d49af0253dd88"
+      "sha256": "d363e3f520634dda1463df6412b1ad671448b3a919ea5c1e0d57e37c12a16ba8"
     },
     {
       "byte_preserved": false,
@@ -42,14 +42,19 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 1754,
+      "bytes": 1828,
       "path": "docs/RELEASE-CHECKLIST.md",
-      "sha256": "f239f1c13341b99bd1309482dfcdd296472766b074a21a5f29dd76a4d50d3262"
+      "sha256": "97ee3c20cbe3cde0260de03f9781f113a4d49d2ab4ae52d89ade7fb3859cd236"
     },
     {
-      "bytes": 2756,
+      "bytes": 3365,
+      "path": "docs/SOURCE-BINDING.md",
+      "sha256": "3ceb4dea96ba6972ca2d562349543eeb022af387cd80ff3aeee17837ec895341"
+    },
+    {
+      "bytes": 2781,
       "path": "docs/VERIFICATION.md",
-      "sha256": "11d22b9a17da3e77431a72d750a8fc71a79f80504df114925a1a5d2ec9ef78e0"
+      "sha256": "86f7199ef4ba36d3889dd6867b17ba538ff9892da5035a5fd684467e474e4ff2"
     },
     {
       "byte_preserved": true,
@@ -121,9 +126,9 @@
     },
     {
       "byte_preserved": false,
-      "bytes": 8925,
+      "bytes": 10299,
       "path": "fm_research/problem.py",
-      "sha256": "79379d8a779916c0efdf9be8615db2bdc1a957b41915ead00187bbe7f5921610",
+      "sha256": "f1a68876f94ab4ba4f4bc69c331daba28efc58e39a90dc818bde127d879b35e5",
       "source_sha256": "0e718ddda6122d6570023072eda22abfa82ec8c7c9f5a04bcb5e698222af8129"
     },
     {
@@ -187,6 +192,11 @@
       "path": "tests/test_problem.py",
       "sha256": "5eb73a45452a9b77789bffdb0341ae426156e5718e28a7598f29b50e06f11b9e",
       "source_sha256": "fecea353544fd272cb7d95638dafc1f822345e6351da7d2373a45979eaa7021b"
+    },
+    {
+      "bytes": 6200,
+      "path": "tests/test_source_binding.py",
+      "sha256": "eeb13fc7f6a421c87ef1db43ca3bc7f3182665fe108e7fe214ed54cf94b4dd7b"
     },
     {
       "bytes": 69,
@@ -266,5 +276,6 @@
   "license_scope": "First-party files enumerated here and this manifest, as specified by NOTICE.md; LICENSE retains its own document notice.",
   "release_kind": "source_candidate",
   "schema": "foundation-math-explicit-source-manifest/1",
-  "self_binding": "This file is included by the packaging tool; its SHA256 is recorded externally to avoid a recursive hash."
+  "self_binding": "This file is included by the packaging tool; its SHA256 is recorded externally to avoid a recursive hash.",
+  "source_binding_format": "fm-research-source/2"
 }

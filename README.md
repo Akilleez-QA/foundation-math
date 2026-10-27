@@ -43,6 +43,12 @@ under its admitted dependency assumptions**, not that surrounding prose is prove
 `cited` is admitted, not independently proved. Historical receipts do not become
 current receipts merely by copying them.
 
+Version-2 source binding covers all 17 selected mathematical source/catalog
+files, including vendor implementations and retained verifiers. Changed source
+bytes make earlier receipts stale; catalog mismatches remain explicit errors.
+This binds bytes on disk, not loaded-code authenticity or mathematical truth.
+See [source binding](docs/SOURCE-BINDING.md) for the exact scope and regression.
+
 The mapper accepts the separate `fm-evidence-paper/1` schema. It does not infer
 judgments from a research receipt. Its `supported` status means support under
 supplied judgments at the stated scope, not authenticated truth. All generated
