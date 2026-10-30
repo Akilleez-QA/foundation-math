@@ -3,6 +3,11 @@
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
+      "bytes": 27,
+      "path": ".gitleaks.toml",
+      "sha256": "27630a96d6c55755cc37620f3933d5cab94b1eb78a726a32e11212972525d76e"
+    },
+    {
       "bytes": 1170,
       "path": "CONTRIBUTING.md",
       "sha256": "9f7867a7f2d4c7c2b2e1f21b7875e84e8a7142620012b618159c8154923ac786"
@@ -60,6 +65,31 @@
       "bytes": 2665,
       "path": "docs/VERIFICATION.md",
       "sha256": "6521753c10f4e7d328da9bf97b8d6584b5ad18dbd2a3d0fbac59a01f497c77bc"
+    },
+    {
+      "bytes": 3555,
+      "path": "docs/architecture/architecture.md",
+      "sha256": "0b82610ec344eb49cb5c2c67a23a19bbb2ac79bab83a29900eb67e1b6ae79f5a"
+    },
+    {
+      "bytes": 4521,
+      "path": "docs/configuration/configuration-management.md",
+      "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
+    },
+    {
+      "bytes": 3263,
+      "path": "docs/icd/icd-stdio.md",
+      "sha256": "6c3d0714587a345cf8078c89c2d2207d5fea5098987631cab7cc5e447ec2df8e"
+    },
+    {
+      "bytes": 3966,
+      "path": "docs/requirements/requirements.md",
+      "sha256": "979a729e128b140dcfbe5b4b2136091048c92a5c8ea2571140bad36cbb851d7e"
+    },
+    {
+      "bytes": 5545,
+      "path": "docs/verification/verification-matrix.md",
+      "sha256": "fb51efdcec197ef34ad15f9a4e65c0b4c87d08e990fc56e9108d6be4e39432a8"
     },
     {
       "byte_preserved": true,
@@ -224,9 +254,9 @@
       "sha256": "ff7ccc2bdbb87b7753ef3ef9eeffd583d1e97de939b892df3cd76ec647a4c422"
     },
     {
-      "bytes": 2309,
+      "bytes": 2626,
       "path": "tools/package_source.py",
-      "sha256": "00f85232788251514b0f71547f1c79ced27dfffc5c7713449eb3009366bbf73d"
+      "sha256": "562a2956a98ab4384f0e7147709a1c109cf00a760256e358722b58ba094e04c4"
     },
     {
       "byte_preserved": true,
