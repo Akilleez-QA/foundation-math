@@ -117,14 +117,12 @@ def evaluate_class_expression(expr,table):
         require(max(abs(a.numerator).bit_length(),a.denominator.bit_length(),abs(b.numerator).bit_length(),b.denominator.bit_length())<=272,'E_BUDGET','Intermediate field component bit budget exceeded')
     return ch,decompose(ch,table)
 def certificate_wire(obj):
-    # In-memory API is also data-only: no subclasses, bool, float or custom keys.
     stack=[(obj,1)];count=0;wire_bytes=0
     def reserve(n):
         nonlocal wire_bytes
         wire_bytes+=n
         require(wire_bytes<=262144,'E_BUDGET','Canonical certificate byte budget exceeded')
     def reserve_string(text):
-        # Cheap lower bound rejects huge caller-owned strings before scanning.
         require(len(text)+wire_bytes+2<=262144,'E_BUDGET','Canonical certificate byte budget exceeded')
         reserve(2)
         for ch in text:
@@ -157,7 +155,6 @@ def certificate_wire(obj):
 
 def verify(expected_request:dict,certificate:dict)->dict:
     validate_request(expected_request)
-    # This detached request is independent of any request embedded in a certificate.
     req=json.loads(serial(expected_request))
     require(type(certificate) is dict,'E_CERTIFICATE','Certificate must be an object')
     wire=certificate_wire(certificate)
@@ -170,7 +167,5 @@ def verify(expected_request:dict,certificate:dict)->dict:
     parity={SIGNS[i] for i in range(9) if m[i]}
     result={'multiplicities':m,'dimension':sum(DIMS[i]*m[i] for i in range(9)),'classification':classification,'center_parity':'zero' if not parity else 'even' if parity=={1} else 'odd' if parity=={-1} else 'mixed','even_dimension':sum(DIMS[i]*m[i] for i in range(9) if SIGNS[i]==1),'odd_dimension':sum(DIMS[i]*m[i] for i in range(9) if SIGNS[i]==-1),'negative_multiplicities':{LABELS[i]:m[i] for i in range(9) if m[i]<0}}
     expected={'schema':'fm-character-certificate-v1','catalog_sha256':PIN,'request_sha256':sha(req),'request':req,'result':result,'class_values':[encoded(x) for x in ch],'scope':'universal_representation_arithmetic_only'}
-    # Serialized comparison distinguishes bool from integer and rejects extra keys,
-    # noncanonical rationals, changed provenance, mismatched requests and scope.
     require(wire.decode('ascii')==serial(expected),'E_CERTIFICATE','Certificate does not match the external request and fixed catalog')
     return {'schema':'fm-character-verification-v1','status':'verified_arithmetic','catalog_sha256':PIN,'request_sha256':sha(req),'certificate_sha256':sha(certificate),'result':result,'scope':'universal_representation_arithmetic_only','runtime_acceptance':False,'lean_proof':False}

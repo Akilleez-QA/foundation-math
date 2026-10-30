@@ -329,7 +329,6 @@ def map_evidence(bundle, artifact_bytes=None):
                     reasons.append('artifact_bytes_missing_or_mismatched')
                 if not j['evidence_ids']:
                     reasons.append('no_evidence')
-                # Counts, hashes and review reports cannot serve as substantive evidence.
                 if not any(j['scope'] in SUPPORT[ev[eid]['kind']] for eid in j['evidence_ids']):
                     reasons.append('evidence_kind_does_not_support_scope')
                 needed = set(REQUIRED.get(j['scope'], set()))
@@ -359,7 +358,6 @@ def map_evidence(bundle, artifact_bytes=None):
             exact = [j for j in support if j['scope'] == n['scope'] and j['supported_statement'] == n['statement']]
             selected = exact[0] if exact else support[0] if support else None
             if selected:
-                # Same-scope judgments cannot erase each other's qualifications.
                 for j in support:
                     if j['scope'] == selected['scope'] and j['supported_statement'] == selected['supported_statement']:
                         conditions.update(j['conditions'])
@@ -377,7 +375,6 @@ def map_evidence(bundle, artifact_bytes=None):
                 disposition = 'conditional'
             else:
                 disposition = 'supported'
-            # Unconditional intended-theorem status cannot be obtained from conditional premises.
             if selected and n['scope'] == 'intended_theorem' and conditions and disposition == 'conditional':
                 disposition = 'blocked'
             results[nid] = {
@@ -419,9 +416,7 @@ def map_evidence(bundle, artifact_bytes=None):
 
 
 def _safe(value):
-    # Normalize line separators before quoting so CR-only input cannot open a heading.
     text = str(value).replace('\r\n', '\n').replace('\r', '\n')
-    # Display controls/bidi formatting literally, preserving visible qualifications.
     bidi = {0x061c, 0x200e, 0x200f, *range(0x202a, 0x202f), *range(0x2066, 0x206a)}
     text = ''.join(('\\u%04x' % ord(ch)) if ord(ch) in bidi or (ord(ch) < 32 and ch not in '\n\t') or 0x7f <= ord(ch) <= 0x9f else ch for ch in text)
     text = html.escape(text, quote=False)

@@ -28,7 +28,6 @@ def _prepare(rows, field, modulus):
         raise ValueError("ragged matrix")
     p = modulus
     if field == 'F_p':
-        # Complete trial division for p <= 10^12; larger moduli are unsupported.
         if type(p) is not int:
             raise TypeError("integer modulus required")
         if not 2 <= p <= 10**12:
@@ -55,7 +54,7 @@ def _prepare(rows, field, modulus):
                         raise ValueError("different quadratic fields")
                     return x
                 return QuadraticElement(rational(x), 0, d)
-            coerce(0)  # Validate the radicand even for empty matrices.
+            coerce(0)
         else:
             raise ValueError("unsupported field")
     def encode(x):

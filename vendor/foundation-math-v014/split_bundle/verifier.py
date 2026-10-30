@@ -74,7 +74,6 @@ def verify(expected_request,certificate):
                     terms=[]
                     for b in req['bundle']:
                         degree=b['twist']+t
-                        # Serre duality changes n to -n-2; zero at n=-1.
                         symmetric_degree=degree if cohomological_degree==0 else -degree-2
                         if symmetric_degree>=0:
                             terms.append(scaled(b['multiplicity'],times(table[LABELS.index(b['irrep'])][j],s(symmetric_degree,j))))
@@ -93,7 +92,6 @@ def verify(expected_request,certificate):
                 for b in req['target']:
                     d=b['twist']-a['twist']
                     if d>=0:
-                        # Dual source character equals itself for this real-valued catalog.
                         terms.append(scaled(a['multiplicity']*b['multiplicity'],times(times(table[LABELS.index(a['irrep'])][j],table[LABELS.index(b['irrep'])][j]),s(d,j))))
             ch.append(total(terms))
         h=describe(tuple(ch),True)

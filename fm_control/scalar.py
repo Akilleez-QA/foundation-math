@@ -56,6 +56,6 @@ def obstruction(models, observed, noise_bound, target, admissible):
             return False
         actions = safe_actions(x, gain, drift, target, admissible)
         if actions is None:
-            return False  # Exclude a model already individually uncontrollable.
+            return False
         sets.append(actions)
     return intersection(*sets) is None

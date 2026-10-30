@@ -218,7 +218,6 @@ class MapperTests(unittest.TestCase):
         with self.assertRaises(SchemaError): render_paper(r,data)
 
     def test_disclosed_title_regression_cannot_assert_blocked_validation(self):
-        # Previously disclosed title regression; not fresh blind evidence.
         b, data = bundle(kind='numerical_verification', scope='empirical_validation')
         b['paper']['title'] = 'This real device’s force law and operating predictions are experimentally validated'
         b['claims'][0]['statement'] = b['paper']['title']

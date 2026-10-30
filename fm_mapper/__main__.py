@@ -18,7 +18,6 @@ def main(argv=None):
         data = read_artifacts(b, args.artifact_root or args.bundle.parent)
         result = map_evidence(b, data)
         raw = json.dumps(result, sort_keys=True, ensure_ascii=False, indent=2, allow_nan=False) + '\n'
-        # Refuse accidental replacement of bundle or source artifacts by output paths.
         sources = {args.bundle.resolve()} | {(args.artifact_root or args.bundle.parent).joinpath(a['path']).resolve() for a in b['artifacts']}
         destinations = [x.resolve() for x in (args.json_out, args.paper_out) if x is not None]
         if len(destinations) != len(set(destinations)) or any(x in sources for x in destinations):
