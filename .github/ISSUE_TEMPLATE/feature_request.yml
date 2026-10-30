@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a scoped Foundation Math improvement.
+title: '[Feature]: '
+body:
+  - type: markdown
+    attributes:
+      value: 'Use synthetic examples and remove private data. Follow SECURITY.md for sensitive reports.'
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and use case
+      description: Explain the unmet need and what existing commands or contracts you tried.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and scope
+      description: Describe the affected component, inputs, outputs, assumptions, and compatibility impact.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation and limits
+      description: Propose bounded synthetic checks and distinguish software checks from mathematical or physical validation.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and tradeoffs

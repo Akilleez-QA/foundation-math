@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible Foundation Math defect.
+title: '[Bug]: '
+body:
+  - type: markdown
+    attributes:
+      value: 'For sensitive reports, follow SECURITY.md. Do not post vulnerability details, private research data, or personal information.'
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Explain the discrepancy and the affected component or contract.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include exact commands and a small synthetic input. State resource limits and exit status.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Commit and environment
+      description: Include the commit, Python version, and operating system.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and scope
+      description: Include relevant output and failed or unrun checks. Distinguish computed results from supplied judgments and model assumptions.
