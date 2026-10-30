@@ -40,10 +40,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Check source manifest
+      - name: Check source package
         shell: bash
         run: |
-          if [ -f tools/build_manifest.py ]; then
-            python -B tools/build_manifest.py
-            git diff --exit-code SOURCE-MANIFEST.json
-          fi
+          src="$RUNNER_TEMP/source"
+          mkdir -p "$src"
+          git archive HEAD | tar -x -C "$src"
+          python -B "$src/tools/package_source.py" "$RUNNER_TEMP/foundation-math-source.zip"

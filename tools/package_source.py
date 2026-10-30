@@ -5,6 +5,13 @@ import json
 from pathlib import Path, PurePosixPath
 import zipfile
 
+EXCLUDED_FILES = frozenset({'AGENTS.md', 'CHANGELOG.md', 'CODE_OF_CONDUCT.md', 'SECURITY.md', 'SUPPORT.md'})
+EXCLUDED_DIRECTORY = '.github'
+
+
+def excluded(relative):
+    return relative in EXCLUDED_FILES or relative.split('/', 1)[0] == EXCLUDED_DIRECTORY
+
 
 def checked_files(root):
     manifest = json.loads((root / 'SOURCE-MANIFEST.json').read_text())
@@ -14,6 +21,7 @@ def checked_files(root):
         raise ValueError('Duplicate source manifest path')
     expected = set(paths) | {'SOURCE-MANIFEST.json'}
     actual = {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file() or p.is_symlink()}
+    actual = {path for path in actual if not excluded(path)}
     if expected != actual:
         raise ValueError('Exact source file-set mismatch')
     for row in rows:
