@@ -89,6 +89,15 @@ The intended release process promotes an explicitly selected, tested development
 snapshot after review; it is not a blanket directory sync. See
 [the release checklist](docs/RELEASE-CHECKLIST.md).
 
+## Used by Cstack
+
+Cstack template (private, Refrigeration.AI) uses Foundation Math v0.14 from
+`vendor/foundation-math-v014` through its Math stdio adapter and
+`foundations/math/fm_research` exact-arithmetic research checks. The adapter pins
+the vendored `SOURCE-MANIFEST.json` by SHA-256 and verifies its 561 file hashes.
+That full historical distribution is broader than this repository’s selected
+v0.14 source subset.
+
 ## Commercial licensing
 
 This project is available under the GNU General Public License v3.0 only (GPL-3.0-only). If you want to use it in a product or service under different terms, commercial licenses are available from Refrigeration.AI. Contact craig@nh3.biz.
