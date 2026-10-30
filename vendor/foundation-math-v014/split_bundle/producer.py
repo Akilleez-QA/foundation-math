@@ -36,7 +36,6 @@ def calculate(request):
             for b in req['target']:
                 n=b['twist']-a['twist'];m=a['multiplicity']*b['multiplicity']
                 if n<0 or m==0:continue
-                # Every catalog irrep has real character and is self-dual.
                 ch=tensor(tensor(irrep(a['irrep']),irrep(b['irrep']),cat),sym(n),cat)
                 h=h.add(scaled(m,ch))
         result={'operation':'hom','source':stats(req['source']),'target':stats(req['target']),'hom_character':describe(h),'equivariant_hom_dimension':h.multiplicities[0],'conclusion':'dimension_of_equivariant_map_space_only_no_map_rank_or_embedding_claim'}

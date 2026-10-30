@@ -79,7 +79,6 @@ def parse_request(obj):
     e=obj['expectation'];keys(e,('classification','equals'))
     need(type(e['classification']) is str and e['classification'] in ('any','genuine','proper_virtual'),'E_SCHEMA','Unknown expected classification')
     eq=None if e['equals'] is None else coeffs(e['equals'],256)
-    # A canonical JSON round-trip detaches caller-owned mutable dictionaries.
     wire=canonical(obj)
     need(len(wire.encode('ascii'))<=BUDGETS['request_bytes'],'E_BUDGET','Canonical request byte budget exceeded')
     raw=json.loads(wire)

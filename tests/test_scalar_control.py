@@ -4,8 +4,6 @@ from fm_control.scalar import interval as I, safe_actions, obstruction
 
 class Certificate(unittest.TestCase):
     def test_genuine_disjoint_witness(self):
-        # Both current states x=1/2 are safe and give exactly the same y.
-        # Drift -1 requires u>=1/2; drift +1 requires u<=-1/2.
         self.assertTrue(obstruction([(Q(1,2),1,-1),(Q(1,2),1,1)], Q(1,2),0,I(0,1),I(-2,2)))
     def test_touching_is_not_disjoint(self):
         self.assertFalse(obstruction([(0,1,0),(1,1,0)],Q(1,2),Q(1,2),I(0,1),I(-2,2)))

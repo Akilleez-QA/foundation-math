@@ -99,7 +99,6 @@ class SourceBindingTests(unittest.TestCase):
              patch.object(vendor, 'VENDOR', relocated / 'vendor/foundation-math-v014'):
             self.assertEqual(expected, problem._source_hash())
             self.assertEqual(problem.gate(self.spec, self.old)[self.claim['id']], 'certified')
-        # The version-1 framing is not relabeled as a current source identity.
         legacy = hashlib.sha256(vendor.catalog_sha256().encode())
         for path in sorted((self.copy / 'fm_research').glob('*.py')):
             legacy.update(path.name.encode() + b'\0' + path.read_bytes() + b'\0')

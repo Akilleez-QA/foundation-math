@@ -151,7 +151,6 @@ def load_spec(source):
     return spec
 
 
-# Exact selected mathematical source closure; no mapper, tests or archive inputs.
 _SOURCE_FILES = (
     'fm_research/__init__.py', 'fm_research/__main__.py',
     'fm_research/field.py', 'fm_research/p1.py', 'fm_research/problem.py',
@@ -175,7 +174,7 @@ def _source_hash():
     even when a particular check does not invoke them. It is not authentication
     of loaded code, the interpreter, or the truth of a mathematical claim.
     """
-    vendor.catalog_sha256()  # Preserve the fixed-catalog integrity check.
+    vendor.catalog_sha256()
     h = sha256(b'fm-research-source/2\0')
     prefix = 'vendor/foundation-math-v014/'
     for relative in sorted(_SOURCE_FILES):

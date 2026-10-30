@@ -31,7 +31,6 @@ def data_guard(obj,limit):
 def load_json(raw,limit):
     need(type(raw) is bytes,'E_TYPE','JSON bytes required')
     need(len(raw)<=limit,'E_BUDGET','JSON byte budget exceeded')
-    # Bound nesting before json.loads, even when Python recursion limits are high.
     depth=0;quoted=False;escaped=False
     for byte in raw:
         if quoted:

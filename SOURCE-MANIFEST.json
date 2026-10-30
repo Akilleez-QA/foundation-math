@@ -57,9 +57,9 @@
       "sha256": "3ceb4dea96ba6972ca2d562349543eeb022af387cd80ff3aeee17837ec895341"
     },
     {
-      "bytes": 2781,
+      "bytes": 2665,
       "path": "docs/VERIFICATION.md",
-      "sha256": "86f7199ef4ba36d3889dd6867b17ba538ff9892da5035a5fd684467e474e4ff2"
+      "sha256": "6521753c10f4e7d328da9bf97b8d6584b5ad18dbd2a3d0fbac59a01f497c77bc"
     },
     {
       "byte_preserved": true,
@@ -86,9 +86,9 @@
       "sha256": "172fef0cf6c93277dcf35f139494a8b94775d96714bdd802f17886ff69df9e50"
     },
     {
-      "bytes": 2323,
+      "bytes": 2267,
       "path": "fm_control/scalar.py",
-      "sha256": "2b766e60dd1fcd85cd3d4f28ccee6fa549d739eb54e4ffea8ebd5327a83af844"
+      "sha256": "ffdb2f7311b3b4862d7e28033bfc9c055bde63ed50be0852bab4332721e4055c"
     },
     {
       "byte_preserved": true,
@@ -98,17 +98,17 @@
       "source_sha256": "bdfd9a866058dd66f33510309e9c7ba239834a2b62ac3986b7bbd53024cef904"
     },
     {
-      "byte_preserved": true,
-      "bytes": 2227,
+      "byte_preserved": false,
+      "bytes": 2140,
       "path": "fm_mapper/__main__.py",
-      "sha256": "61d7ab31a5ce6eb7332c79b37ad003e3586f667ff373c308f48e5c3fd83db179",
+      "sha256": "aa36180173d87b8aead5724c496cd816e5b24eb95426c9dccb99306578a42da7",
       "source_sha256": "61d7ab31a5ce6eb7332c79b37ad003e3586f667ff373c308f48e5c3fd83db179"
     },
     {
-      "byte_preserved": true,
-      "bytes": 29422,
+      "byte_preserved": false,
+      "bytes": 28981,
       "path": "fm_mapper/core.py",
-      "sha256": "826067bb358d20966db7c7742bc545715d1f9dd6651294903ed481b97e1c22b2",
+      "sha256": "b3134618b530d86ef1d0d9a679019c51dba5951778b80656cd2e4181d160047c",
       "source_sha256": "826067bb358d20966db7c7742bc545715d1f9dd6651294903ed481b97e1c22b2"
     },
     {
@@ -141,16 +141,16 @@
     },
     {
       "byte_preserved": false,
-      "bytes": 10299,
+      "bytes": 10170,
       "path": "fm_research/problem.py",
-      "sha256": "f1a68876f94ab4ba4f4bc69c331daba28efc58e39a90dc818bde127d879b35e5",
+      "sha256": "a680d1ab94ece06a8f5f218506a0f0a47a814a240524551e08c96bcb6a49fc5f",
       "source_sha256": "0e718ddda6122d6570023072eda22abfa82ec8c7c9f5a04bcb5e698222af8129"
     },
     {
-      "byte_preserved": true,
-      "bytes": 6328,
+      "byte_preserved": false,
+      "bytes": 6197,
       "path": "fm_research/rank.py",
-      "sha256": "55065357e99a920eaea7f9578b1cb83428142e9d1b8cdcd04fe47b6140b041ce",
+      "sha256": "3dfed6d3ad3e367ea97b1c75f3954728ccc064fa54fd2c4aed2ddb229733506c",
       "source_sha256": "55065357e99a920eaea7f9578b1cb83428142e9d1b8cdcd04fe47b6140b041ce"
     },
     {
@@ -191,9 +191,9 @@
     },
     {
       "byte_preserved": false,
-      "bytes": 19845,
+      "bytes": 19770,
       "path": "tests/test_mapper.py",
-      "sha256": "03efc6475b357ddd4fbb617503ee4a1e18f37fdae8f8ada7ed59a731ca615185",
+      "sha256": "06b634f0fe683e7264446f7df4a9744fea78ba5650c988dc1558da1a5758ce93",
       "source_sha256": "60d474b1cd6da548aa629a72af231d43723bf60e1d3a3bf7498d96b8a622b57f"
     },
     {
@@ -209,14 +209,14 @@
       "source_sha256": "fecea353544fd272cb7d95638dafc1f822345e6351da7d2373a45979eaa7021b"
     },
     {
-      "bytes": 3064,
+      "bytes": 2927,
       "path": "tests/test_scalar_control.py",
-      "sha256": "8e08ea104104b658e9717205ae712d6328f79e683a426c74838901cad48c8690"
+      "sha256": "1b05cb0a413b8058ebdab35abcbed6142f73eefd1051cf111cc3b7e733ad7550"
     },
     {
-      "bytes": 6200,
+      "bytes": 6121,
       "path": "tests/test_source_binding.py",
-      "sha256": "eeb13fc7f6a421c87ef1db43ca3bc7f3182665fe108e7fe214ed54cf94b4dd7b"
+      "sha256": "b0d070e088992602bf4ee522c99d4e4569dae44b6f7267bff59d9727cee05df1"
     },
     {
       "bytes": 69,
@@ -243,10 +243,10 @@
       "source_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74"
     },
     {
-      "byte_preserved": true,
-      "bytes": 4804,
+      "byte_preserved": false,
+      "bytes": 4726,
       "path": "vendor/foundation-math-v014/character_ring/contract.py",
-      "sha256": "15414a9671f66d0ee7ed1ba1b681f611de392f1f87c920611631f444b3a92c4b",
+      "sha256": "1397d692b1b52e8a1397e114ad4afab6c71488113e24e63b57048425da513148",
       "source_sha256": "15414a9671f66d0ee7ed1ba1b681f611de392f1f87c920611631f444b3a92c4b"
     },
     {
@@ -257,10 +257,10 @@
       "source_sha256": "20993a7288b37e1b3a384b1c4046cae375c287f5bc5759078da41b1df5bf3ca0"
     },
     {
-      "byte_preserved": true,
-      "bytes": 11934,
+      "byte_preserved": false,
+      "bytes": 11523,
       "path": "vendor/foundation-math-v014/character_ring/verifier.py",
-      "sha256": "d5ba4f472d8783d706ae4919fe86e77804c86abcf52574ca7959d9f432257115",
+      "sha256": "a51a01fb24057b5027fec1b91e91b93e425d1c8a30ce5eda860ca92994589719",
       "source_sha256": "d5ba4f472d8783d706ae4919fe86e77804c86abcf52574ca7959d9f432257115"
     },
     {
@@ -271,24 +271,24 @@
       "source_sha256": "6ebaf46927773838389d9ff2f516a3e7b9b0b849596f0ba6a655385c28246b0e"
     },
     {
-      "byte_preserved": true,
-      "bytes": 4682,
+      "byte_preserved": false,
+      "bytes": 4599,
       "path": "vendor/foundation-math-v014/split_bundle/contract.py",
-      "sha256": "4259114f723b7e3a57ba5490d5e6e923e72bcc5647fe7bad3719cba7ab2e625c",
+      "sha256": "726fe1bfa343890b148fad95ad72c47776ccc2d137b0380886143f42c3012743",
       "source_sha256": "4259114f723b7e3a57ba5490d5e6e923e72bcc5647fe7bad3719cba7ab2e625c"
     },
     {
-      "byte_preserved": true,
-      "bytes": 2747,
+      "byte_preserved": false,
+      "bytes": 2672,
       "path": "vendor/foundation-math-v014/split_bundle/producer.py",
-      "sha256": "106c61e5200650a8e369bcbedb11377d21ff36ad85b01275dff55022c1848a6c",
+      "sha256": "9f67bb856b169c01de6ba76104f0fc86c80c3d9e8e37112397c860d67635ea00",
       "source_sha256": "106c61e5200650a8e369bcbedb11377d21ff36ad85b01275dff55022c1848a6c"
     },
     {
-      "byte_preserved": true,
-      "bytes": 7455,
+      "byte_preserved": false,
+      "bytes": 7290,
       "path": "vendor/foundation-math-v014/split_bundle/verifier.py",
-      "sha256": "3e95fbec7f466c4efcf01abbcdb246be775844d126e5599a3f62995e54556076",
+      "sha256": "035f7a9d46176085c6d5773dbf0dfd86044ccc4e3ffd1b350295e98fe93c6082",
       "source_sha256": "3e95fbec7f466c4efcf01abbcdb246be775844d126e5599a3f62995e54556076"
     }
   ],
