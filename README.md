@@ -87,7 +87,22 @@ never overwritten. This is a source distribution, not a wheel or a tested pip
 installation. Run checks with suitable CPU, address-space and wall-time limits;
 see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 
-## License and development
+## Used by Cstack
+
+Cstack template (private, Refrigeration.AI) uses Foundation Math v0.14 from
+`vendor/foundation-math-v014` through its Math stdio adapter and
+`foundations/math/fm_research` exact-arithmetic research checks. The adapter pins
+the vendored `SOURCE-MANIFEST.json` by SHA-256 and verifies its 561 file hashes.
+That full historical distribution is broader than this repository’s selected
+v0.14 source subset.
+
+## Exact scalar control certificates
+
+`fm_control` adds model-conditional one-step safe-action intervals and a
+two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
+This is not a physical simulator, general controller or equipment-safety approval.
+
+## Development and provenance
 
 Copyright (c) 2026 Refrigeration.AI. The first-party source, tests, synthetic examples,
 tooling, documentation and metadata listed in `SOURCE-MANIFEST.json`, including
@@ -101,21 +116,6 @@ The intended release process promotes an explicitly selected, tested development
 snapshot after review; it is not a blanket directory sync. See
 [the release checklist](docs/RELEASE-CHECKLIST.md).
 
-## Used by Cstack
-
-Cstack template (private, Refrigeration.AI) uses Foundation Math v0.14 from
-`vendor/foundation-math-v014` through its Math stdio adapter and
-`foundations/math/fm_research` exact-arithmetic research checks. The adapter pins
-the vendored `SOURCE-MANIFEST.json` by SHA-256 and verifies its 561 file hashes.
-That full historical distribution is broader than this repository’s selected
-v0.14 source subset.
-
-## Commercial licensing
+## License
 
 This project is available under the GNU General Public License v3.0 only (GPL-3.0-only). If you want to use it to create a product or service under different terms, commercial licenses are available from Refrigeration.AI. Contact craig@nh3.biz.
-
-## Exact scalar control certificates
-
-`fm_control` adds model-conditional one-step safe-action intervals and a
-two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
-This is not a physical simulator, general controller or equipment-safety approval.
