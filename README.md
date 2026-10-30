@@ -89,6 +89,10 @@ The intended release process promotes an explicitly selected, tested development
 snapshot after review; it is not a blanket directory sync. See
 [the release checklist](docs/RELEASE-CHECKLIST.md).
 
+## Commercial licensing
+
+This project is available under the GNU General Public License v3.0 only (GPL-3.0-only). If you want to use it in a product or service under different terms, commercial licenses are available from Refrigeration.AI. Contact craig@nh3.biz.
+
 ## Exact scalar control certificates
 
 `fm_control` adds model-conditional one-step safe-action intervals and a
