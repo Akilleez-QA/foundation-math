@@ -1,0 +1,148 @@
+{
+  "schema": "fm-evidence-paper/1",
+  "problem": {
+    "id": "synthetic",
+    "revision": "1",
+    "title": "Synthetic mapper fixture",
+    "objective": "Retain precisely scoped supplied findings."
+  },
+  "artifacts": [
+    {
+      "id": "record",
+      "path": "record.txt",
+      "sha256": "20377e5fb5de8b609b1ed5a7804dcf94ec97b9026c8af6b81a0cf7bec58a436d",
+      "description": "Synthetic source record"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev",
+      "kind": "exact_computation",
+      "artifact_ids": [
+        "record"
+      ],
+      "description": "Caller-supplied finite finding",
+      "provenance": "Synthetic unit-test input; not real proof evidence",
+      "family": "synthetic-family",
+      "legacy_status": "certified"
+    },
+    {
+      "id": "citation",
+      "kind": "citation",
+      "artifact_ids": [
+        "record"
+      ],
+      "description": "Synthetic citation example",
+      "provenance": "Synthetic test citation, not an actual theorem",
+      "family": "synthetic-family",
+      "legacy_status": "cited"
+    }
+  ],
+  "obligations": [],
+  "claims": [
+    {
+      "id": "cited-premise",
+      "statement": "A caller-supplied cited premise is admitted conditionally.",
+      "scope": "cited",
+      "depends_on": [],
+      "evidence_ids": [
+        "citation"
+      ],
+      "assumptions": [],
+      "exclusions": [],
+      "obligations": []
+    },
+    {
+      "id": "result",
+      "statement": "The supplied finite record reports 2 + 2 = 4.",
+      "scope": "finite_computation",
+      "depends_on": [
+        "cited-premise"
+      ],
+      "evidence_ids": [
+        "ev"
+      ],
+      "assumptions": [
+        "The cited premise applies to the supplied finite input."
+      ],
+      "exclusions": [],
+      "obligations": []
+    }
+  ],
+  "judgments": [
+    {
+      "id": "judgment-cited-premise",
+      "target_type": "claim",
+      "target_id": "cited-premise",
+      "binding": {
+        "problem_sha256": "6829e40311d846eea9620b59cc475f48d831daf146470a50b103a3f0121deba0",
+        "target_sha256": "79464a34301dd0e63db484cb342080c942e51c2223efbe6bafa4802c6cd1c714",
+        "evidence_sha256": {
+          "citation": "24747e11caf7ac809939cda86343a321d052b4d9a302b5ba398864242a84d738"
+        },
+        "artifacts_sha256": {
+          "record": "20377e5fb5de8b609b1ed5a7804dcf94ec97b9026c8af6b81a0cf7bec58a436d"
+        }
+      },
+      "decision": "supports",
+      "scope": "cited",
+      "supported_statement": "A caller-supplied cited premise is admitted conditionally.",
+      "evidence_ids": [
+        "citation"
+      ],
+      "conditions": [],
+      "checks": {},
+      "assessor": "Synthetic fixture author",
+      "method": "Explicit supplied assessment",
+      "family": "synthetic-family",
+      "rationale": "Tests the mapper contract, not mathematical truth."
+    },
+    {
+      "id": "judgment-result",
+      "target_type": "claim",
+      "target_id": "result",
+      "binding": {
+        "problem_sha256": "6829e40311d846eea9620b59cc475f48d831daf146470a50b103a3f0121deba0",
+        "target_sha256": "866aa20a106d6d298398599482168002a652a7e8bae7aaacfc78a67f17a54634",
+        "evidence_sha256": {
+          "ev": "15d0728cd420110f4fce251a03f6d4a76aab5d244cc932cd4f2fe062c34d6d7d"
+        },
+        "artifacts_sha256": {
+          "record": "20377e5fb5de8b609b1ed5a7804dcf94ec97b9026c8af6b81a0cf7bec58a436d"
+        }
+      },
+      "decision": "supports",
+      "scope": "finite_computation",
+      "supported_statement": "The supplied finite record reports 2 + 2 = 4.",
+      "evidence_ids": [
+        "ev"
+      ],
+      "conditions": [],
+      "checks": {},
+      "assessor": "Synthetic fixture author",
+      "method": "Explicit supplied assessment",
+      "family": "synthetic-family",
+      "rationale": "Tests the mapper contract, not mathematical truth."
+    }
+  ],
+  "attempts": [],
+  "costs": [
+    {
+      "id": "total_cost",
+      "value": null,
+      "unit": "USD",
+      "coverage": "Unknown, not measured",
+      "source_artifact_ids": []
+    }
+  ],
+  "paper": {
+    "title": "Synthetic evidence draft",
+    "claim_ids": [
+      "cited-premise",
+      "result"
+    ],
+    "limitations": [
+      "Synthetic input only."
+    ]
+  }
+}

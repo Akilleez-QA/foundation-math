@@ -1,0 +1,19 @@
+{
+  "name": "foundation-math",
+  "candidate": "scalar-control-v1-20261027",
+  "distribution": "explicit-allowlist-source-zip",
+  "python_requires": ">=3.10",
+  "dependencies": [],
+  "license": "GPL-3.0-only",
+  "license_state": "owner_selected_first_party_scope_in_NOTICE",
+  "capabilities": [
+    "exact_mathematical_kernels",
+    "finite_check_receipts",
+    "supplied_evidence_reports",
+    "exact_scalar_one_step_certificates"
+  ],
+  "scientific_acceptance": false,
+  "copyright": "Copyright (c) 2026 Refrigeration.AI",
+  "release_kind": "source_candidate",
+  "source_binding_format": "fm-research-source/2"
+}

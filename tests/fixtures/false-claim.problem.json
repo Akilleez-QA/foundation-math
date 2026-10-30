@@ -1,0 +1,37 @@
+{
+  "schema": "fm-research-problem/1",
+  "problem_id": "synthetic-deliberately-false",
+  "title": "Synthetic small exact-kernel checks",
+  "objective": "Exercise software contracts on invented small inputs, not a research claim.",
+  "repo": {
+    "name": "Akilleez-QA/foundation-math",
+    "commit": "50da4eb357765b5d3e683c8764419f9d3e91b319"
+  },
+  "roles": {
+    "builder": "Synthetic fixture author",
+    "reviewer": "Synthetic fixture reviewer",
+    "verifier": "Local finite checks"
+  },
+  "assumptions": [
+    "The repository pin identifies the README-only scaffold, NOT these kernel bytes.",
+    "Character catalog identification is an input assumption."
+  ],
+  "exclusions": [
+    "No original research instance, empirical validation or theorem proof is represented."
+  ],
+  "claims": [
+    {
+      "id": "sym2",
+      "statement": "Deliberately false expectation for negative CLI coverage.",
+      "kind": "computed",
+      "depends_on": [],
+      "check": {
+        "kernel": "twoi.decompose_sym_W",
+        "args": {
+          "n": 2
+        },
+        "expect": "W"
+      }
+    }
+  ]
+}
