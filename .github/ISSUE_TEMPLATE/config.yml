@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security reporting guidance
+    url: https://github.com/Akilleez-QA/foundation-math/blob/main/SECURITY.md
+    about: Read before sharing sensitive details or asking for a private reporting channel.
+  - name: Usage and support
+    url: https://github.com/Akilleez-QA/foundation-math/blob/main/SUPPORT.md
+    about: Start here for documentation and usage questions.
