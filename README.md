@@ -1,6 +1,8 @@
+![Foundation Math social preview](.github/assets/social-preview.png)
+
 # Foundation Math
 
-Exact mathematical kernels and evidence reports
+Exact mathematical kernels and physics research tools with reproducible evidence reports
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
@@ -26,12 +28,11 @@ Use a fresh output path for mapper `--json-out` and `--paper-out`.
 
 ## What is inside
 
-- Exact quadratic-field arithmetic and finite matrix rank certificates.
-- Virtual character arithmetic on a byte-pinned SL2(F5) character catalog.
-- Formal supplied split-bundle cohomology and Hom-space characters.
-- Structured finite checks, dependency accounting, and bound local receipts.
-- An optional evidence mapper that records caller-supplied judgments and renders
-  a visibly qualified draft report.
+| Component | Purpose |
+|---|---|
+| `fm_research/` | Exact quadratic arithmetic, finite rank certificates, character arithmetic, and formal supplied split-bundle characters |
+| `fm_mapper/` | Caller-supplied evidence judgments and qualified draft reports |
+| `fm_control/` | Model-conditional scalar one-step certificates |
 
 Only the selected character and split-bundle runtime components of v0.14 are
 included. This is **not** the full historical v0.14 distribution or its tool suite.
@@ -70,8 +71,12 @@ claims, authenticate reviewers, or establish a productivity speedup.
 ```sh
 python3 -S -B -m unittest discover -s tests -t .
 python3 -S -B -O -m unittest discover -s tests -t .
-python3 -S -B tools/package_source.py ../foundation-math-candidate.zip
 ```
+
+Package a clean committed export using the [source packaging guide](docs/guides/how-to/source-package.md).
+Running the packager directly in a Git checkout fails its exact-file check because
+Git metadata is outside the allowlist. Commit documentation and manifest changes
+before exporting.
 
 Packaging uses an explicit manifest, verifies the exact file set and every hash,
 and writes a deterministic source ZIP outside the tree. Existing output files are
@@ -87,8 +92,10 @@ This is not a physical simulator, general controller or equipment-safety approva
 
 ## Documentation
 
+Start with the [documentation index](docs/README.md).
+
 - [Requirements](docs/requirements/requirements.md)
-- [Architecture](docs/architecture/)
+- [Architecture](docs/architecture/architecture.md)
 - [Verification matrix](docs/verification/verification-matrix.md)
 - [Configuration management](docs/configuration/configuration-management.md)
 - [Local process interfaces](docs/icd/icd-stdio.md)
