@@ -3,6 +3,11 @@
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
+      "bytes": 37,
+      "path": ".gitignore",
+      "sha256": "9805b5dd0e7d444d544a64e8757f46570a5d808e99b4b864719129db2db79f5d"
+    },
+    {
       "bytes": 27,
       "path": ".gitleaks.toml",
       "sha256": "27630a96d6c55755cc37620f3933d5cab94b1eb78a726a32e11212972525d76e"
@@ -45,6 +50,11 @@
       "path": "docs/EVIDENCE-PAPER.md",
       "sha256": "329cfe829573240076088c37e00bfef41ef13d27ce9f6c1068e662df0dd3a6b6",
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
+    },
+    {
+      "bytes": 555,
+      "path": "docs/README.md",
+      "sha256": "0cfe60a42d38046ab1b4889cca2144b3f9723121c0d935dc0ef15e784c2b6133"
     },
     {
       "bytes": 1828,
