@@ -1,4 +1,4 @@
-![Foundation Math social preview](.github/assets/social-preview.png)
+![Foundation Math social preview](https://raw.githubusercontent.com/Akilleez-QA/foundation-math/d07d9abbe6917e67cd04e1e0a5c23004970a4781/.github/assets/social-preview.png)
 
 # Foundation Math
 
