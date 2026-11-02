@@ -1,40 +1,19 @@
+![Foundation Math social preview](https://raw.githubusercontent.com/Akilleez-QA/foundation-math/d07d9abbe6917e67cd04e1e0a5c23004970a4781/.github/assets/social-preview.png)
+
 # Foundation Math
 
-Standalone source release candidate: exact mathematical kernels and evidence
-reports. This is an extraction of existing Foundation Math code, not a new
-general-purpose solver. The covered first-party files are licensed under
-**GPL-3.0-only**. A local candidate does not by itself establish public publication.
+Exact mathematical kernels and physics research tools with reproducible evidence reports
 
-## Family
+[<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
-| Repository | Role | Relation |
-|---|---|---|
-| [cstack](https://github.com/Akilleez-QA/cstack) | Runs Foundations behind pinned adapters under one human approver | Host |
-| [foundation-engine](https://github.com/Akilleez-QA/foundation-engine) | TypeScript and three.js framework for browser games | Foundation |
-| [foundation-math](https://github.com/Akilleez-QA/foundation-math) | Exact mathematical kernels and physics research tools | Foundation |
-| [foundation-film](https://github.com/Akilleez-QA/foundation-film) | Film-production acceptance checks | Foundation |
-| [foundation-refrigeration](https://github.com/Akilleez-QA/foundation-refrigeration) | Refrigeration data and checks | Foundation |
-| [foundation-robotics](https://github.com/Akilleez-QA/foundation-robotics) | Physics checks for motion | Foundation |
-| [foundation-template](https://github.com/Akilleez-QA/foundation-template) | Minimal Foundation to copy for a new domain | Foundation |
-| [endoforge](https://github.com/Akilleez-QA/endoforge) | Workshop for running coding agents with checks and receipts | Tool |
-| [poodo](https://github.com/Akilleez-QA/poodo) | Reasoning skill that shows evidence before it acts | Tool |
+## Status
 
-## Included scope
+This source-tree candidate checks finite mathematical claims, maps supplied
+evidence judgments into qualified draft reports, and computes model-conditional
+scalar one-step certificates. It uses Python 3.10+ and the standard library.
+A local candidate does not by itself establish public publication.
 
-- Exact quadratic-field arithmetic and finite matrix rank certificates.
-- Virtual character arithmetic on a byte-pinned SL2(F5) character catalog.
-- Formal supplied split-bundle cohomology and Hom-space characters.
-- Structured finite checks, dependency accounting, and bound local receipts.
-- An optional evidence mapper that records caller-supplied judgments and renders
-  a visibly qualified draft report.
-
-Only the selected character and split-bundle runtime components of v0.14 are
-included. This is **not** the full historical v0.14 distribution or its tool suite.
-No paid service, credentials, network access, package installation or external
-solver is needed for the included source-tree workflow. Python 3.10+ is required;
-the candidate verification records the Python version actually used.
-
-## Run from the extracted source directory
+## Quickstart
 
 ```sh
 python3 -S -B -m fm_research check examples/research-regression.problem.json
@@ -47,6 +26,20 @@ scaffold, not the implementation. `SOURCE-MANIFEST.json` pins this candidate's
 actual bytes; generated check receipts contain their own kernel-source hash.
 Use a fresh output path for mapper `--json-out` and `--paper-out`.
 
+## What is inside
+
+| Component | Purpose |
+|---|---|
+| `fm_research/` | Exact quadratic arithmetic, finite rank certificates, character arithmetic, and formal supplied split-bundle characters |
+| `fm_mapper/` | Caller-supplied evidence judgments and qualified draft reports |
+| `fm_control/` | Model-conditional scalar one-step certificates |
+
+Only the selected character and split-bundle runtime components of v0.14 are
+included. This is **not** the full historical v0.14 distribution or its tool suite.
+No paid service, credentials, network access, package installation or external
+solver is needed for the included source-tree workflow. Python 3.10+ is required;
+the candidate verification records the Python version actually used.
+
 ## Read the evidence correctly
 
 `fm_research` retains its existing `certified`, `cited`, `argued`, `refuted`,
@@ -55,7 +48,7 @@ under its admitted dependency assumptions**, not that surrounding prose is prove
 `cited` is admitted, not independently proved. Historical receipts do not become
 current receipts merely by copying them.
 
-Version-2 source binding covers all 17 selected mathematical source/catalog
+Version-2 source binding covers the selected mathematical source/catalog
 files, including vendor implementations and retained verifiers. Changed source
 bytes make earlier receipts stale; catalog mismatches remain explicit errors.
 This binds bytes on disk, not loaded-code authenticity or mathematical truth.
@@ -78,8 +71,12 @@ claims, authenticate reviewers, or establish a productivity speedup.
 ```sh
 python3 -S -B -m unittest discover -s tests -t .
 python3 -S -B -O -m unittest discover -s tests -t .
-python3 -S -B tools/package_source.py ../foundation-math-candidate.zip
 ```
+
+Package a clean committed export using the [source packaging guide](docs/guides/how-to/source-package.md).
+Running the packager directly in a Git checkout fails its exact-file check because
+Git metadata is outside the allowlist. Commit documentation and manifest changes
+before exporting.
 
 Packaging uses an explicit manifest, verifies the exact file set and every hash,
 and writes a deterministic source ZIP outside the tree. Existing output files are
@@ -87,7 +84,49 @@ never overwritten. This is a source distribution, not a wheel or a tested pip
 installation. Run checks with suitable CPU, address-space and wall-time limits;
 see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 
-## License and development
+## Exact scalar control certificates
+
+`fm_control` adds model-conditional one-step safe-action intervals and a
+two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
+This is not a physical simulator, general controller or equipment-safety approval.
+
+## Documentation
+
+Start with the [documentation index](docs/README.md).
+
+- [Requirements](docs/requirements/requirements.md)
+- [Architecture](docs/architecture/architecture.md)
+- [Verification matrix](docs/verification/verification-matrix.md)
+- [Configuration management](docs/configuration/configuration-management.md)
+- [Local process interfaces](docs/icd/icd-stdio.md)
+- [Release checklist](docs/RELEASE-CHECKLIST.md)
+
+## Related projects
+
+[Foundation Engine](https://github.com/Akilleez-QA/foundation-engine) and
+[Cstack](https://github.com/Akilleez-QA/cstack) are related projects.
+This checkout contains no Cstack adapter; its selected historical vendor subset
+does not establish compatibility with a current host.
+
+## Layout
+
+| Path | Contents |
+|---|---|
+| `fm_research/` | Exact kernels, receipts and dependency accounting |
+| `fm_mapper/` | Supplied evidence judgments and draft reports |
+| `fm_control/` | Exact scalar one-step certificates |
+| `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources |
+| `tests/` | Synthetic standard-library tests |
+| `tools/` | Explicit-manifest source packager |
+| `docs/` | Contracts, requirements, design and verification records |
+
+## Contributing
+
+See [Contributing](CONTRIBUTING.md), [Support](SUPPORT.md), and the
+[Code of conduct](CODE_OF_CONDUCT.md). Report sensitive issues through
+[Security](SECURITY.md).
+
+## Development and provenance
 
 Copyright (c) 2026 Refrigeration.AI. The first-party source, tests, synthetic examples,
 tooling, documentation and metadata listed in `SOURCE-MANIFEST.json`, including
@@ -101,21 +140,6 @@ The intended release process promotes an explicitly selected, tested development
 snapshot after review; it is not a blanket directory sync. See
 [the release checklist](docs/RELEASE-CHECKLIST.md).
 
-## Used by Cstack
-
-Cstack template (private, Refrigeration.AI) uses Foundation Math v0.14 from
-`vendor/foundation-math-v014` through its Math stdio adapter and
-`foundations/math/fm_research` exact-arithmetic research checks. The adapter pins
-the vendored `SOURCE-MANIFEST.json` by SHA-256 and verifies its 561 file hashes.
-That full historical distribution is broader than this repository’s selected
-v0.14 source subset.
-
-## Commercial licensing
+## License
 
 This project is available under the GNU General Public License v3.0 only (GPL-3.0-only). If you want to use it to create a product or service under different terms, commercial licenses are available from Refrigeration.AI. Contact craig@nh3.biz.
-
-## Exact scalar control certificates
-
-`fm_control` adds model-conditional one-step safe-action intervals and a
-two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
-This is not a physical simulator, general controller or equipment-safety approval.

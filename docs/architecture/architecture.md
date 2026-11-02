@@ -1,4 +1,4 @@
-# Architecture design
+# Architecture
 
 Foundation Math is a Python 3.10+ source-tree package using the standard library
 and a selected local vendor subset. It implements finite mathematical checks,
@@ -41,3 +41,17 @@ The research fingerprint binds selected mathematical sources on disk, while
 reviewer authentication or loaded-code authenticity check. See
 [source binding](../SOURCE-BINDING.md) and the
 [adapter ICD](../icd/icd-stdio.md).
+
+## Design decisions
+
+Exact rational arithmetic keeps finite checks separate from approximate models.
+The research gate retains admitted dependencies; the mapper consumes supplied
+judgments rather than deriving scientific acceptance from receipts. Scalar
+certificates remain a separate API because their inputs and one-step conclusions
+have a different contract from structured research claims.
+
+The distribution allowlist and mathematical source fingerprint serve distinct
+purposes. Documentation changes can invalidate distribution pins without changing
+mathematical source identity. The [configuration guide](../configuration/configuration-management.md)
+explains how a new candidate is assembled. No architecture decision records are
+maintained in this checkout.
