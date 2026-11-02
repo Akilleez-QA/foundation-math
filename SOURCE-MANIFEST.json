@@ -40,9 +40,9 @@
       "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
     },
     {
-      "bytes": 6689,
+      "bytes": 7107,
       "path": "README.md",
-      "sha256": "bb2f27bb2c682f6053a143e20d2d235424cabeded33f69ab0a37c6fd773779a3"
+      "sha256": "7fc47d012f2563d91f29a4abbd15b5e26e6191e433ebf25fc8aa129f9bbd5274"
     },
     {
       "byte_preserved": false,
@@ -52,9 +52,9 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 555,
+      "bytes": 888,
       "path": "docs/README.md",
-      "sha256": "0cfe60a42d38046ab1b4889cca2144b3f9723121c0d935dc0ef15e784c2b6133"
+      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
     },
     {
       "bytes": 1828,
@@ -85,6 +85,11 @@
       "bytes": 4521,
       "path": "docs/configuration/configuration-management.md",
       "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
+    },
+    {
+      "path": "docs/guides/how-to/source-package.md",
+      "bytes": 1916,
+      "sha256": "5f6eb87c5bd3744417465850cbd2102e1cb3dde787872c76754a0427c85045a1"
     },
     {
       "bytes": 3263,
