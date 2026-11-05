@@ -18,6 +18,8 @@
 
 ## Reference
 
+- [Exact rational interval histories](INTERVAL-HISTORY.md)
+
 - [EVIDENCE-PAPER](EVIDENCE-PAPER.md)
 - [SCALAR-CONTROL](SCALAR-CONTROL.md)
 - [SOURCE-BINDING](SOURCE-BINDING.md)

@@ -1,5 +1,5 @@
 {
-  "candidate": "scalar-control-v1-20261027",
+  "candidate": "interval-history-v1-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,24 +25,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2892,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "aafe8c0da121752c73b02efbb29a9ead97cdaf609e22f79ba10f02c173c506da"
     },
     {
-      "bytes": 620,
+      "bytes": 663,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "06f621ba2bc048c21f236fac937088c5be27b086c2612c8fdd506943fa1fe578"
     },
     {
-      "bytes": 2586,
+      "bytes": 2926,
       "path": "PROVENANCE.md",
-      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
+      "sha256": "fb5200a4e09eb23b6b8faff35ac7c47e511c1d7126bebbfbb94d403374260d8a"
     },
     {
-      "bytes": 7112,
+      "bytes": 7378,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "04d5edd6b18c53ac8f60ca7f829d5ebc28e9d2f448627a08036e7bc681049371"
     },
     {
       "byte_preserved": false,
@@ -52,9 +52,14 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "bytes": 8859,
+      "path": "docs/INTERVAL-HISTORY.md",
+      "sha256": "3abf05b8d25ee97fa66a394c77e0785b44264e55d68e69ea713ca8b196e06b3d"
+    },
+    {
+      "bytes": 948,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "88575a2150d87fa65935ab886aa230e48258f730251ce4a87fb117afe9412b19"
     },
     {
       "bytes": 1828,
@@ -87,8 +92,8 @@
       "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
     },
     {
-      "path": "docs/guides/how-to/source-package.md",
       "bytes": 1916,
+      "path": "docs/guides/how-to/source-package.md",
       "sha256": "5f6eb87c5bd3744417465850cbd2102e1cb3dde787872c76754a0427c85045a1"
     },
     {
@@ -134,6 +139,16 @@
       "bytes": 2267,
       "path": "fm_control/scalar.py",
       "sha256": "ffdb2f7311b3b4862d7e28033bfc9c055bde63ed50be0852bab4332721e4055c"
+    },
+    {
+      "bytes": 336,
+      "path": "fm_intervals/__init__.py",
+      "sha256": "2f1c03a5ec131b66ab4c4c33c6dfe0e0c4ba059215af54b2a7c29d2d1bbdf4d5"
+    },
+    {
+      "bytes": 4628,
+      "path": "fm_intervals/history.py",
+      "sha256": "c3d942ab112e96b14982b42c4b279ab4ef3ed38aa58e1815cd91f24ceaa31cc1"
     },
     {
       "byte_preserved": true,
@@ -228,6 +243,11 @@
       "path": "tests/mapper_helpers.py",
       "sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab",
       "source_sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab"
+    },
+    {
+      "bytes": 8716,
+      "path": "tests/test_interval_history.py",
+      "sha256": "fb3a54d215f2237cabd3da66b41f5cf5efe758012a2bc66934f8a2c34d04100d"
     },
     {
       "bytes": 4447,
