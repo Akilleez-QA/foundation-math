@@ -25,14 +25,14 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2725,
+      "bytes": 2730,
       "path": "NOTICE.md",
-      "sha256": "65511bfc7ced33b2d6d3cb51751cf6042addf414f3880dfa0ada615717fce359"
+      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
     },
     {
-      "bytes": 614,
+      "bytes": 620,
       "path": "PACKAGE.json",
-      "sha256": "624b58edfe5fb6e7f4d79838a1555cd0d8eb1337393cecd51711a9c43172023a"
+      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
     },
     {
       "bytes": 2586,
@@ -40,9 +40,9 @@
       "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
     },
     {
-      "bytes": 7107,
+      "bytes": 7112,
       "path": "README.md",
-      "sha256": "7fc47d012f2563d91f29a4abbd15b5e26e6191e433ebf25fc8aa129f9bbd5274"
+      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
     },
     {
       "byte_preserved": false,

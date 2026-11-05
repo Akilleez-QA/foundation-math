@@ -1,6 +1,6 @@
 # Copyright, license and source scope
 
-Copyright (c) 2026 Refrigeration AI, Inc..
+Copyright (c) 2026 Refrigeration AI, Inc.
 
 ## GPL-3.0-only
 
