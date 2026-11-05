@@ -77,6 +77,17 @@ class PathBoundsTests(unittest.TestCase):
         self.assertEqual(receipt['integrals'], (F(-1, 6), F(1, 3)))
         self.assertTrue(verify_path_bounds(rows, '1/2', '1', '2', receipt))
 
+    def test_exponent_and_nonrational_text_rejected_before_conversion(self):
+        rows = [(0, 1, 0, 1)]
+        receipt = certify_path_bounds(rows, 1, 1, 1)
+        for value in ('1e1000000000', '1e-1000000000', '1.0', ' 1', '1_000', '1/-2'):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                certify_path_bounds([(0, 1, value, 1)], 1, 1, 1)
+            bad = copy.deepcopy(receipt)
+            bad['lower'][0] = value
+            with self.subTest(receipt=value), self.assertRaises(ValueError):
+                verify_path_bounds(rows, 1, 1, 1, bad)
+
     def test_budget_validation_and_pair_limit(self):
         rows = [(0, 1, 0, 1)]
         for band in ((2, 1), (), (0, True), [0, 1, 2]):

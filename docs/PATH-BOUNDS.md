@@ -89,9 +89,13 @@ but it does not identify the sharp extrema `[-3,4]`. Interior bends matter.
 ## Validation and resource boundary
 
 Accepted scalars are exact built-in `int`, `fractions.Fraction`, or strings
-parsed as rational numbers. Booleans, floats and nonfinite tokens are rejected.
+in signed integer or integer/positive-integer form, using ASCII digits.
+Whitespace, decimals, underscores, exponents, signed/zero/leading-zero
+denominators, booleans, floats and nonfinite tokens are rejected before
+conversion.
 Input numerators and denominators are limited to 512 bits; input strings to
-256 characters. Horizon/rates must be nonnegative, record windows must lie
+256 characters, including strings in receipts. Native `Fraction` values in
+receipts may use the larger generated-value bit limit. Horizon/rates must be nonnegative, record windows must lie
 inside the horizon, and value intervals must not be reversed. There are at
 most 32 records. These input violations raise `ValueError`.
 
@@ -105,7 +109,7 @@ The caps limit finite work; they are not a wall-clock or memory guarantee.
 
 ## Verification and scope
 
-Fifteen author test methods cover asymmetric directions, missing time coverage,
+Sixteen author test methods cover asymmetric directions, missing time coverage,
 closed-endpoint contradictions, singleton/constant/zero-horizon cases, integral
 bands, malformed inputs, caps, tampering, omitted crossings, and large generated
 rational roundtrips. Eighty seeded synthetic cases compare sharp extrema with

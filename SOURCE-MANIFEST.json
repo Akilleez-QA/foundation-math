@@ -52,9 +52,9 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 6383,
+      "bytes": 6644,
       "path": "docs/PATH-BOUNDS.md",
-      "sha256": "ad5ffceb9327cabe2191c443ee31ad0c631c16be659abbd952fbbe5480524755"
+      "sha256": "96724a56be81030a3bb737d170336726c9da8cd3b231d4049b31b894c826a14e"
     },
     {
       "bytes": 938,
@@ -167,9 +167,9 @@
       "sha256": "6a52f122eb2718d7726596abecb44ed24ec375df7622b8cd1c3f306c2e4924bd"
     },
     {
-      "bytes": 9761,
+      "bytes": 9969,
       "path": "fm_paths/bounds.py",
-      "sha256": "5c5fe4a081ae4a1e2d34687f5a0f72ea324c72b2a0417b4761c0f83b5c15a42d"
+      "sha256": "c74b861334ba140b27cfbdef6dd85aa4a1cee1a69c9743f4a39fb4acf162afaa"
     },
     {
       "byte_preserved": true,
@@ -262,9 +262,9 @@
       "sha256": "12d7aa056436855dd79b516b9affe589a0e7139981d818d1add653e25352122d"
     },
     {
-      "bytes": 8362,
+      "bytes": 8958,
       "path": "tests/test_path_bounds.py",
-      "sha256": "6cdcd66f362160fe1fe16e1b654f531fbf3f4aafe2bebd2305fc53a0c614699c"
+      "sha256": "443fa9799eb7aae21b30bb155fc6a2357fd3d6e07c70e54265d23d3ef9795e50"
     },
     {
       "byte_preserved": false,

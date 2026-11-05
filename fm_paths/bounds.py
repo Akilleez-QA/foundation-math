@@ -1,5 +1,6 @@
 from fractions import Fraction
 from itertools import combinations
+import re
 
 
 _INPUT_BITS = 512
@@ -7,13 +8,16 @@ _RECEIPT_BITS = 32768
 _MAX_RECORDS = 32
 _MAX_POINTS = 4096
 _MAX_PAIRS = 200000
+_RATIONAL = re.compile(r"[+-]?[0-9]+(?:/[1-9][0-9]*)?\Z")
 
 
 def _rational(value, bits=_INPUT_BITS):
     if type(value) not in (int, str, Fraction):
         raise ValueError("expected int, Fraction or rational string")
-    if type(value) is str and len(value) > (256 if bits == _INPUT_BITS else 10000):
-        raise ValueError("rational string limit exceeded")
+    if type(value) is str and (len(value) > 256 or not _RATIONAL.fullmatch(value)):
+        raise ValueError("expected bounded integer or integer/positive-integer text")
+    if type(value) is int and value.bit_length() > bits:
+        raise ValueError("rational bit limit exceeded")
     try:
         value = Fraction(value)
     except (ValueError, ZeroDivisionError):
