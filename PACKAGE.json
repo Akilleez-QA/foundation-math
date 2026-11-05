@@ -13,7 +13,7 @@
     "exact_scalar_one_step_certificates"
   ],
   "scientific_acceptance": false,
-  "copyright": "Copyright (c) 2026 Refrigeration.AI",
+  "copyright": "Copyright (c) 2026 Refrigeration AI, Inc.",
   "release_kind": "source_candidate",
   "source_binding_format": "fm-research-source/2"
 }
