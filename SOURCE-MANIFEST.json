@@ -25,24 +25,29 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2750,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "46dbdd2a60bf45062492cf0952c516f45cbd06902088c881886ee5f90ac124fa"
     },
     {
-      "bytes": 620,
+      "bytes": 666,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "d3a198dd485b538e8c3cfaa1560856ffde1949c7681302e0af9ca8909010b889"
     },
     {
-      "bytes": 2586,
+      "bytes": 2938,
       "path": "PROVENANCE.md",
-      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
+      "sha256": "ff323172b0702933c3e7dace0ab6422902636f79ecf920e5a669876b2973471b"
     },
     {
-      "bytes": 7112,
+      "bytes": 7376,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "d99f945dd9451acb1996a5959062a55a0ab71d8e344fde386f6545def55f5c16"
+    },
+    {
+      "bytes": 5606,
+      "path": "docs/DUAL-REPAIR.md",
+      "sha256": "413ab7500a4c912ed6dadf99f421efdd068809ffad7f04466a92ab9c3e6bafd7"
     },
     {
       "byte_preserved": false,
@@ -52,9 +57,9 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "bytes": 948,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "9b7d9c05571d491945ee5e8430b7adb8a1e6660a3eb9cc315d3ec3dd4e5c3de6"
     },
     {
       "bytes": 1828,
@@ -87,8 +92,8 @@
       "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
     },
     {
-      "path": "docs/guides/how-to/source-package.md",
       "bytes": 1916,
+      "path": "docs/guides/how-to/source-package.md",
       "sha256": "5f6eb87c5bd3744417465850cbd2102e1cb3dde787872c76754a0427c85045a1"
     },
     {
@@ -155,6 +160,16 @@
       "path": "fm_mapper/core.py",
       "sha256": "b3134618b530d86ef1d0d9a679019c51dba5951778b80656cd2e4181d160047c",
       "source_sha256": "826067bb358d20966db7c7742bc545715d1f9dd6651294903ed481b97e1c22b2"
+    },
+    {
+      "bytes": 382,
+      "path": "fm_optimization/__init__.py",
+      "sha256": "5ac4acf4e26281b4c02a0dbc948d73a0880ac25ed5008421e7f9d407604ddb21"
+    },
+    {
+      "bytes": 7480,
+      "path": "fm_optimization/dual.py",
+      "sha256": "3e7c87ec23008d0dc8195530f1fca3943afc22143120974aec3a85dca6e096d3"
     },
     {
       "byte_preserved": true,
@@ -228,6 +243,11 @@
       "path": "tests/mapper_helpers.py",
       "sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab",
       "source_sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab"
+    },
+    {
+      "bytes": 11252,
+      "path": "tests/test_dual_repair.py",
+      "sha256": "5909d0ec0584abf6e1644c02b2ae72b3775cb50b6f043e0a407f851b8fdccab3"
     },
     {
       "bytes": 4447,

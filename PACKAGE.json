@@ -10,7 +10,8 @@
     "exact_mathematical_kernels",
     "finite_check_receipts",
     "supplied_evidence_reports",
-    "exact_scalar_one_step_certificates"
+    "exact_scalar_one_step_certificates",
+    "exact_linear_optimization_certificates"
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Refrigeration AI, Inc.",

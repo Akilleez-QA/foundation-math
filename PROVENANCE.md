@@ -40,3 +40,10 @@ New fm_control code is elementary interval algebra with synthetic witnesses.
 Prior runtime modules are unchanged. No external physical data or private
 application code is included. The normalization regression reflects an actual
 prototype defect; validation claims are limited to the stated model and tests.
+
+## Exact linear optimization certificates (2026-11-05)
+
+The fm_optimization addition consists of newly authored elementary rational
+algebra, fresh synthetic tests and a mathematical contract under GPL-3.0-only.
+Existing runtime modules and fixtures are unchanged. The API is separate from
+the research receipt dispatcher and its source-binding scope.
