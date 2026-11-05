@@ -1,5 +1,5 @@
 {
-  "candidate": "scalar-control-v1-20261027",
+  "candidate": "quadratic-minimax-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,24 +25,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2745,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "e2d5de73e583d42baea25ceea9633bc1c13ae69ce236af310a42c6e6ee4f0965"
     },
     {
-      "bytes": 620,
+      "bytes": 664,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "511f70074672ff7cbf0bc22c65332f3d76cd1aa4b0f4fae036edf0c36e0e607b"
     },
     {
-      "bytes": 2586,
+      "bytes": 3015,
       "path": "PROVENANCE.md",
-      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
+      "sha256": "30440463d8c7398a58c1751ee1fcf7dcdb8bdff3ae05ff60a67c71ef70b67b0d"
     },
     {
-      "bytes": 7112,
+      "bytes": 7437,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "a654bd3adfdd9c2d77ad6778f5b5f6964170fabeef50af0348bfaafcc4e919b5"
     },
     {
       "byte_preserved": false,
@@ -52,9 +52,14 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "path": "docs/QUADRATIC-MINIMAX.md",
+      "bytes": 6321,
+      "sha256": "5c06cdc8d5ad7ddeaa1ab3dfde30ba2cdea1547ac8002b76c2dab81dc4c4dc5a"
+    },
+    {
+      "bytes": 933,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "f2928707907946e127f1ebf8e7fafd89e0103622ccd6f0fd1d7aa9112daab54d"
     },
     {
       "bytes": 1828,
@@ -157,6 +162,21 @@
       "source_sha256": "826067bb358d20966db7c7742bc545715d1f9dd6651294903ed481b97e1c22b2"
     },
     {
+      "path": "fm_minimax/__init__.py",
+      "bytes": 49,
+      "sha256": "0048ce93858e2be03631f6676bad118c01d51b616014e117f15179deb216c8e6"
+    },
+    {
+      "path": "fm_minimax/__main__.py",
+      "bytes": 31,
+      "sha256": "6deb266c269ec429191ba647e36d7dec081eaf9640fa4091ea64e2eb7f9b307a"
+    },
+    {
+      "path": "fm_minimax/core.py",
+      "bytes": 16410,
+      "sha256": "95bed2093dbe3244b027954ffe9813c1412c0d73819896e5cca29043eae06167"
+    },
+    {
       "byte_preserved": true,
       "bytes": 79,
       "path": "fm_research/__init__.py",
@@ -240,6 +260,11 @@
       "path": "tests/test_mapper.py",
       "sha256": "06b634f0fe683e7264446f7df4a9744fea78ba5650c988dc1558da1a5758ce93",
       "source_sha256": "60d474b1cd6da548aa629a72af231d43723bf60e1d3a3bf7498d96b8a622b57f"
+    },
+    {
+      "path": "tests/test_minimax.py",
+      "bytes": 9163,
+      "sha256": "5b8b7085446e27459bed0a4e3cec78f511ee5e3c2f8e214739848c3e01d2d143"
     },
     {
       "bytes": 2452,

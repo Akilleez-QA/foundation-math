@@ -40,3 +40,11 @@ New fm_control code is elementary interval algebra with synthetic witnesses.
 Prior runtime modules are unchanged. No external physical data or private
 application code is included. The normalization regression reflects an actual
 prototype defect; validation claims are limited to the stated model and tests.
+
+## Quadratic minimax addition (2026-11-05)
+
+The additive `fm_minimax` module checks generic rational quadratic, linear
+equality and inequality certificates. Its examples and tests are synthetic.
+It is based on public main commit `090ddeb3c9a7e5937bd5d0de08cc924e099cb800`;
+existing runtime modules and tests remain unchanged. Source-package inclusion
+does not alter the research dispatcher or its separate source-binding scope.

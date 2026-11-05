@@ -90,6 +90,13 @@ see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
 This is not a physical simulator, general controller or equipment-safety approval.
 
+## Exact quadratic minimax certificates
+
+`fm_minimax` checks supplied rational common-point, dual and Farkas witnesses
+for finite shared-metric quadratic minimax problems. It does not search for an
+optimizer. See [the contract](docs/QUADRATIC-MINIMAX.md) for exact premises,
+strict inequality semantics and resource bounds.
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).
