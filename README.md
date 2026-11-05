@@ -128,7 +128,7 @@ See [Contributing](CONTRIBUTING.md), [Support](SUPPORT.md), and the
 
 ## Development and provenance
 
-Copyright (c) 2026 Refrigeration.AI. The first-party source, tests, synthetic examples,
+Copyright (c) 2026 Refrigeration AI, Inc. The first-party source, tests, synthetic examples,
 tooling, documentation and metadata listed in `SOURCE-MANIFEST.json`, including
 the selected v0.14 source subset, are licensed under GNU GPL **version 3 only**
 (SPDX: `GPL-3.0-only`), not "or later". See [LICENSE](LICENSE),
