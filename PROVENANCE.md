@@ -40,3 +40,10 @@ New fm_control code is elementary interval algebra with synthetic witnesses.
 Prior runtime modules are unchanged. No external physical data or private
 application code is included. The normalization regression reflects an actual
 prototype defect; validation claims are limited to the stated model and tests.
+
+## Exact numerical residual and error enclosures (2026-11-05)
+
+Built on public commit `090ddeb3c9a7e5937bd5d0de08cc924e099cb800`.
+The addition contains generic rational mathematics and synthetic tests.
+Existing runtime modules and their source-binding scheme remain unchanged.
+The accompanying contract states the finite checks and their limitations.
