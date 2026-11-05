@@ -90,6 +90,12 @@ see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
 This is not a physical simulator, general controller or equipment-safety approval.
 
+## Exact continuous path bounds
+
+`fm_paths` adds a standalone exact rational API. See
+[the mathematical contract](docs/PATH-BOUNDS.md) for assumptions, proof boundaries,
+synthetic examples and input limits. It does not change the research dispatcher.
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).

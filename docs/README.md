@@ -18,6 +18,8 @@
 
 ## Reference
 
+- [Exact continuous path bounds](PATH-BOUNDS.md)
+
 - [EVIDENCE-PAPER](EVIDENCE-PAPER.md)
 - [SCALAR-CONTROL](SCALAR-CONTROL.md)
 - [SOURCE-BINDING](SOURCE-BINDING.md)

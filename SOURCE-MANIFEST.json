@@ -1,5 +1,5 @@
 {
-  "candidate": "scalar-control-v1-20261027",
+  "candidate": "path-bounds-v1-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,24 +25,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2883,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "7ebedf70c84d9f41134a39f1ea514993af27c5d49b29ba48937ce998f1c1ab03"
     },
     {
-      "bytes": 620,
+      "bytes": 653,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "82a2da5c650e5778860778365f082485ec4ea45ec2df56fa967c4edbdc498ae0"
     },
     {
-      "bytes": 2586,
+      "bytes": 2921,
       "path": "PROVENANCE.md",
-      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
+      "sha256": "b9afa865d6e2fa72f0f8f02defc67a57bf7663e3774b4b46142595c16982bd5d"
     },
     {
-      "bytes": 7112,
+      "bytes": 7364,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "867e3aa5aec5f1d34fff3ab145a4283614339f9e853a3a4ab3c12b74f8552a3e"
     },
     {
       "byte_preserved": false,
@@ -52,9 +52,14 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "bytes": 6383,
+      "path": "docs/PATH-BOUNDS.md",
+      "sha256": "ad5ffceb9327cabe2191c443ee31ad0c631c16be659abbd952fbbe5480524755"
+    },
+    {
+      "bytes": 938,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "1112f00d6f14ffaee04ec3ca048133ce35d5bf4740fb0242727c99a2dbe8a475"
     },
     {
       "bytes": 1828,
@@ -87,8 +92,8 @@
       "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
     },
     {
-      "path": "docs/guides/how-to/source-package.md",
       "bytes": 1916,
+      "path": "docs/guides/how-to/source-package.md",
       "sha256": "5f6eb87c5bd3744417465850cbd2102e1cb3dde787872c76754a0427c85045a1"
     },
     {
@@ -155,6 +160,16 @@
       "path": "fm_mapper/core.py",
       "sha256": "b3134618b530d86ef1d0d9a679019c51dba5951778b80656cd2e4181d160047c",
       "source_sha256": "826067bb358d20966db7c7742bc545715d1f9dd6651294903ed481b97e1c22b2"
+    },
+    {
+      "bytes": 117,
+      "path": "fm_paths/__init__.py",
+      "sha256": "6a52f122eb2718d7726596abecb44ed24ec375df7622b8cd1c3f306c2e4924bd"
+    },
+    {
+      "bytes": 9761,
+      "path": "fm_paths/bounds.py",
+      "sha256": "5c5fe4a081ae4a1e2d34687f5a0f72ea324c72b2a0417b4761c0f83b5c15a42d"
     },
     {
       "byte_preserved": true,
@@ -245,6 +260,11 @@
       "bytes": 2452,
       "path": "tests/test_package.py",
       "sha256": "12d7aa056436855dd79b516b9affe589a0e7139981d818d1add653e25352122d"
+    },
+    {
+      "bytes": 8362,
+      "path": "tests/test_path_bounds.py",
+      "sha256": "6cdcd66f362160fe1fe16e1b654f531fbf3f4aafe2bebd2305fc53a0c614699c"
     },
     {
       "byte_preserved": false,
