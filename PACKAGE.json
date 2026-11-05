@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "scalar-control-v1-20261027",
+  "candidate": "fixed-prefix-v1-20261105",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],
@@ -10,7 +10,8 @@
     "exact_mathematical_kernels",
     "finite_check_receipts",
     "supplied_evidence_reports",
-    "exact_scalar_one_step_certificates"
+    "exact_scalar_one_step_certificates",
+    "exact_fixed_prefix_continuation"
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Refrigeration AI, Inc.",

@@ -1,5 +1,5 @@
 {
-  "candidate": "scalar-control-v1-20261027",
+  "candidate": "fixed-prefix-v1-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,14 +25,14 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2946,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "107633f9577d479c3e34304da120ddcef79683113a05f0c7b054247d3f193e5d"
     },
     {
-      "bytes": 620,
+      "bytes": 657,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "ab37411fdded267ab336dfedcf7822187933196078a581ef0bc1eaf1dd8d5697"
     },
     {
       "bytes": 2586,
@@ -40,9 +40,9 @@
       "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
     },
     {
-      "bytes": 7112,
+      "bytes": 7432,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "f3826afd62e437404bdc1fc3954d7c1c134a8c330c1f8897d19c1f7faebed01d"
     },
     {
       "byte_preserved": false,
@@ -52,9 +52,14 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "path": "docs/FIXED-PREFIX.md",
+      "bytes": 6336,
+      "sha256": "0b14d1aeb8125bb93c03d4a5400eb3251e55b296b6e3ba5886ca2ebab9fc8f7b"
+    },
+    {
+      "bytes": 922,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "0b14d4f5968500f90914d7f646d7bb05fd78fad5a6623e364a3675f4ffae1c73"
     },
     {
       "bytes": 1828,
@@ -157,6 +162,11 @@
       "source_sha256": "826067bb358d20966db7c7742bc545715d1f9dd6651294903ed481b97e1c22b2"
     },
     {
+      "path": "fm_prefix/__init__.py",
+      "bytes": 10583,
+      "sha256": "5f56fb6836c4ee149dec79da51492494473c770522ddf73dd1f12b5a4192fffe"
+    },
+    {
       "byte_preserved": true,
       "bytes": 79,
       "path": "fm_research/__init__.py",
@@ -245,6 +255,11 @@
       "bytes": 2452,
       "path": "tests/test_package.py",
       "sha256": "12d7aa056436855dd79b516b9affe589a0e7139981d818d1add653e25352122d"
+    },
+    {
+      "path": "tests/test_prefix.py",
+      "bytes": 7300,
+      "sha256": "8ca42503471fc48ff722b48702ff8a525c4da3443eed2583b04e4a3dbb0b8b6a"
     },
     {
       "byte_preserved": false,

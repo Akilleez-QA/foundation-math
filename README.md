@@ -90,6 +90,12 @@ see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
 This is not a physical simulator, general controller or equipment-safety approval.
 
+## Fixed-prefix continuation
+
+`fm_prefix` computes conditional reachable ellipsoids for bounded nilpotent
+linear ODE inputs with a fixed polynomial prefix, exact moments and a quadratic
+norm budget. See [contract and derivation](docs/FIXED-PREFIX.md).
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).
@@ -115,6 +121,7 @@ does not establish compatibility with a current host.
 | `fm_research/` | Exact kernels, receipts and dependency accounting |
 | `fm_mapper/` | Supplied evidence judgments and draft reports |
 | `fm_control/` | Exact scalar one-step certificates |
+| `fm_prefix/` | Exact fixed-prefix moment and norm continuation |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources |
 | `tests/` | Synthetic standard-library tests |
 | `tools/` | Explicit-manifest source packager |
