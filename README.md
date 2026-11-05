@@ -90,6 +90,17 @@ see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
 This is not a physical simulator, general controller or equipment-safety approval.
 
+## Correlated quadratic certificates
+
+`fm_correlated` checks supplied exact rational upper and lower certificates for
+correlated quadratic offset/center images. It keeps exact-image and outer-image
+exclusion distinct and does not search for an optimizer. See the
+[mathematical and input contract](docs/CORRELATED-QUADRATIC.md).
+
+```sh
+python3 -S -B -m fm_correlated examples/correlated-quadratic.json
+```
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).
@@ -115,6 +126,7 @@ does not establish compatibility with a current host.
 | `fm_research/` | Exact kernels, receipts and dependency accounting |
 | `fm_mapper/` | Supplied evidence judgments and draft reports |
 | `fm_control/` | Exact scalar one-step certificates |
+| `fm_correlated/` | Supplied correlated quadratic certificates |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources |
 | `tests/` | Synthetic standard-library tests |
 | `tools/` | Explicit-manifest source packager |

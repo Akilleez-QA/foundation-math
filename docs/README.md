@@ -26,3 +26,5 @@
 The existing uppercase contract and historical verification filenames remain stable
 for inbound links. New guides use lowercase names under `guides/`. Tutorials,
 explanations, and decision records can be added when there is content for them.
+
+- [Correlated quadratic supplied certificates](CORRELATED-QUADRATIC.md)

@@ -1,5 +1,5 @@
 {
-  "candidate": "scalar-control-v1-20261027",
+  "candidate": "correlated-quadratic-v1-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,14 +25,14 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2980,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "75fd5b2dac86a795b829d2b342d920afb23a981b9bf2a9252a64aff53d0b9e46"
     },
     {
-      "bytes": 620,
+      "bytes": 676,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "e60cda1494fa549e5a486f5e11658aed7c3ea6d780ed66618396aa47b6cb194e"
     },
     {
       "bytes": 2586,
@@ -40,9 +40,14 @@
       "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
     },
     {
-      "bytes": 7112,
+      "bytes": 7584,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "efcdeba4e756bc9aaca4359948c6b68cf244b9e92e00abe0a06aab8e5fbbe01c"
+    },
+    {
+      "path": "docs/CORRELATED-QUADRATIC.md",
+      "bytes": 8205,
+      "sha256": "51cf5e1beb06ac2a7936f020220322114df4096b32aa48eb43f38dd4496e68e1"
     },
     {
       "byte_preserved": false,
@@ -52,9 +57,9 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "bytes": 961,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "1c2b15fa9b0c6151450dfba14ff1658fafcb5b89bf40343a6f037ef352177e38"
     },
     {
       "bytes": 1828,
@@ -107,6 +112,11 @@
       "sha256": "fb51efdcec197ef34ad15f9a4e65c0b4c87d08e990fc56e9108d6be4e39432a8"
     },
     {
+      "path": "examples/correlated-quadratic.json",
+      "bytes": 1105,
+      "sha256": "e42ccfde4da76358ca2f898ce8c8e4a94df263ff2cbbf420b3690229901885cf"
+    },
+    {
       "byte_preserved": true,
       "bytes": 4207,
       "path": "examples/evidence-mapper/legacy-conditional.json",
@@ -134,6 +144,21 @@
       "bytes": 2267,
       "path": "fm_control/scalar.py",
       "sha256": "ffdb2f7311b3b4862d7e28033bfc9c055bde63ed50be0852bab4332721e4055c"
+    },
+    {
+      "path": "fm_correlated/__init__.py",
+      "bytes": 88,
+      "sha256": "aa1d6e86ff92e27a8eb79bf21fcdb919d4876f7317954411dcba8d664ba97d60"
+    },
+    {
+      "path": "fm_correlated/__main__.py",
+      "bytes": 54,
+      "sha256": "3bf79ef45a8e3917766ec92034759b9fa18e921d57d4b762233000278ddac45f"
+    },
+    {
+      "path": "fm_correlated/quadratic.py",
+      "bytes": 13633,
+      "sha256": "9b4d52fe4ef9fb07b7cca27d9432ac49f18f260bf840eab5a61765b8742f80b6"
     },
     {
       "byte_preserved": true,
@@ -228,6 +253,11 @@
       "path": "tests/mapper_helpers.py",
       "sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab",
       "source_sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab"
+    },
+    {
+      "path": "tests/test_correlated.py",
+      "bytes": 7618,
+      "sha256": "0b7f64faea49c077a1b9c7767107168ab06ab8274c2c4ff4a4527796f61a4acf"
     },
     {
       "bytes": 4447,
