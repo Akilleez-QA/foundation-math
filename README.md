@@ -33,6 +33,7 @@ Use a fresh output path for mapper `--json-out` and `--paper-out`.
 | `fm_research/` | Exact quadratic arithmetic, finite rank certificates, character arithmetic, and formal supplied split-bundle characters |
 | `fm_mapper/` | Caller-supplied evidence judgments and qualified draft reports |
 | `fm_control/` | Model-conditional scalar one-step certificates |
+| `fm_identifiability/` | Exact affine-query pair and sufficient constancy witnesses |
 
 Only the selected character and split-bundle runtime components of v0.14 are
 included. This is **not** the full historical v0.14 distribution or its tool suite.
@@ -89,6 +90,12 @@ see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 `fm_control` adds model-conditional one-step safe-action intervals and a
 two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
 This is not a physical simulator, general controller or equipment-safety approval.
+
+## Exact affine-query witnesses
+
+`fm_identifiability` verifies supplied feasible-point pairs and sufficient
+equality-row-span constancy witnesses for affine queries on closed linear fibers.
+See [the theorem, interface, and limitations](docs/QUERY-IDENTIFIABILITY.md).
 
 ## Documentation
 

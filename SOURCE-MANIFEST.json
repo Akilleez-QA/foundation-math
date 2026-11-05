@@ -25,24 +25,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2753,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "56749ab7ec53ec21404ed9a385d601a055654af99e352aab933235e690cbb88d"
     },
     {
-      "bytes": 620,
+      "bytes": 656,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "31d003fd5b444a5feec1cd600370285ce2f246a9c3e88f68c1384cfb5c57b7f2"
     },
     {
-      "bytes": 2586,
+      "bytes": 2931,
       "path": "PROVENANCE.md",
-      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
+      "sha256": "3b0322e5c6cafe09de9298c515fefa1e3b6e0e2338e8b4f768c817284c1b4c89"
     },
     {
-      "bytes": 7112,
+      "bytes": 7468,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "0ee4985be2f708549835b1b12cc2585e34b0a7d0bc3f8ae046a8cc698efd98e5"
     },
     {
       "byte_preserved": false,
@@ -52,9 +52,14 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "bytes": 5977,
+      "path": "docs/QUERY-IDENTIFIABILITY.md",
+      "sha256": "e6a7a513faae67b53de5afa1be251dbc8e207c5cfd9eac1d1793d712e6dcfbf6"
+    },
+    {
+      "bytes": 940,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "224008239a1d2c710879ae42f368c728ce1881e6b814ee7a96aaaaf2da80d518"
     },
     {
       "bytes": 1828,
@@ -87,8 +92,8 @@
       "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
     },
     {
-      "path": "docs/guides/how-to/source-package.md",
       "bytes": 1916,
+      "path": "docs/guides/how-to/source-package.md",
       "sha256": "5f6eb87c5bd3744417465850cbd2102e1cb3dde787872c76754a0427c85045a1"
     },
     {
@@ -134,6 +139,11 @@
       "bytes": 2267,
       "path": "fm_control/scalar.py",
       "sha256": "ffdb2f7311b3b4862d7e28033bfc9c055bde63ed50be0852bab4332721e4055c"
+    },
+    {
+      "bytes": 5503,
+      "path": "fm_identifiability/__init__.py",
+      "sha256": "6d97f427fc98bf17067357af13c6340cff32f8b7b13e1ae3af202196d7dd3b9b"
     },
     {
       "byte_preserved": true,
@@ -228,6 +238,11 @@
       "path": "tests/mapper_helpers.py",
       "sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab",
       "source_sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab"
+    },
+    {
+      "bytes": 7738,
+      "path": "tests/test_identifiability.py",
+      "sha256": "b455df4e2fb6b3ecf1f0e240a3705fe38e35c8f4407307c71842da30b91900b8"
     },
     {
       "bytes": 4447,
