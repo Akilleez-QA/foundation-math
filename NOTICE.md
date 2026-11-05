@@ -9,7 +9,8 @@ The owner selects GNU General Public License version 3 only (SPDX:
 distribution. This is not an "or later" grant. The complete license is in LICENSE.
 The software is supplied without warranty; see LICENSE sections 15 and 16.
 
-Covered first-party paths are `fm_research/`, `fm_mapper/`, `fm_control/`, the nine selected
+Covered first-party paths are `fm_research/`, `fm_mapper/`, `fm_control/`,
+`fm_certificates/`, the nine selected
 runtime files under `vendor/foundation-math-v014/`, `tests/`, `examples/`, `tools/`,
 `docs/`, and the first-party root documentation and metadata, as enumerated in
 `SOURCE-MANIFEST.json`. The root manifest itself is included in that scope.
