@@ -1,5 +1,5 @@
 {
-  "candidate": "query-identifiability-20261105",
+  "candidate": "numerical-enclosures-v1-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,24 +25,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2773,
+      "bytes": 2940,
       "path": "NOTICE.md",
-      "sha256": "6d22253b62c4e0d646d2aeb41d89fbfc7a7df8d560f74bc09e16a50bc08ab317"
+      "sha256": "10da1b5e28cc451765b5d8eaf04e30fe7ed6b415258b2ca0a8fff5165c4b4880"
     },
     {
-      "bytes": 705,
+      "bytes": 750,
       "path": "PACKAGE.json",
-      "sha256": "7fadd985f474d88e418079a1c88d9230828fd981b69ae0e36cea5e912b22eb5c"
+      "sha256": "291e7fb6d0fa3e3e0a44de79dddbe6403acc3918d0d7c2e3602e02a70e690536"
     },
     {
-      "bytes": 3639,
+      "bytes": 3991,
       "path": "PROVENANCE.md",
-      "sha256": "fb3c2fa160fc35f81203d16a82716544ad97ad931f820d83d8158970b380b02d"
+      "sha256": "b23c831c63de43ec77739a307f14274d16d87f4e66b4091bdb58e5e07c0b5df4"
     },
     {
-      "bytes": 8125,
+      "bytes": 8569,
       "path": "README.md",
-      "sha256": "8bde249ea1b0628294df2047f5b23ae471a9c7252b1937f41f051818e7406e48"
+      "sha256": "b872c1c770ff07f1d72eead33a91f64120711f6d6753fa93127f09197c0bbc05"
     },
     {
       "path": "docs/AFFINE-CERTIFICATES.md",
@@ -57,14 +57,19 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
+      "bytes": 7862,
+      "path": "docs/NUMERICAL-ENCLOSURES.md",
+      "sha256": "b95bcf8d23de1f6420c7a1596c6a9178e7d56e7a461af7ed94fa56df840f8ccb"
+    },
+    {
       "bytes": 5977,
       "path": "docs/QUERY-IDENTIFIABILITY.md",
       "sha256": "e6a7a513faae67b53de5afa1be251dbc8e207c5cfd9eac1d1793d712e6dcfbf6"
     },
     {
-      "bytes": 988,
+      "bytes": 1063,
       "path": "docs/README.md",
-      "sha256": "1a5acf9c9b820e895e1afb0449a2c56c9355a10a899cbd70fadd0eace6f01bb4"
+      "sha256": "668b0c3c35dd419225913c6e56ba04c6b77bba0b132fc39b0ae21858cc2309a8"
     },
     {
       "bytes": 1828,
@@ -154,6 +159,16 @@
       "bytes": 2267,
       "path": "fm_control/scalar.py",
       "sha256": "ffdb2f7311b3b4862d7e28033bfc9c055bde63ed50be0852bab4332721e4055c"
+    },
+    {
+      "bytes": 272,
+      "path": "fm_enclosures/__init__.py",
+      "sha256": "158a3ad2e499500f0b8a6d646a310c5175864e0e4983f031bf65cf8033e351bd"
+    },
+    {
+      "bytes": 5610,
+      "path": "fm_enclosures/numerical.py",
+      "sha256": "f4f7e9461c33b1428f7545cf270fcd39a058cba022e3695203ac477a14410324"
     },
     {
       "bytes": 5503,
@@ -275,6 +290,11 @@
       "path": "tests/test_mapper.py",
       "sha256": "06b634f0fe683e7264446f7df4a9744fea78ba5650c988dc1558da1a5758ce93",
       "source_sha256": "60d474b1cd6da548aa629a72af231d43723bf60e1d3a3bf7498d96b8a622b57f"
+    },
+    {
+      "bytes": 6529,
+      "path": "tests/test_numerical_enclosures.py",
+      "sha256": "96cf007e220eba1dc32a26d5f743a335909a93b250e9377a041f620f7077e4da"
     },
     {
       "bytes": 2452,

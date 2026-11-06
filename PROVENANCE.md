@@ -59,3 +59,10 @@ The fm_identifiability addition consists of newly authored elementary rational
 algebra, fresh synthetic tests and a mathematical contract under GPL-3.0-only.
 Existing runtime modules and fixtures are unchanged. The API is separate from
 the research receipt dispatcher and its source-binding scope.
+
+## Exact numerical residual and error enclosures (2026-11-05)
+
+Built on public commit `090ddeb3c9a7e5937bd5d0de08cc924e099cb800`.
+The addition contains generic rational mathematics and synthetic tests.
+Existing runtime modules and their source-binding scheme remain unchanged.
+The accompanying contract states the finite checks and their limitations.

@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "query-identifiability-20261105",
+  "candidate": "numerical-enclosures-v1-20261105",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],
@@ -12,7 +12,8 @@
     "supplied_evidence_reports",
     "exact_scalar_one_step_certificates",
     "exact_affine_implication_certificates",
-    "exact_affine_query_witnesses"
+    "exact_affine_query_witnesses",
+    "exact_numerical_residual_enclosures"
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Refrigeration AI, Inc.",
