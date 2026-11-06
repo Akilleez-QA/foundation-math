@@ -11,6 +11,8 @@
     "finite_check_receipts",
     "supplied_evidence_reports",
     "exact_scalar_one_step_certificates",
+    "exact_affine_implication_certificates",
+    "exact_affine_query_witnesses",
     "exact_numerical_residual_enclosures"
   ],
   "scientific_acceptance": false,
