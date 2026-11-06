@@ -33,6 +33,7 @@ Use a fresh output path for mapper `--json-out` and `--paper-out`.
 | `fm_research/` | Exact quadratic arithmetic, finite rank certificates, character arithmetic, and formal supplied split-bundle characters |
 | `fm_mapper/` | Caller-supplied evidence judgments and qualified draft reports |
 | `fm_control/` | Model-conditional scalar one-step certificates |
+| `fm_certificates/` | Exact affine implication, infeasibility and composition checks |
 | `fm_identifiability/` | Exact affine-query pair and sufficient constancy witnesses |
 
 Only the selected character and split-bundle runtime components of v0.14 are
@@ -91,6 +92,14 @@ see [verification](docs/VERIFICATION.md) for the bounded candidate checks.
 two-model observation-ambiguity checker. See [scope and proof](docs/SCALAR-CONTROL.md).
 This is not a physical simulator, general controller or equipment-safety approval.
 
+## Exact affine certificates
+
+The local `fm_certificates` candidate checks supplied nonnegative rational
+multipliers for affine implications, strict infeasibility witnesses and composed
+proofs. It uses no solver and does not infer external facts. See
+[the affine certificate contract](docs/AFFINE-CERTIFICATES.md). This API is
+separate from the existing research JSON dispatcher and source-bound receipts.
+
 ## Exact affine-query witnesses
 
 `fm_identifiability` verifies supplied feasible-point pairs and sufficient
@@ -122,6 +131,8 @@ does not establish compatibility with a current host.
 | `fm_research/` | Exact kernels, receipts and dependency accounting |
 | `fm_mapper/` | Supplied evidence judgments and draft reports |
 | `fm_control/` | Exact scalar one-step certificates |
+| `fm_certificates/` | Exact affine certificates under declared premises |
+| `fm_identifiability/` | Exact affine-query pair and sufficient constancy witnesses |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources |
 | `tests/` | Synthetic standard-library tests |
 | `tools/` | Explicit-manifest source packager |

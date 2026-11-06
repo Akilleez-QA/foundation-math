@@ -41,6 +41,18 @@ Prior runtime modules are unchanged. No external physical data or private
 application code is included. The normalization regression reflects an actual
 prototype defect; validation claims are limited to the stated model and tests.
 
+## Affine-certificate local candidate (2026-11-05)
+
+Prepared against public Foundation Math commit
+`090ddeb3c9a7e5937bd5d0de08cc924e099cb800`. The new self-contained
+`fm_certificates` implementation is elementary nonnegative linear-combination
+arithmetic. Its tests use newly constructed dimensionless synthetic examples.
+No external physical data, source tables, model implementation or application
+configuration is included. Prior runtime modules, tests, examples and tools
+remain unchanged. The research JSON dispatcher and its source-binding scope
+are unchanged; affine certificates bind declared statements through a separate
+versioned digest. Local preparation and tests do not authorize publication.
+
 ## Exact affine-query witnesses (2026-11-05)
 
 The fm_identifiability addition consists of newly authored elementary rational
