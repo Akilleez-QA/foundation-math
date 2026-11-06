@@ -1,5 +1,5 @@
 {
-  "candidate": "scalar-control-v1-20261027",
+  "candidate": "affine-certificates-local-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,24 +25,29 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2730,
+      "bytes": 2750,
       "path": "NOTICE.md",
-      "sha256": "fea273ee95b158b88c919a72a76c9501dc19d3e01b726290aa3d9a6dc0e26c2a"
+      "sha256": "6d65b52bf6740fe2c44f8fd11f721c2b6222024f8c3575ed01b3c62e0651d2a3"
     },
     {
-      "bytes": 620,
+      "bytes": 673,
       "path": "PACKAGE.json",
-      "sha256": "b0f47198ca1a25ac0c016ea5d107a614a183460aab9757383f1094b287f540a8"
+      "sha256": "24571ff80aa2543a08c53d1e750752091577d0ee01de49956a0ee0bd0e44051b"
     },
     {
-      "bytes": 2586,
+      "bytes": 3294,
       "path": "PROVENANCE.md",
-      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
+      "sha256": "4f342225b42a82e3620aa3726483442f365dcba315eb72c2597649fd94de4c6c"
     },
     {
-      "bytes": 7112,
+      "bytes": 7682,
       "path": "README.md",
-      "sha256": "79a027db06793d346f828f98c9961fa3694c2178065e2490d94d4d85bcc93759"
+      "sha256": "ce89da2ce9617fc242c86ff21512f1e3820c92230a1543edcbca9f959e4b73c5"
+    },
+    {
+      "path": "docs/AFFINE-CERTIFICATES.md",
+      "bytes": 5169,
+      "sha256": "9f0458d08e8854cfc88da3703f72e935af2085ce2f8f8c7293e767b14fbd2175"
     },
     {
       "byte_preserved": false,
@@ -52,9 +57,9 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 888,
+      "bytes": 936,
       "path": "docs/README.md",
-      "sha256": "3f94b319639801c9ca6f1ab4df74a670b51387ee012a4bb987caa601280e00ea"
+      "sha256": "0dad39b861de128b46fe2596e7648c9be3978c3e93ed493d33f8a2670dcacfcd"
     },
     {
       "bytes": 1828,
@@ -124,6 +129,16 @@
       "bytes": 2130,
       "path": "examples/research-regression.problem.json",
       "sha256": "f6c5db8425630f0501c69ce54e93bbd8087178e371fbb73d4a3dbe48abef3307"
+    },
+    {
+      "path": "fm_certificates/__init__.py",
+      "bytes": 473,
+      "sha256": "2336837ad30c85940a689df548618cea4a096f022dac579046cf01fc264b4082"
+    },
+    {
+      "path": "fm_certificates/affine.py",
+      "bytes": 5320,
+      "sha256": "d34c87f21530e50278366cb9079d603eae3807615b2b78b19457f54af2f69921"
     },
     {
       "bytes": 139,
@@ -228,6 +243,11 @@
       "path": "tests/mapper_helpers.py",
       "sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab",
       "source_sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab"
+    },
+    {
+      "path": "tests/test_affine_certificates.py",
+      "bytes": 7216,
+      "sha256": "d1d3c90ec294de2987cc658b0a7078e83e9c367b2037613361c4a0134f63004d"
     },
     {
       "bytes": 4447,
