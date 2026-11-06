@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "affine-certificates-local-20261105",
+  "candidate": "query-identifiability-20261105",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],
@@ -11,7 +11,8 @@
     "finite_check_receipts",
     "supplied_evidence_reports",
     "exact_scalar_one_step_certificates",
-    "exact_affine_implication_certificates"
+    "exact_affine_implication_certificates",
+    "exact_affine_query_witnesses"
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Refrigeration AI, Inc.",

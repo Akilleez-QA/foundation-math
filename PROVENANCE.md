@@ -52,3 +52,10 @@ configuration is included. Prior runtime modules, tests, examples and tools
 remain unchanged. The research JSON dispatcher and its source-binding scope
 are unchanged; affine certificates bind declared statements through a separate
 versioned digest. Local preparation and tests do not authorize publication.
+
+## Exact affine-query witnesses (2026-11-05)
+
+The fm_identifiability addition consists of newly authored elementary rational
+algebra, fresh synthetic tests and a mathematical contract under GPL-3.0-only.
+Existing runtime modules and fixtures are unchanged. The API is separate from
+the research receipt dispatcher and its source-binding scope.

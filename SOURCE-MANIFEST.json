@@ -1,5 +1,5 @@
 {
-  "candidate": "affine-certificates-local-20261105",
+  "candidate": "query-identifiability-20261105",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,24 +25,24 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2750,
+      "bytes": 2773,
       "path": "NOTICE.md",
-      "sha256": "6d65b52bf6740fe2c44f8fd11f721c2b6222024f8c3575ed01b3c62e0651d2a3"
+      "sha256": "6d22253b62c4e0d646d2aeb41d89fbfc7a7df8d560f74bc09e16a50bc08ab317"
     },
     {
-      "bytes": 673,
+      "bytes": 705,
       "path": "PACKAGE.json",
-      "sha256": "24571ff80aa2543a08c53d1e750752091577d0ee01de49956a0ee0bd0e44051b"
+      "sha256": "7fadd985f474d88e418079a1c88d9230828fd981b69ae0e36cea5e912b22eb5c"
     },
     {
-      "bytes": 3294,
+      "bytes": 3639,
       "path": "PROVENANCE.md",
-      "sha256": "4f342225b42a82e3620aa3726483442f365dcba315eb72c2597649fd94de4c6c"
+      "sha256": "fb3c2fa160fc35f81203d16a82716544ad97ad931f820d83d8158970b380b02d"
     },
     {
-      "bytes": 7682,
+      "bytes": 8125,
       "path": "README.md",
-      "sha256": "ce89da2ce9617fc242c86ff21512f1e3820c92230a1543edcbca9f959e4b73c5"
+      "sha256": "8bde249ea1b0628294df2047f5b23ae471a9c7252b1937f41f051818e7406e48"
     },
     {
       "path": "docs/AFFINE-CERTIFICATES.md",
@@ -57,9 +57,14 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 936,
+      "bytes": 5977,
+      "path": "docs/QUERY-IDENTIFIABILITY.md",
+      "sha256": "e6a7a513faae67b53de5afa1be251dbc8e207c5cfd9eac1d1793d712e6dcfbf6"
+    },
+    {
+      "bytes": 988,
       "path": "docs/README.md",
-      "sha256": "0dad39b861de128b46fe2596e7648c9be3978c3e93ed493d33f8a2670dcacfcd"
+      "sha256": "1a5acf9c9b820e895e1afb0449a2c56c9355a10a899cbd70fadd0eace6f01bb4"
     },
     {
       "bytes": 1828,
@@ -149,6 +154,11 @@
       "bytes": 2267,
       "path": "fm_control/scalar.py",
       "sha256": "ffdb2f7311b3b4862d7e28033bfc9c055bde63ed50be0852bab4332721e4055c"
+    },
+    {
+      "bytes": 5503,
+      "path": "fm_identifiability/__init__.py",
+      "sha256": "6d97f427fc98bf17067357af13c6340cff32f8b7b13e1ae3af202196d7dd3b9b"
     },
     {
       "byte_preserved": true,
@@ -248,6 +258,11 @@
       "path": "tests/test_affine_certificates.py",
       "bytes": 7216,
       "sha256": "d1d3c90ec294de2987cc658b0a7078e83e9c367b2037613361c4a0134f63004d"
+    },
+    {
+      "bytes": 7738,
+      "path": "tests/test_identifiability.py",
+      "sha256": "b455df4e2fb6b3ecf1f0e240a3705fe38e35c8f4407307c71842da30b91900b8"
     },
     {
       "bytes": 4447,
