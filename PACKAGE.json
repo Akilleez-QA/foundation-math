@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "quadratic-minimax-20261105",
+  "candidate": "quadratic-minimax-20261105-main-53a58dd-20261107",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],
@@ -11,6 +11,9 @@
     "finite_check_receipts",
     "supplied_evidence_reports",
     "exact_scalar_one_step_certificates",
+    "exact_affine_implication_certificates",
+    "exact_affine_query_witnesses",
+    "exact_numerical_residual_enclosures",
     "exact_quadratic_minimax_certificates"
   ],
   "scientific_acceptance": false,
