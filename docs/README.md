@@ -20,8 +20,11 @@
 
 - [Exact continuous path bounds](PATH-BOUNDS.md)
 
+- [Affine certificates](AFFINE-CERTIFICATES.md)
+- [Exact numerical residual and error enclosures](NUMERICAL-ENCLOSURES.md)
 - [EVIDENCE-PAPER](EVIDENCE-PAPER.md)
 - [SCALAR-CONTROL](SCALAR-CONTROL.md)
+- [QUERY-IDENTIFIABILITY](QUERY-IDENTIFIABILITY.md)
 - [SOURCE-BINDING](SOURCE-BINDING.md)
 - [VERIFICATION](VERIFICATION.md)
 
