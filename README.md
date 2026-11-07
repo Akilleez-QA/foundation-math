@@ -69,6 +69,12 @@ Characters, dimensions, and Hom spaces are not actual maps, geometry or existenc
 proofs. This software does not validate a physical model, prove arbitrary research
 claims, authenticate reviewers, or establish a productivity speedup.
 
+## Exact optimization certificates
+
+`fm_optimization` checks rational linear-program upper bounds, repairs supplied
+dual candidates with equality corrections and explicit box support, and checks
+supplied attaining points. See [the contract](docs/DUAL-REPAIR.md).
+
 ## Checks and source packaging
 
 ```sh

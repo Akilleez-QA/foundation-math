@@ -1,5 +1,5 @@
 {
-  "candidate": "numerical-enclosures-v1-20261105",
+  "candidate": "dual-repair-main-reconciled-20261107",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,29 +25,34 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2940,
+      "bytes": 2960,
       "path": "NOTICE.md",
-      "sha256": "10da1b5e28cc451765b5d8eaf04e30fe7ed6b415258b2ca0a8fff5165c4b4880"
+      "sha256": "d9c672cda21b0a186f976ad0e9406413136bdaba07a5425826aa7f60b205a183"
     },
     {
-      "bytes": 750,
+      "bytes": 800,
       "path": "PACKAGE.json",
-      "sha256": "291e7fb6d0fa3e3e0a44de79dddbe6403acc3918d0d7c2e3602e02a70e690536"
+      "sha256": "efd1a41bc68f26067591c2a7a307085b30f7b6b69ac40d8606eee9c12089f77d"
     },
     {
-      "bytes": 3991,
+      "bytes": 4965,
       "path": "PROVENANCE.md",
-      "sha256": "b23c831c63de43ec77739a307f14274d16d87f4e66b4091bdb58e5e07c0b5df4"
+      "sha256": "bde18ac6ae5e28bd4f18f0b96cac42600ebf21c494e3ac68c373eb145054ecbc"
     },
     {
-      "bytes": 8569,
+      "bytes": 8833,
       "path": "README.md",
-      "sha256": "b872c1c770ff07f1d72eead33a91f64120711f6d6753fa93127f09197c0bbc05"
+      "sha256": "0a416077f538a283cd59b0810bb6614dbcb7a09e060c852a4dd0dd1ae3e24b09"
     },
     {
-      "path": "docs/AFFINE-CERTIFICATES.md",
       "bytes": 5169,
+      "path": "docs/AFFINE-CERTIFICATES.md",
       "sha256": "9f0458d08e8854cfc88da3703f72e935af2085ce2f8f8c7293e767b14fbd2175"
+    },
+    {
+      "bytes": 5606,
+      "path": "docs/DUAL-REPAIR.md",
+      "sha256": "413ab7500a4c912ed6dadf99f421efdd068809ffad7f04466a92ab9c3e6bafd7"
     },
     {
       "byte_preserved": false,
@@ -67,9 +72,9 @@
       "sha256": "e6a7a513faae67b53de5afa1be251dbc8e207c5cfd9eac1d1793d712e6dcfbf6"
     },
     {
-      "bytes": 1063,
+      "bytes": 1123,
       "path": "docs/README.md",
-      "sha256": "668b0c3c35dd419225913c6e56ba04c6b77bba0b132fc39b0ae21858cc2309a8"
+      "sha256": "1ad35c834eb1410446fb91494d86570934854756d26712ee2237c3288a79f252"
     },
     {
       "bytes": 1828,
@@ -102,8 +107,8 @@
       "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
     },
     {
-      "path": "docs/guides/how-to/source-package.md",
       "bytes": 1916,
+      "path": "docs/guides/how-to/source-package.md",
       "sha256": "5f6eb87c5bd3744417465850cbd2102e1cb3dde787872c76754a0427c85045a1"
     },
     {
@@ -141,13 +146,13 @@
       "sha256": "f6c5db8425630f0501c69ce54e93bbd8087178e371fbb73d4a3dbe48abef3307"
     },
     {
-      "path": "fm_certificates/__init__.py",
       "bytes": 473,
+      "path": "fm_certificates/__init__.py",
       "sha256": "2336837ad30c85940a689df548618cea4a096f022dac579046cf01fc264b4082"
     },
     {
-      "path": "fm_certificates/affine.py",
       "bytes": 5320,
+      "path": "fm_certificates/affine.py",
       "sha256": "d34c87f21530e50278366cb9079d603eae3807615b2b78b19457f54af2f69921"
     },
     {
@@ -195,6 +200,16 @@
       "path": "fm_mapper/core.py",
       "sha256": "b3134618b530d86ef1d0d9a679019c51dba5951778b80656cd2e4181d160047c",
       "source_sha256": "826067bb358d20966db7c7742bc545715d1f9dd6651294903ed481b97e1c22b2"
+    },
+    {
+      "bytes": 382,
+      "path": "fm_optimization/__init__.py",
+      "sha256": "5ac4acf4e26281b4c02a0dbc948d73a0880ac25ed5008421e7f9d407604ddb21"
+    },
+    {
+      "bytes": 7480,
+      "path": "fm_optimization/dual.py",
+      "sha256": "3e7c87ec23008d0dc8195530f1fca3943afc22143120974aec3a85dca6e096d3"
     },
     {
       "byte_preserved": true,
@@ -270,9 +285,14 @@
       "source_sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab"
     },
     {
-      "path": "tests/test_affine_certificates.py",
       "bytes": 7216,
+      "path": "tests/test_affine_certificates.py",
       "sha256": "d1d3c90ec294de2987cc658b0a7078e83e9c367b2037613361c4a0134f63004d"
+    },
+    {
+      "bytes": 11252,
+      "path": "tests/test_dual_repair.py",
+      "sha256": "5909d0ec0584abf6e1644c02b2ae72b3775cb50b6f043e0a407f851b8fdccab3"
     },
     {
       "bytes": 7738,
