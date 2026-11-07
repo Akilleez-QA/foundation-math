@@ -113,6 +113,13 @@ See [the theorem, interface, and limitations](docs/QUERY-IDENTIFIABILITY.md).
 [the mathematical contract](docs/NUMERICAL-ENCLOSURES.md) for assumptions, proof boundaries,
 synthetic examples and input limits. It does not change the research dispatcher.
 
+## Exact quadratic minimax certificates
+
+`fm_minimax` checks supplied rational common-point, dual and Farkas witnesses
+for finite shared-metric quadratic minimax problems. It does not search for an
+optimizer. See [the contract](docs/QUADRATIC-MINIMAX.md) for exact premises,
+strict inequality semantics and resource bounds.
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).

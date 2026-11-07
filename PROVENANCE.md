@@ -66,3 +66,22 @@ Built on public commit `090ddeb3c9a7e5937bd5d0de08cc924e099cb800`.
 The addition contains generic rational mathematics and synthetic tests.
 Existing runtime modules and their source-binding scheme remain unchanged.
 The accompanying contract states the finite checks and their limitations.
+
+## Quadratic minimax addition (2026-11-05)
+
+The additive `fm_minimax` module checks generic rational quadratic, linear
+equality and inequality certificates. Its examples and tests are synthetic.
+It is based on public main commit `090ddeb3c9a7e5937bd5d0de08cc924e099cb800`;
+existing runtime modules and tests remain unchanged. Source-package inclusion
+does not alter the research dispatcher or its separate source-binding scope.
+
+## Additive public reconciliation (2026-11-07)
+
+This candidate combines the preceding public addition with public main commit
+`53a58dde072b1d3f92836a1365f88f364b880a33`. Existing mathematical source, tests,
+contracts and community files are retained byte-for-byte. Only shared overview,
+license-scope and package metadata are reconciled. Earlier dated descriptions
+and verification statements above retain their historical scope; they do not
+certify this combined candidate. Its exact source set is pinned separately by
+`SOURCE-MANIFEST.json`; author checks, independent review and scientific
+acceptance remain distinct.
