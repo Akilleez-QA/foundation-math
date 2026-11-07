@@ -113,6 +113,17 @@ See [the theorem, interface, and limitations](docs/QUERY-IDENTIFIABILITY.md).
 [the mathematical contract](docs/NUMERICAL-ENCLOSURES.md) for assumptions, proof boundaries,
 synthetic examples and input limits. It does not change the research dispatcher.
 
+## Correlated quadratic certificates
+
+`fm_correlated` checks supplied exact rational upper and lower certificates for
+correlated quadratic offset/center images. It keeps exact-image and outer-image
+exclusion distinct and does not search for an optimizer. See the
+[mathematical and input contract](docs/CORRELATED-QUADRATIC.md).
+
+```sh
+python3 -S -B -m fm_correlated examples/correlated-quadratic.json
+```
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).
@@ -141,6 +152,7 @@ does not establish compatibility with a current host.
 | `fm_certificates/` | Exact affine certificates under declared premises |
 | `fm_identifiability/` | Exact affine-query pair and sufficient constancy witnesses |
 | `fm_enclosures/` | Exact numerical residual and conditional error enclosures |
+| `fm_correlated/` | Supplied correlated quadratic certificates |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources |
 | `tests/` | Synthetic standard-library tests |
 | `tools/` | Explicit-manifest source packager |
