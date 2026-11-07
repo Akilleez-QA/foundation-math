@@ -18,6 +18,8 @@
 
 ## Reference
 
+- [Exact rational interval histories](INTERVAL-HISTORY.md)
+
 - [Affine certificates](AFFINE-CERTIFICATES.md)
 - [Exact numerical residual and error enclosures](NUMERICAL-ENCLOSURES.md)
 - [EVIDENCE-PAPER](EVIDENCE-PAPER.md)

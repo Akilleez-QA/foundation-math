@@ -113,6 +113,12 @@ See [the theorem, interface, and limitations](docs/QUERY-IDENTIFIABILITY.md).
 [the mathematical contract](docs/NUMERICAL-ENCLOSURES.md) for assumptions, proof boundaries,
 synthetic examples and input limits. It does not change the research dispatcher.
 
+## Exact rational interval histories
+
+`fm_intervals` adds a standalone exact rational API. See
+[the mathematical contract](docs/INTERVAL-HISTORY.md) for assumptions, proof boundaries,
+synthetic examples and input limits. It does not change the research dispatcher.
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).
