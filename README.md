@@ -113,6 +113,12 @@ See [the theorem, interface, and limitations](docs/QUERY-IDENTIFIABILITY.md).
 [the mathematical contract](docs/NUMERICAL-ENCLOSURES.md) for assumptions, proof boundaries,
 synthetic examples and input limits. It does not change the research dispatcher.
 
+## Fixed-prefix continuation
+
+`fm_prefix` computes conditional reachable ellipsoids for bounded nilpotent
+linear ODE inputs with a fixed polynomial prefix, exact moments and a quadratic
+norm budget. See [contract and derivation](docs/FIXED-PREFIX.md).
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).
@@ -141,6 +147,7 @@ does not establish compatibility with a current host.
 | `fm_certificates/` | Exact affine certificates under declared premises |
 | `fm_identifiability/` | Exact affine-query pair and sufficient constancy witnesses |
 | `fm_enclosures/` | Exact numerical residual and conditional error enclosures |
+| `fm_prefix/` | Exact fixed-prefix moment and norm continuation |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources |
 | `tests/` | Synthetic standard-library tests |
 | `tools/` | Explicit-manifest source packager |
