@@ -1,5 +1,5 @@
 {
-  "candidate": "correlated-quadratic-v1-20261105",
+  "candidate": "correlated-quadratic-main-reconciled-20261107",
   "catalog_sha256": "84ceb37bc32d10c4908e5b5f1f2f5994082074f2c2a9f36c846347750c79fa74",
   "files": [
     {
@@ -25,28 +25,33 @@
       "source_git_blob_sha1": "f6cdd22a6c1fbc887e08a215cb4beb3c47048041"
     },
     {
-      "bytes": 2980,
+      "bytes": 3190,
       "path": "NOTICE.md",
-      "sha256": "75fd5b2dac86a795b829d2b342d920afb23a981b9bf2a9252a64aff53d0b9e46"
+      "sha256": "52a16a8800180e47ee54098a3f32e7cbba2274db544f9b29958e039e2196e193"
     },
     {
-      "bytes": 676,
+      "bytes": 813,
       "path": "PACKAGE.json",
-      "sha256": "e60cda1494fa549e5a486f5e11658aed7c3ea6d780ed66618396aa47b6cb194e"
+      "sha256": "3e398abb3394aa5907ffb914b36a622b3127448a55e57dd22f3fb98721a79fdd"
     },
     {
-      "bytes": 2586,
+      "bytes": 4613,
       "path": "PROVENANCE.md",
-      "sha256": "d59b85a994b44de39b5c1585254667be0aee15f2af1e8ae8352d6ae1510c38ad"
+      "sha256": "9c900b0fe6018a9a1ce326558d64bd1a5dfc010be0f0c1dccca7a4d8a01bfa32"
     },
     {
-      "bytes": 7584,
+      "bytes": 9041,
       "path": "README.md",
-      "sha256": "efcdeba4e756bc9aaca4359948c6b68cf244b9e92e00abe0a06aab8e5fbbe01c"
+      "sha256": "81edc26ada81c8187a8e0b4cee2952d3b9a06cfd9ebf4aebdd021a08f74c2ee9"
     },
     {
-      "path": "docs/CORRELATED-QUADRATIC.md",
+      "bytes": 5169,
+      "path": "docs/AFFINE-CERTIFICATES.md",
+      "sha256": "9f0458d08e8854cfc88da3703f72e935af2085ce2f8f8c7293e767b14fbd2175"
+    },
+    {
       "bytes": 8205,
+      "path": "docs/CORRELATED-QUADRATIC.md",
       "sha256": "51cf5e1beb06ac2a7936f020220322114df4096b32aa48eb43f38dd4496e68e1"
     },
     {
@@ -57,9 +62,19 @@
       "source_sha256": "d453ea9c952c7ce93e9703d53e25b69be26720dfe94f692fea0c13d878bb24c4"
     },
     {
-      "bytes": 961,
+      "bytes": 7862,
+      "path": "docs/NUMERICAL-ENCLOSURES.md",
+      "sha256": "b95bcf8d23de1f6420c7a1596c6a9178e7d56e7a461af7ed94fa56df840f8ccb"
+    },
+    {
+      "bytes": 5977,
+      "path": "docs/QUERY-IDENTIFIABILITY.md",
+      "sha256": "e6a7a513faae67b53de5afa1be251dbc8e207c5cfd9eac1d1793d712e6dcfbf6"
+    },
+    {
+      "bytes": 1136,
       "path": "docs/README.md",
-      "sha256": "1c2b15fa9b0c6151450dfba14ff1658fafcb5b89bf40343a6f037ef352177e38"
+      "sha256": "20cfc893f029f18015aa08bbbe181940309c2a4d2695fe0907a1029113c23a01"
     },
     {
       "bytes": 1828,
@@ -92,8 +107,8 @@
       "sha256": "21d206767fc9691d4416e290060eb7d8f352b110879aeec227ad74e66fbc7d5b"
     },
     {
-      "path": "docs/guides/how-to/source-package.md",
       "bytes": 1916,
+      "path": "docs/guides/how-to/source-package.md",
       "sha256": "5f6eb87c5bd3744417465850cbd2102e1cb3dde787872c76754a0427c85045a1"
     },
     {
@@ -112,8 +127,8 @@
       "sha256": "fb51efdcec197ef34ad15f9a4e65c0b4c87d08e990fc56e9108d6be4e39432a8"
     },
     {
-      "path": "examples/correlated-quadratic.json",
       "bytes": 1105,
+      "path": "examples/correlated-quadratic.json",
       "sha256": "e42ccfde4da76358ca2f898ce8c8e4a94df263ff2cbbf420b3690229901885cf"
     },
     {
@@ -136,6 +151,16 @@
       "sha256": "f6c5db8425630f0501c69ce54e93bbd8087178e371fbb73d4a3dbe48abef3307"
     },
     {
+      "bytes": 473,
+      "path": "fm_certificates/__init__.py",
+      "sha256": "2336837ad30c85940a689df548618cea4a096f022dac579046cf01fc264b4082"
+    },
+    {
+      "bytes": 5320,
+      "path": "fm_certificates/affine.py",
+      "sha256": "d34c87f21530e50278366cb9079d603eae3807615b2b78b19457f54af2f69921"
+    },
+    {
       "bytes": 139,
       "path": "fm_control/__init__.py",
       "sha256": "172fef0cf6c93277dcf35f139494a8b94775d96714bdd802f17886ff69df9e50"
@@ -146,19 +171,34 @@
       "sha256": "ffdb2f7311b3b4862d7e28033bfc9c055bde63ed50be0852bab4332721e4055c"
     },
     {
-      "path": "fm_correlated/__init__.py",
       "bytes": 88,
+      "path": "fm_correlated/__init__.py",
       "sha256": "aa1d6e86ff92e27a8eb79bf21fcdb919d4876f7317954411dcba8d664ba97d60"
     },
     {
-      "path": "fm_correlated/__main__.py",
       "bytes": 54,
+      "path": "fm_correlated/__main__.py",
       "sha256": "3bf79ef45a8e3917766ec92034759b9fa18e921d57d4b762233000278ddac45f"
     },
     {
-      "path": "fm_correlated/quadratic.py",
       "bytes": 13633,
+      "path": "fm_correlated/quadratic.py",
       "sha256": "9b4d52fe4ef9fb07b7cca27d9432ac49f18f260bf840eab5a61765b8742f80b6"
+    },
+    {
+      "bytes": 272,
+      "path": "fm_enclosures/__init__.py",
+      "sha256": "158a3ad2e499500f0b8a6d646a310c5175864e0e4983f031bf65cf8033e351bd"
+    },
+    {
+      "bytes": 5610,
+      "path": "fm_enclosures/numerical.py",
+      "sha256": "f4f7e9461c33b1428f7545cf270fcd39a058cba022e3695203ac477a14410324"
+    },
+    {
+      "bytes": 5503,
+      "path": "fm_identifiability/__init__.py",
+      "sha256": "6d97f427fc98bf17067357af13c6340cff32f8b7b13e1ae3af202196d7dd3b9b"
     },
     {
       "byte_preserved": true,
@@ -255,9 +295,19 @@
       "source_sha256": "f5685579918e7edd4c82615cb61127ac7c63b60d4b3ef2015ef6ea0d06afc2ab"
     },
     {
-      "path": "tests/test_correlated.py",
+      "bytes": 7216,
+      "path": "tests/test_affine_certificates.py",
+      "sha256": "d1d3c90ec294de2987cc658b0a7078e83e9c367b2037613361c4a0134f63004d"
+    },
+    {
       "bytes": 7618,
+      "path": "tests/test_correlated.py",
       "sha256": "0b7f64faea49c077a1b9c7767107168ab06ab8274c2c4ff4a4527796f61a4acf"
+    },
+    {
+      "bytes": 7738,
+      "path": "tests/test_identifiability.py",
+      "sha256": "b455df4e2fb6b3ecf1f0e240a3705fe38e35c8f4407307c71842da30b91900b8"
     },
     {
       "bytes": 4447,
@@ -270,6 +320,11 @@
       "path": "tests/test_mapper.py",
       "sha256": "06b634f0fe683e7264446f7df4a9744fea78ba5650c988dc1558da1a5758ce93",
       "source_sha256": "60d474b1cd6da548aa629a72af231d43723bf60e1d3a3bf7498d96b8a622b57f"
+    },
+    {
+      "bytes": 6529,
+      "path": "tests/test_numerical_enclosures.py",
+      "sha256": "96cf007e220eba1dc32a26d5f743a335909a93b250e9377a041f620f7077e4da"
     },
     {
       "bytes": 2452,
