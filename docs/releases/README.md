@@ -4,3 +4,4 @@ Each version description (VDD) identifies one recorded source candidate: commit,
 
 | Version description | Candidate | Commit |
 |---|---|---|
+| [VDD-numerical-enclosures-v1-20261105](VDD-numerical-enclosures-v1-20261105.md) | `numerical-enclosures-v1-20261105` | `151e8b7` |

@@ -157,9 +157,14 @@
       "sha256": "32527a9947c1b5ce46baf31b96d2525f13bdd36263348d7c761bd288e1f2935e"
     },
     {
-      "bytes": 436,
+      "bytes": 569,
       "path": "docs/releases/README.md",
-      "sha256": "d04f832f2b45f354e0d872c6b1fd86c81a5c7236312f709ae82a7829ec3c3164"
+      "sha256": "9ee2f6af87bfd0ec66ced28bdf24a94b7fa243a73f3672d721ef56b71cc56e45"
+    },
+    {
+      "bytes": 8190,
+      "path": "docs/releases/VDD-numerical-enclosures-v1-20261105.md",
+      "sha256": "7cc1721303f83968d2839d3d730f306b6bd8d2c9b9cc67c22d1426399e613536"
     },
     {
       "bytes": 21022,
@@ -167,9 +172,14 @@
       "sha256": "a1f40bab59c6fe034678dd922fff3755c1533def70aadbb10f2433ef74164a00"
     },
     {
-      "bytes": 378,
+      "bytes": 511,
       "path": "docs/verification/reports/README.md",
-      "sha256": "045b5168ab5dacf59d8b91748bcc352fdc3344b07f5e6ed765b93ca12501c863"
+      "sha256": "49bde34842fd66c5b25295653be850ce784c29dbbdb2b32606865f179e7ba625"
+    },
+    {
+      "bytes": 19742,
+      "path": "docs/verification/reports/STR-numerical-enclosures-v1-20261105.md",
+      "sha256": "059ec6f4142a384594e006d12f40947a19eba90fab9f0dc5852897038e45f92d"
     },
     {
       "bytes": 8222,

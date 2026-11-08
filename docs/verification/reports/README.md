@@ -4,3 +4,4 @@ Each software test report (STR) records one run of both unit suites, the trace c
 
 | Report | Candidate | Commit |
 |---|---|---|
+| [STR-numerical-enclosures-v1-20261105](STR-numerical-enclosures-v1-20261105.md) | `numerical-enclosures-v1-20261105` | `151e8b7` |
