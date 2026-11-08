@@ -2,7 +2,7 @@
 
 # Foundation Math
 
-Exact mathematical kernels and physics research tools with reproducible evidence reports
+Exact mathematical kernels, certificate verifiers and evidence reports in standard-library Python
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
