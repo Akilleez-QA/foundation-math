@@ -30,3 +30,24 @@ body:
     id: alternatives
     attributes:
       label: Alternatives and tradeoffs
+  - type: input
+    id: version
+    attributes:
+      label: Current commit
+      description: The commit or source candidate you are working with.
+  - type: textarea
+    id: affected
+    attributes:
+      label: Affected requirements, interfaces and documents
+      description: Requirement IDs (REQ-MATH-###), ICDs, data dictionary entries and guides. Name other family repositories affected by an interface change.
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority (your assessment)
+      options:
+        - high
+        - medium
+        - low
+  - type: markdown
+    attributes:
+      value: 'Maintainer record: the implementing pull request states the disposition (approved, rejected or deferred), the impact analysis, the verifying tests and matrix rows, and the commit or candidate that contains the change.'
