@@ -62,7 +62,7 @@ def unit_run(optimized):
 def coverage():
     with tempfile.TemporaryDirectory() as tmp:
         ignore = sorted({sys.prefix, sys.base_prefix, sys.exec_prefix})
-        command = [sys.executable, '-S', '-B', '-m', 'trace', '--count', '--summary', '-C', tmp,
+        command = [sys.executable, '-S', '-B', '-m', 'trace', '--count', '--summary', '--missing', '-C', tmp,
                    *[f'--ignore-dir={p}' for p in ignore], '--module', 'unittest', 'discover', '-s', 'tests', '-t', '.']
         result = run(command)
     rows = []
@@ -74,7 +74,7 @@ def coverage():
                 rows.append((relative, int(match.group(1)), float(match.group(2))))
     lines = sum(r[1] for r in rows)
     covered = sum(r[1] * r[2] / 100 for r in rows)
-    return {'command': 'python3 -S -B -m trace --count --summary -C <tmp> --ignore-dir=<python prefix> --module unittest discover -s tests -t .',
+    return {'command': 'python3 -S -B -m trace --count --summary --missing -C <tmp> --ignore-dir=<python prefix> --module unittest discover -s tests -t .',
             'exit': result.returncode, 'rows': sorted(rows), 'lines': lines,
             'percent': round(100 * covered / lines, 1) if lines else 0.0}
 
@@ -117,8 +117,8 @@ def gitleaks(binary):
     version = run([binary, 'version']).stdout.strip()
     return {'command': 'gitleaks git --no-banner --redact -c .gitleaks.toml --log-opts=HEAD .',
             'version': version, 'exit': result.returncode,
-            'summary': ' '.join(re.sub(r'\x1b\[[0-9;]*m', '', l).split(None, 1)[-1]
-                                for l in result.stderr.splitlines()[-2:])}
+            'summary': '; '.join(re.sub(r'^\S+\s+INF\s+', '', re.sub(r'\x1b\[[0-9;]*m', '', l)).strip()
+                                 for l in result.stderr.splitlines()[-2:])}
 
 
 def package():
@@ -208,7 +208,7 @@ def collect(args):
         'candidate': meta['candidate'],
         'tags': git('tag', '--list').split(),
         'commits': git('log', '--format=%h %cs %s').splitlines(),
-        'environment': f'{platform.system()} {platform.release()} {platform.machine()}; Python {platform.python_version()}',
+        'environment': f'{platform.system()} {platform.machine()}; Python {platform.python_version()}',
         'normal': unit_run(False),
         'optimized': unit_run(True),
         'trace_problems': problems,

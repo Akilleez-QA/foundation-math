@@ -52,7 +52,7 @@ No performance or load tests exist; no timing requirement is stated.
 Tool: the standard-library `trace` module, so no dependency is added. Command (run by the STR generator):
 
 ```sh
-python3 -S -B -m trace --count --summary -C "$(mktemp -d)" --ignore-dir="$(python3 -c 'import sys; print(sys.prefix)')" --module unittest discover -s tests -t .
+python3 -S -B -m trace --count --summary --missing -C "$(mktemp -d)" --ignore-dir="$(python3 -c 'import sys; print(sys.prefix)')" --module unittest discover -s tests -t .
 ```
 
 It counts lines executed inside the test process only; code run in CLI subprocesses is not counted. The measured value per commit is in the STR. No coverage threshold is set. MC/DC: N/A (not safety-critical, SWE-219).

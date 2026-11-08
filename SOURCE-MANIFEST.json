@@ -172,9 +172,9 @@
       "sha256": "045b5168ab5dacf59d8b91748bcc352fdc3344b07f5e6ed765b93ca12501c863"
     },
     {
-      "bytes": 8212,
+      "bytes": 8222,
       "path": "docs/verification/test-plan.md",
-      "sha256": "8017d7ad73f06d77811c2ea67723dfa590a56fac8b188d936923a77885b694b7"
+      "sha256": "3ec68da791ed8a8863d31cb45c0276118517c52eec926c4c5818fa9ec1b4d50d"
     },
     {
       "bytes": 19080,
@@ -394,9 +394,9 @@
       "sha256": "faa6a18e55c9407ecb809a1a01815d3bfd7051f93763cf9dbc2c8fe08bce0ce7"
     },
     {
-      "bytes": 24531,
+      "bytes": 24554,
       "path": "tools/gen_release_docs.py",
-      "sha256": "59207919fab48868c17c9c0a7ad8152c8a95c718d5268c884b65a1ac8cb892f8"
+      "sha256": "069ff96333a9212c5e07700701a5c231241c086f13027d19228419e4b9d5b992"
     },
     {
       "bytes": 2626,
