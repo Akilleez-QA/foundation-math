@@ -66,3 +66,16 @@ Built on public commit `090ddeb3c9a7e5937bd5d0de08cc924e099cb800`.
 The addition contains generic rational mathematics and synthetic tests.
 Existing runtime modules and their source-binding scheme remain unchanged.
 The accompanying contract states the finite checks and their limitations.
+
+## Correction note (2026-11-08)
+
+The summary at the top of this file predates PR #5 (2026-10-30), which removed
+code comments from several retained files. `SOURCE-MANIFEST.json` is the
+authority for byte preservation. At commit `53a58dd` it marks these selected
+files `byte_preserved: true`: five `fm_research` modules (`__init__`, `field`,
+`p1`, `twoi`, `vendor`), `fm_mapper/__init__.py`, and four vendor files
+(both `__init__.py` files, `character_ring/catalog.json`,
+`character_ring/producer.py`). `fm_research/rank.py`, `fm_research/problem.py`,
+`fm_mapper/core.py`, `fm_mapper/__main__.py` and the other five vendor files
+are `byte_preserved: false`; their rows keep the original `source_sha256`.
+The earlier sections are kept as written.

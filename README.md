@@ -2,18 +2,25 @@
 
 # Foundation Math
 
-Exact mathematical kernels and physics research tools with reproducible evidence reports
+Exact mathematical kernels, certificate verifiers and evidence reports in standard-library Python
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
 ## Status
 
-This source-tree candidate checks finite mathematical claims, maps supplied
-evidence judgments into qualified draft reports, and computes model-conditional
-scalar one-step certificates. It uses Python 3.10+ and the standard library.
-A local candidate does not by itself establish public publication.
+Source candidate `numerical-enclosures-v1-20261105` (from `PACKAGE.json`; no release tag).
+Self-assessed Class E analog, not safety-critical; this is not a NASA compliance
+determination ([software management plan](docs/plan/software-management-plan.md#1-software-classification-self-assessed)).
+
+This source tree checks finite mathematical claims, maps supplied evidence
+judgments into qualified draft reports, and verifies exact certificates: scalar
+one-step safe actions, affine implications and infeasibility, affine-query
+witnesses, and interval residual enclosures. It uses Python 3.10+ and the
+standard library. A local candidate does not by itself establish public publication.
 
 ## Quickstart
+
+Clone the repository and run from its root. Nothing is installed.
 
 ```sh
 python3 -S -B -m fm_research check examples/research-regression.problem.json
@@ -76,6 +83,9 @@ python3 -S -B -m unittest discover -s tests -t .
 python3 -S -B -O -m unittest discover -s tests -t .
 ```
 
+Both suites include `tests/test_trace.py`, which runs the documentation trace
+check (`python3 -S -B -m tools.check_trace`).
+
 Package a clean committed export using the [source packaging guide](docs/guides/how-to/source-package.md).
 Running the packager directly in a Git checkout fails its exact-file check because
 Git metadata is outside the allowlist. Commit documentation and manifest changes
@@ -113,21 +123,50 @@ See [the theorem, interface, and limitations](docs/QUERY-IDENTIFIABILITY.md).
 [the mathematical contract](docs/NUMERICAL-ENCLOSURES.md) for assumptions, proof boundaries,
 synthetic examples and input limits. It does not change the research dispatcher.
 
+## Limitations
+
+- `certified`, `supported`, `bounded` and a passing certificate are conditional
+  mathematical statements about supplied inputs. They are not proofs of research
+  prose, scientific acceptance, engineering approval or safety determinations.
+- `fm_control` is arithmetic for one step of a scalar affine model. It commands
+  nothing, does no unit conversion, and is not a controller or simulator.
+- The SL2(F5) catalog's identification with the group and any supplied bundle
+  splitting are assumptions.
+- No stdio bridge or Cstack adapter is included; Python 3.10 and 3.11 are untested.
+- Twelve implemented behaviours have no test; see the
+  [requirement gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps).
+
+Full list: [limitations and safety-relevant use](docs/guides/explanation/limitations.md).
+
 ## Documentation
 
-Start with the [documentation index](docs/README.md).
+Start with the [documentation index](docs/README.md) or the
+[first-check tutorial](docs/guides/tutorials/first-check.md).
 
-- [Requirements](docs/requirements/requirements.md)
-- [Architecture](docs/architecture/architecture.md)
-- [Verification matrix](docs/verification/verification-matrix.md)
-- [Configuration management](docs/configuration/configuration-management.md)
-- [Local process interfaces](docs/icd/icd-stdio.md)
+- [Software management plan](docs/plan/software-management-plan.md) and [compliance matrix](docs/plan/compliance-matrix.md)
+- [Requirements](docs/requirements/requirements.md) and [verification matrix](docs/verification/verification-matrix.md)
+- [Design](docs/architecture/architecture.md)
+- [Process interfaces](docs/icd/icd-stdio.md), [Python API](docs/icd/icd-python-api.md) and [data dictionary](docs/data/data-dictionary.md)
+- [Test plan](docs/verification/test-plan.md), [test reports](docs/verification/reports/README.md) and [version descriptions](docs/releases/README.md)
+- [Configuration management](docs/configuration/configuration-management.md) and [assurance record](docs/assurance/assurance-record.md)
 - [Release checklist](docs/RELEASE-CHECKLIST.md)
 
 ## Related projects
 
-[Foundation Engine](https://github.com/Akilleez-QA/foundation-engine) and
-[Cstack](https://github.com/Akilleez-QA/cstack) are related projects.
+Foundation Math belongs to the Cstack family (code name Mjölnir).
+
+| Repository | Role |
+|---|---|
+| [Cstack](https://github.com/Akilleez-QA/cstack) | Host; vendors the foundations byte-pinned |
+| [EndoForge](https://github.com/Akilleez-QA/endoforge) | Workshop and evaluator engine |
+| [POODO](https://github.com/Akilleez-QA/poodo) | Reasoning skill |
+| [Foundation Engine](https://github.com/Akilleez-QA/foundation-engine) | Games framework (library) |
+| Foundation Math (this repository) | Exact mathematical kernels and certificates |
+| [Foundation Film](https://github.com/Akilleez-QA/foundation-film) | Film foundation |
+| [Foundation Refrigeration](https://github.com/Akilleez-QA/foundation-refrigeration) | Refrigeration foundation |
+| [Foundation Robotics](https://github.com/Akilleez-QA/foundation-robotics) | Robotics foundation |
+| [Foundation Template](https://github.com/Akilleez-QA/foundation-template) | Copy source for new foundations |
+
 This checkout contains no Cstack adapter; its selected historical vendor subset
 does not establish compatibility with a current host.
 
@@ -143,7 +182,7 @@ does not establish compatibility with a current host.
 | `fm_enclosures/` | Exact numerical residual and conditional error enclosures |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources |
 | `tests/` | Synthetic standard-library tests |
-| `tools/` | Explicit-manifest source packager |
+| `tools/` | Source packager, manifest refresh, documentation trace check, release-record generator |
 | `docs/` | Contracts, requirements, design and verification records |
 
 ## Contributing
