@@ -2,13 +2,10 @@
 
 # Foundation Math
 
-Foundation Math checks specific kinds of mathematical claims exactly: you hand it
-a claim plus the evidence for it, and it recomputes or verifies the claim with
-whole numbers and fractions, never floating point, using only the Python standard
-library. It has two parts. The general part checks proofs about linear inequalities and
-linear systems, and is what most people will use. The research part is a
-command-line checker kept from earlier Foundation Math work on the finite group
-SL2(F5); its kernels only fit claims of those specific kinds.
+Foundation Math checks proofs of mathematical claims exactly: you hand it a claim
+plus the evidence for it, and it verifies or recomputes the claim with whole
+numbers and fractions, never floating point, using only the Python standard
+library.
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
@@ -18,49 +15,38 @@ Results from scripts, notebooks and AI agents often arrive with a confident
 "this is proved" attached. The program that produced a result is a poor judge of
 it. Foundation Math is the separate judge: it never writes the proof, it only
 checks one. A claim is accepted only when an exact computation or a supplied
-certificate checks out. Otherwise it is rejected, and you get a receipt saying
-what was checked.
+certificate checks out. Otherwise it is rejected.
+
+Most of it is a Python library for linear problems: proofs that inequalities
+imply other inequalities, that a system has no solution, that a quantity has a
+single value, and exact error bounds. A smaller command-line part checks claims
+about one finite group, SL2(F5), from the project's original research use.
 
 ### What a Foundation is
 
-Foundation Math is one of the Foundations in the Cstack family (code name
-Mjölnir). A Foundation is a read-only checker for one subject. Another program,
-the producer, makes a result; the Foundation judges it and reports what it found.
-It changes nothing and controls nothing. Producers never grade their own work.
-[Cstack](https://github.com/Akilleez-QA/cstack) runs each Foundation from a
-copy whose file hashes it has pinned, so the judge itself can't be swapped
-quietly.
+A Foundation is a read-only checker for one subject. Another program, the
+producer, makes a result; the Foundation judges it and reports what it found. It
+changes nothing and controls nothing. Producers never grade their own work.
+Foundation Math is the maths Foundation in the Cstack family (code name
+Mjölnir). [Cstack](https://github.com/Akilleez-QA/cstack) is a host that keeps a
+hash-pinned copy of each Foundation and refuses to run one whose files changed.
+For maths it currently pins an older subset (v0.14) of this code; this repository
+is the current source and can be used on its own.
 
 ## How it works
 
 ```mermaid
 flowchart LR
     P["Producer<br/>person, script or AI agent"] -->|"claim + evidence"| K["Exact check<br/>integers and fractions only"]
-    K -->|"matches"| A["accepted<br/>certified / True"]
-    K -->|"does not match"| R["rejected<br/>refuted / False / error"]
-    A --> O["receipt (command line)<br/>args_sha256, observed,<br/>kernel_source_sha256, python_version"]
-    R --> O
+    K -->|"checks out"| A["accepted<br/>True / certificate / certified"]
+    K -->|"does not"| R["rejected<br/>False / InvalidCertificate / refuted"]
 ```
 
-There are two ways in. The command line reads a problem file: a list of claims,
-each naming an exact kernel (a small function such as "rank of this matrix") and
-the answer the producer expects. Foundation Math runs the kernel and writes an
-evidence record (arguments hash, observed answer, hash of the kernel source).
-A separate gate then re-checks that record against the claim and the current
-source files, compares the answer with the expected one, and prints one JSON line
-per claim. A claim that depends on another is certified only if everything below
-it is too. `--evidence-out FILE` saves the records. The Python
-modules check certificates: the producer supplies a witness (for example, the
-multipliers that prove an inequality) and the module checks it exactly. They
-return plain values or frozen records; the `fm_certificates` and
-`fm_identifiability` records carry a SHA-256 digest of the exact statement checked. Neither
-path searches for a proof; a missing or failed proof is not evidence that a claim
-is false.
-
-All the modules share that one rule: the producer supplies the claim and the
-evidence, and the module only checks. The set of checks is fixed in code. A new
-kind of claim needs a new kernel (an entry in `KERNELS` in
-`fm_research/problem.py`) or a new module, with tests.
+The producer supplies a claim and a witness, for example the multipliers that
+prove an inequality. The module checks the witness with exact arithmetic and
+answers yes or no; it never searches for a proof. A failed or missing proof is
+not evidence that the claim is false. The set of checks is fixed in code; a new
+kind of claim needs a new module or kernel, with tests.
 
 ## Example
 
@@ -91,15 +77,48 @@ x + 2y <= 9: accepted
 x + 2y <= 7: rejected: Supplied implication witness did not verify
 ```
 
-`make_implication` returns a frozen certificate record when the witness checks
-out and raises `InvalidCertificate` when it does not. `verify_implication` gives
-the same answer as `True` or `False`.
+`make_implication` returns a frozen certificate record, which carries a SHA-256
+digest of the exact system it was checked against, or raises `InvalidCertificate`.
+`verify_implication` gives the same answer as `True` or `False`.
 
-The command line works on a problem file. Each claim names a kernel, its
-arguments and the answer the producer expects. This claim from
-[the shipped example](examples/research-regression.problem.json) says the matrix
-`[[√5, 0], [0, 3]]` has rank 2. A plain number is a rational entry; a pair
-`[a, b]` means `a + b√5`:
+## Install and run
+
+You need Python 3.10 or newer; CI tests on 3.12 only. Nothing is installed.
+
+```sh
+git clone https://github.com/Akilleez-QA/foundation-math
+cd foundation-math
+python3 -S -B -m unittest discover -s tests -t .
+```
+
+The test suite ends with `OK`. Then paste the example above. The `-S` and `-B`
+flags are optional; they prove that only the standard library loads and keep
+`.pyc` files out of the tree. Next, follow the
+[first-check tutorial](docs/guides/tutorials/first-check.md).
+
+## What is inside
+
+| Module | What it checks | Contract |
+|---|---|---|
+| `fm_certificates/` | Supplied proofs that linear inequalities imply another inequality, or have no solution | [Affine certificates](docs/AFFINE-CERTIFICATES.md) |
+| `fm_identifiability/` | Supplied witnesses that a linear quantity does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
+| `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
+| `fm_control/` | One-step safe-action intervals for a scalar linear model | [Scalar control](docs/SCALAR-CONTROL.md) |
+| `fm_research/` | Command line: claims files checked by exact kernels for matrix rank over Q, Q(√5) and prime fields, characters of SL2(F5), and cohomology dimensions of supplied split bundles | [Source binding](docs/SOURCE-BINDING.md) |
+| `fm_mapper/` | Command line: turns your own judgment of each claim into a draft paper whose wording matches the support. It reports; it does not judge | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
+| `vendor/foundation-math-v014/` | Character and split-bundle sources used by `fm_research` | [Provenance](PROVENANCE.md) |
+
+`tests/` holds synthetic standard-library tests; `tools/` holds the source
+packager, manifest refresh and documentation trace check. No network,
+credentials, external solver or package installation is used.
+
+## The research command line
+
+`fm_research` reads a problem file of claims. Each computed claim names a kernel,
+its arguments and the answer the producer expects. This one, from
+[the shipped example](examples/research-regression.problem.json), says the matrix
+`[[√5, 0], [0, 3]]` has rank 2 (a plain number is rational; a pair `[a, b]` means
+`a + b√5`):
 
 ```json
 {
@@ -110,9 +129,6 @@ arguments and the answer the producer expects. This claim from
   "check": {"kernel": "rank", "args": {"field": "Q(sqrt5)", "rows": [[[0, 1], 0], [0, 3]]}, "expect": 2}
 }
 ```
-
-Foundation Math recomputes the rank and certifies the claim (output trimmed and
-wrapped):
 
 ```sh
 python3 -S -B -m fm_research check examples/research-regression.problem.json --claim rank-q5
@@ -125,63 +141,24 @@ python3 -S -B -m fm_research check examples/research-regression.problem.json --c
  "args_sha256": "2ec6140c...", "kernel_source_sha256": "a9652c11...", ...}}
 ```
 
-Change `"expect": 2` to `1` and the claim comes back `refuted`. Each output line
-has two results. `verdict` is the raw comparison: `PASS` if the kernel's answer
-equals `expect`, `FAIL` if not. `status` is the claim's standing:
+(Output trimmed and wrapped.) The command runs the kernel, records the
+arguments hash, the observed answer and a hash of the kernel source, then grades
+the claim. `verdict` is the raw comparison with `expect`; `status` is the claim's
+standing. Change `"expect": 2` to `1` and it comes back `refuted`.
 
 | `status` | Meaning |
 |---|---|
 | `certified` | The check passed and every claim it depends on is `certified` or `cited` |
 | `refuted` | The check failed |
 | `blocked` | The check passed, but a claim it depends on is not certified |
-| `unchecked` | The evidence record was missing, or did not match the claim's kernel, arguments or expected value, or the current source files |
-| `cited`, `argued` | Not computed. A cited source or an argument is passed through as labelled, never upgraded |
+| `unchecked` | The recorded evidence did not match the claim or the current source files |
+| `cited`, `argued` | Not computed: a cited source or an argument, passed through as labelled and never upgraded |
 
 The exit code is 0 only when every computed claim you asked about is `certified`,
-1 otherwise (including when you ask only about `cited` or `argued` claims), and 2
-when the input is malformed.
+1 otherwise (including when you asked only about `cited` or `argued` claims), and
+2 when the input is malformed. Run the whole example file to see three
+`certified` claims and one `argued`.
 
-## Install and run
-
-You need Python 3.10 or newer; CI tests on 3.12 only. Nothing is installed. The
-flags keep runs clean: `-S` skips site packages so only the standard library
-loads, and `-B` writes no `.pyc` files.
-
-```sh
-git clone https://github.com/Akilleez-QA/foundation-math
-cd foundation-math
-python3 -S -B -m fm_research check examples/research-regression.problem.json
-python3 -S -B -m unittest discover -s tests -t .
-```
-
-The first command prints four claims: three `certified` and one `argued` (an
-argument nobody checked, which stays labelled as such). The test suite ends with
-`OK`. Next, follow the [first-check tutorial](docs/guides/tutorials/first-check.md).
-
-## What is inside
-
-**General checkers** (Python API):
-
-| Module | What it checks | Contract |
-|---|---|---|
-| `fm_certificates/` | Supplied proofs that linear inequalities imply another inequality, or have no solution | [Affine certificates](docs/AFFINE-CERTIFICATES.md) |
-| `fm_identifiability/` | Supplied witnesses that a linear query does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
-| `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
-| `fm_control/` | One-step safe-action intervals for a scalar linear model | [Scalar control](docs/SCALAR-CONTROL.md) |
-
-**Research claims and reports** (command line):
-
-| Module | What it checks | Contract |
-|---|---|---|
-| `fm_research/` | Problem files of claims, using exact kernels: matrix rank over Q, Q(√5) and prime fields, characters of the finite group SL2(F5), and cohomology dimensions of supplied split bundles on a projective line | [Source binding](docs/SOURCE-BINDING.md) |
-| `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources used by `fm_research` | [Provenance](PROVENANCE.md) |
-| `fm_mapper/` | Reads a JSON bundle of claims, hashed source files and your judgment of each claim; writes a JSON summary and a draft paper whose wording matches the support | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
-
-**Supporting:** `tests/` holds synthetic standard-library tests ([test plan](docs/verification/test-plan.md)); `tools/` holds the source packager, manifest refresh and documentation trace check.
-
-The only command-line entry points are `fm_research` and `fm_mapper`; the other
-modules are Python APIs. No network, credentials, external solver or package
-installation is used.
 
 ## Limitations
 
@@ -193,11 +170,9 @@ installation is used.
 - `fm_control` is arithmetic for one step of a scalar model. It commands nothing,
   converts no units and is not a controller or simulator.
 - There is no stdio bridge or Cstack adapter in this repository. Python 3.10 and
-  3.11 are untested, and twelve implemented
-  behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
+  3.11 are untested, and twelve implemented behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
 
-Status: source candidate `numerical-enclosures-v1-20261105` (from `PACKAGE.json`),
-no release tag. Full list: [limitations and safety-relevant use](docs/guides/explanation/limitations.md).
+Status: unreleased source candidate, no release tag (candidate name in `PACKAGE.json`). Full list: [limitations and safety-relevant use](docs/guides/explanation/limitations.md).
 
 ## Where to go next
 
@@ -225,7 +200,7 @@ because `.git` is not on its file list.
 
 | Repository | Role |
 |---|---|
-| [Cstack](https://github.com/Akilleez-QA/cstack) | Host; runs Foundations from byte-pinned copies. It currently pins an older subset (v0.14) of this code |
+| [Cstack](https://github.com/Akilleez-QA/cstack) | Host; runs Foundations from byte-pinned copies |
 | [EndoForge](https://github.com/Akilleez-QA/endoforge) | Workshop for running coding agents with checks and receipts |
 | [POODO](https://github.com/Akilleez-QA/poodo) | Reasoning skill that shows evidence before it acts |
 | [Foundation Engine](https://github.com/Akilleez-QA/foundation-engine) | Browser games framework, with read-only validators |
