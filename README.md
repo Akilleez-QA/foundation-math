@@ -83,6 +83,8 @@ x + 2y <= 7: rejected: Supplied implication witness did not verify
 
 `make_implication` returns a frozen certificate record, which carries a SHA-256
 digest of the exact system it was checked against, or raises `InvalidCertificate`.
+Multipliers must be non-negative, and extra slack in the constant is allowed
+(here the witness proves `x + 2y <= 8`, which implies `<= 9`).
 `verify_implication` gives the same answer as `True` or `False`.
 
 ## Install and run
@@ -174,7 +176,8 @@ The exit code is 0 only when every computed claim you asked about is `certified`
   writes is marked `draft_not_scientifically_accepted`.
 - `fm_control` is arithmetic for one step of a scalar model. It commands nothing,
   converts no units and is not a controller or simulator.
-- There is no stdio bridge or Cstack adapter in this repository. Python 3.10 and
+- There is no long-running JSON-RPC bridge or Cstack adapter in this repository;
+  the command lines run once and exit. Python 3.10 and
   3.11 are untested, and twelve implemented behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
 
 Status: unreleased source candidate, no release tag (candidate name in `PACKAGE.json`). Full list: [limitations and safety-relevant use](docs/guides/explanation/limitations.md).
@@ -206,13 +209,13 @@ because `.git` is not on its file list.
 | Repository | Role |
 |---|---|
 | [Cstack](https://github.com/Akilleez-QA/cstack) | Host; runs Foundations from byte-pinned copies |
-| [EndoForge](https://github.com/Akilleez-QA/endoforge) | Workshop for running coding agents with checks and receipts |
+| [EndoForge](https://github.com/Akilleez-QA/endoforge) | Research engine that turns short needs into checked WebAssembly kernels |
 | [POODO](https://github.com/Akilleez-QA/poodo) | Reasoning skill that shows evidence before it acts |
 | [Foundation Engine](https://github.com/Akilleez-QA/foundation-engine) | Browser games framework, with read-only validators |
 | Foundation Math (this repository) | Exact checks of mathematical claims and certificates |
 | [Foundation Film](https://github.com/Akilleez-QA/foundation-film) | Film-production acceptance checks |
 | [Foundation Refrigeration](https://github.com/Akilleez-QA/foundation-refrigeration) | Refrigeration data and checks |
-| [Foundation Robotics](https://github.com/Akilleez-QA/foundation-robotics) | Motion checks for robots |
+| [Foundation Robotics](https://github.com/Akilleez-QA/foundation-robotics) | Physics checks for motion |
 | [Foundation Template](https://github.com/Akilleez-QA/foundation-template) | Minimal Foundation to copy for a new subject |
 
 ## Contributing
