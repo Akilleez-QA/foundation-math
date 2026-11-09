@@ -2,9 +2,10 @@
 
 # Foundation Math
 
-Foundation Math checks mathematical claims exactly: you hand it a claim plus the
-evidence for it, and it recomputes or verifies the claim with whole numbers and
-fractions, never floating point, using only the Python standard library.
+Foundation Math checks specific kinds of mathematical claims exactly: you hand it
+a claim plus the evidence for it, and it recomputes or verifies the claim with
+whole numbers and fractions, never floating point, using only the Python standard
+library.
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
@@ -34,7 +35,7 @@ flowchart LR
     P["Producer<br/>person, script or AI agent"] -->|"claim + evidence"| K["Exact check<br/>integers and fractions only"]
     K -->|"matches"| A["accepted<br/>certified / True"]
     K -->|"does not match"| R["rejected<br/>refuted / False / error"]
-    A --> O["receipt<br/>input hash, observed value,<br/>source hash, Python version"]
+    A --> O["receipt (command line)<br/>args_sha256, observed,<br/>kernel_source_sha256, python_version"]
     R --> O
 ```
 
@@ -47,6 +48,11 @@ modules check certificates: the producer supplies a witness (for example, the
 multipliers that prove an inequality) and the module checks it exactly. Neither
 path searches for a proof; a missing or failed proof is not evidence that a claim
 is false.
+
+All the modules share that one rule: the producer supplies the claim and the
+evidence, and the module only checks. The set of checks is fixed in code. A new
+kind of claim needs a new kernel (an entry in `KERNELS` in
+`fm_research/problem.py`) or a new module, with tests.
 
 ## Example
 
@@ -84,7 +90,8 @@ the same answer as `True` or `False`.
 The command line works on a problem file. Each claim names a kernel, its
 arguments and the answer the producer expects. This claim from
 [the shipped example](examples/research-regression.problem.json) says the matrix
-`[[√5, 0], [0, 3]]` has rank 2 (an entry `[a, b]` means `a + b√5`):
+`[[√5, 0], [0, 3]]` has rank 2. A plain number is a rational entry; a pair
+`[a, b]` means `a + b√5`:
 
 ```json
 {
@@ -119,7 +126,7 @@ equals `expect`, `FAIL` if not. `status` is the claim's standing:
 | `certified` | The check passed and every claim it depends on is `certified` or `cited` |
 | `refuted` | The check failed |
 | `blocked` | The check passed, but a claim it depends on is not certified |
-| `unchecked` | The evidence was missing or did not match the claim, kernel or source |
+| `unchecked` | The evidence record was missing, or did not match the claim's kernel, arguments or expected value, or the current source files |
 | `cited`, `argued` | Not computed. A cited source or an argument is passed through as labelled, never upgraded |
 
 The exit code is 0 only when every computed claim you asked about is `certified`,
@@ -127,7 +134,9 @@ The exit code is 0 only when every computed claim you asked about is `certified`
 
 ## Install and run
 
-You need Python 3.10 or newer; CI tests on 3.12 only. Nothing is installed.
+You need Python 3.10 or newer; CI tests on 3.12 only. Nothing is installed. The
+flags keep runs clean: `-S` skips site packages so only the standard library
+loads, and `-B` writes no `.pyc` files.
 
 ```sh
 git clone https://github.com/Akilleez-QA/foundation-math
@@ -166,9 +175,9 @@ installation is used.
   writes is marked `draft_not_scientifically_accepted`.
 - `fm_control` is arithmetic for one step of a scalar model. It commands nothing,
   converts no units and is not a controller or simulator.
-- This repository is the newer standalone version. It has no stdio bridge or
-  Cstack adapter; Cstack currently runs an older copy (v0.14) through its own
-  adapter. Python 3.10 and 3.11 are untested, and twelve implemented
+- This repository is the current source. It has no stdio bridge or Cstack
+  adapter of its own; Cstack runs a pinned older subset (v0.14) through its own
+  adapter until it is repinned. Python 3.10 and 3.11 are untested, and twelve implemented
   behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
 
 Status: source candidate `numerical-enclosures-v1-20261105` (from `PACKAGE.json`),
@@ -182,8 +191,9 @@ no release tag. Full list: [limitations and safety-relevant use](docs/guides/exp
 - [Design](docs/architecture/architecture.md)
 - [Documentation index](docs/README.md)
 
-Before changing code, run both test modes. Both include the documentation trace
-check (`tests/test_trace.py`):
+Before changing code, run both test modes (`-O` repeats the suite with
+assertions stripped). Both include the documentation trace check
+(`tests/test_trace.py`):
 
 ```sh
 python3 -S -B -m unittest discover -s tests -t .
@@ -191,8 +201,9 @@ python3 -S -B -O -m unittest discover -s tests -t .
 ```
 
 After changing a shipped file, run `python3 -S -B -m tools.refresh_manifest`.
-To build a source ZIP, follow the [source packaging guide](docs/guides/how-to/source-package.md);
-the packager rejects a Git checkout because `.git` is not on its file list.
+To build a source ZIP, follow the [source packaging guide](docs/guides/how-to/source-package.md).
+Run the packager on a clean export (`git archive`), not on the clone itself,
+because `.git` is not on its file list.
 
 ## Related projects
 
