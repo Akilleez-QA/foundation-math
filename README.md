@@ -5,7 +5,9 @@
 Foundation Math checks specific kinds of mathematical claims exactly: you hand it
 a claim plus the evidence for it, and it recomputes or verifies the claim with
 whole numbers and fractions, never floating point, using only the Python standard
-library.
+library. It has two parts: general checkers for proofs about linear inequalities
+and linear systems, and a command-line checker for the claims of one algebra
+research project.
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
@@ -41,11 +43,16 @@ flowchart LR
 
 There are two ways in. The command line reads a problem file: a list of claims,
 each naming an exact kernel (a small function such as "rank of this matrix") and
-the answer the producer expects. Foundation Math runs the kernel, compares the
-result with the expected answer, and prints one JSON line per claim. A claim that
-depends on another is certified only if everything below it is too. The Python
+the answer the producer expects. Foundation Math runs the kernel and writes an
+evidence record (arguments hash, observed answer, hash of the kernel source).
+A separate gate then re-checks that record against the claim and the current
+source files, compares the answer with the expected one, and prints one JSON line
+per claim. A claim that depends on another is certified only if everything below
+it is too. `--evidence-out FILE` saves the records. The Python
 modules check certificates: the producer supplies a witness (for example, the
-multipliers that prove an inequality) and the module checks it exactly. Neither
+multipliers that prove an inequality) and the module checks it exactly. They
+return plain values or frozen records; the `fm_certificates` and
+`fm_identifiability` records carry a SHA-256 digest of the exact statement checked. Neither
 path searches for a proof; a missing or failed proof is not evidence that a claim
 is false.
 
@@ -130,7 +137,8 @@ equals `expect`, `FAIL` if not. `status` is the claim's standing:
 | `cited`, `argued` | Not computed. A cited source or an argument is passed through as labelled, never upgraded |
 
 The exit code is 0 only when every computed claim you asked about is `certified`,
-1 otherwise, and 2 when the input is malformed.
+1 otherwise (including when you ask only about `cited` or `argued` claims), and 2
+when the input is malformed.
 
 ## Install and run
 
@@ -151,16 +159,24 @@ argument nobody checked, which stays labelled as such). The test suite ends with
 
 ## What is inside
 
+**General checkers** (Python API):
+
 | Module | What it checks | Contract |
 |---|---|---|
-| `fm_research/` | Problem files of claims (the kernels come from algebra research; the other modules are general linear checks), using exact kernels: matrix rank over Q, Q(√5) and prime fields, characters of the finite group SL2(F5), and cohomology dimensions of supplied split bundles on a projective line | [Source binding](docs/SOURCE-BINDING.md) |
 | `fm_certificates/` | Supplied proofs that linear inequalities imply another inequality, or have no solution | [Affine certificates](docs/AFFINE-CERTIFICATES.md) |
 | `fm_identifiability/` | Supplied witnesses that a linear query does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
 | `fm_control/` | One-step safe-action intervals for a scalar linear model | [Scalar control](docs/SCALAR-CONTROL.md) |
-| `fm_mapper/` | Turns evidence judgments you supply into a draft report with qualified wording | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
+
+**Research claims and reports** (command line):
+
+| Module | What it checks | Contract |
+|---|---|---|
+| `fm_research/` | Problem files of claims, using exact kernels: matrix rank over Q, Q(√5) and prime fields, characters of the finite group SL2(F5), and cohomology dimensions of supplied split bundles on a projective line | [Source binding](docs/SOURCE-BINDING.md) |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources used by `fm_research` | [Provenance](PROVENANCE.md) |
-| `tests/`, `tools/` | Synthetic standard-library tests; source packager, manifest refresh and documentation trace check | [Test plan](docs/verification/test-plan.md) |
+| `fm_mapper/` | Turns evidence judgments you supply into a draft report with qualified wording | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
+
+**Supporting:** `tests/` holds synthetic standard-library tests ([test plan](docs/verification/test-plan.md)); `tools/` holds the source packager, manifest refresh and documentation trace check.
 
 The only command-line entry points are `fm_research` and `fm_mapper`; the other
 modules are Python APIs. No network, credentials, external solver or package
@@ -175,9 +191,9 @@ installation is used.
   writes is marked `draft_not_scientifically_accepted`.
 - `fm_control` is arithmetic for one step of a scalar model. It commands nothing,
   converts no units and is not a controller or simulator.
-- This repository is the current source. It has no stdio bridge or Cstack
-  adapter of its own; Cstack runs a pinned older subset (v0.14) through its own
-  adapter until it is repinned. Python 3.10 and 3.11 are untested, and twelve implemented
+- Use this repository; it is the current source. It has no stdio bridge or Cstack
+  adapter of its own. Cstack still runs a pinned older subset (v0.14) through its
+  own adapter. Python 3.10 and 3.11 are untested, and twelve implemented
   behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
 
 Status: source candidate `numerical-enclosures-v1-20261105` (from `PACKAGE.json`),
