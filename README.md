@@ -35,7 +35,7 @@ currently pins an older subset (v0.14) of it.
 ## How it works
 
 ```mermaid
-flowchart LR
+flowchart TD
     P["Producer<br/>person, script or AI agent"] -->|"claim + evidence"| K["Exact check<br/>integers and fractions only"]
     K -->|"checks out"| A["accepted<br/>True / certificate record"]
     K -->|"does not"| R["rejected<br/>False / InvalidCertificate"]
