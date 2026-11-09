@@ -19,15 +19,15 @@ The user manual (SWEHB 5.12, tailored) is the README plus the guides. This map s
 |---|---|---|
 | Application summary and intended users | [README](../../README.md) intro and Status | Read against code at baseline |
 | Inventory (what is shipped) | [README](../../README.md#what-is-inside) What is inside; [version descriptions](../releases/README.md) | VDD generated from the source ZIP |
-| Environment and prerequisites | [README](../../README.md#quickstart) Quickstart; [test plan §3](../verification/test-plan.md#3-test-environment) | TP-2 run at baseline |
+| Environment and prerequisites | [README](../../README.md#install-and-run) Install and run; [test plan §3](../verification/test-plan.md#3-test-environment) | TP-2 run at baseline |
 | Modes and states of operation | [Design §5](../architecture/architecture.md#5-execution-concept); claim statuses in [data dictionary §2.1](../data/data-dictionary.md#21-problemspec-fm-research-problem1-and-research-outputs) | Inspection |
 | Security and privacy | [SECURITY.md](../../SECURITY.md); [SMP §7](../plan/software-management-plan.md#7-security-privacy-and-secure-coding) | Inspection |
 | Assistance and problem reporting | [SUPPORT.md](../../SUPPORT.md); issue forms in `.github/ISSUE_TEMPLATE/` | Inspection |
 | First-time use | [Tutorial: your first finite check](tutorials/first-check.md) | Run end to end at baseline `53a58dd` |
 | Starting and stopping | Each CLI run is one process that exits; nothing to stop ([process ICD §2](../icd/icd-stdio.md#2-interface-type-and-transport)) | Inspection |
 | Capabilities and commands reference | [Process ICD](../icd/icd-stdio.md), [Python API ICD](../icd/icd-python-api.md), [data dictionary §1](../data/data-dictionary.md#1-tools-and-commands) | Trace check fails on any missing public name |
-| Conventions (IDs, units, file layout) | [Data dictionary conventions](../data/data-dictionary.md#conventions); [README layout](../../README.md#layout) | Inspection |
-| Processing procedures | [Source packaging](how-to/source-package.md); contract documents ([affine](../AFFINE-CERTIFICATES.md), [query](../QUERY-IDENTIFIABILITY.md), [enclosures](../NUMERICAL-ENCLOSURES.md), [scalar](../SCALAR-CONTROL.md), [mapper](../EVIDENCE-PAPER.md), [source binding](../SOURCE-BINDING.md)) | Packaging procedure run at baseline (TP-3) |
+| Conventions (IDs, units, file layout) | [Data dictionary conventions](../data/data-dictionary.md#conventions); [README: What is inside](../../README.md#what-is-inside) | Inspection |
+| Processing procedures | [Research claims and write-ups](how-to/research-claims.md); [source packaging](how-to/source-package.md); contract documents ([affine](../AFFINE-CERTIFICATES.md), [query](../QUERY-IDENTIFIABILITY.md), [enclosures](../NUMERICAL-ENCLOSURES.md), [scalar](../SCALAR-CONTROL.md), [mapper](../EVIDENCE-PAPER.md), [source binding](../SOURCE-BINDING.md)) | Packaging procedure run at baseline (TP-3) |
 | Data backup and recovery from errors | [Troubleshooting §Recovering](how-to/troubleshooting.md#recovering) | Inspection |
 | Messages, errors and exit codes | [Troubleshooting](how-to/troubleshooting.md) | Rows marked "yes" reproduced at baseline |
 | Assumptions and limitations | [README](../../README.md#limitations) Limitations; [limitations](explanation/limitations.md) | Inspection |

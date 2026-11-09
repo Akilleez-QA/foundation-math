@@ -40,9 +40,9 @@
       "sha256": "c4ba32198616dfeee4dd437d9f21c151a2498f5145b1f9dee8ea65870c7b721d"
     },
     {
-      "bytes": 11348,
+      "bytes": 9292,
       "path": "README.md",
-      "sha256": "215320d2c37c28a120094592ce8764fb4a0d8fb9848eb29b582f513f6b4a7a7b"
+      "sha256": "b5058b495ed3bb4e5c8e8e7e1f7167fba9ef0a57f580ca59f2aaae4e4fe1dfbe"
     },
     {
       "bytes": 5169,
@@ -67,9 +67,9 @@
       "sha256": "e6a7a513faae67b53de5afa1be251dbc8e207c5cfd9eac1d1793d712e6dcfbf6"
     },
     {
-      "bytes": 3698,
+      "bytes": 3977,
       "path": "docs/README.md",
-      "sha256": "ecc286eadca72ca7545bfa1fc4ad56a60c09870e1d0e51a15c3d195fcdba8f1d"
+      "sha256": "123bd3b2279c8bf36407ffd488fae3ae364723555a411fa8a2003c5250f8a46f"
     },
     {
       "bytes": 1828,
@@ -112,14 +112,19 @@
       "sha256": "5244b68bc1335725a4ad9c44453519a32a7d9814ca9dbcd08e2189331e202b24"
     },
     {
-      "bytes": 4269,
+      "bytes": 4356,
       "path": "docs/guides/SUM-MAP.md",
-      "sha256": "5a469f14be3d85c47407789667de672faf05699250997274fced871847294ee8"
+      "sha256": "6580a40aa8f2dfe2bddb1706ba807120cebe31827138e2ac5bf44eea768b1d27"
     },
     {
       "bytes": 3829,
       "path": "docs/guides/explanation/limitations.md",
       "sha256": "ffa86291821434fd33a6d301982564df55ba1234044223b2912056192b6947fa"
+    },
+    {
+      "bytes": 4432,
+      "path": "docs/guides/how-to/research-claims.md",
+      "sha256": "4a1269ffb7bd6b1ac40b5c68814af5099b1fbeee0443d7eb571848cfb3bc948e"
     },
     {
       "bytes": 2030,
