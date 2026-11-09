@@ -77,9 +77,27 @@ x + 2y <= 9: accepted
 x + 2y <= 7: rejected: Supplied implication witness did not verify
 ```
 
-The command line does the same for a problem file. Here one claim says a 2x2
-matrix over Q(√5) has rank 2; Foundation Math recomputes the rank and certifies it
-(output trimmed and wrapped):
+`make_implication` returns a frozen certificate record when the witness checks
+out and raises `InvalidCertificate` when it does not. `verify_implication` gives
+the same answer as `True` or `False`.
+
+The command line works on a problem file. Each claim names a kernel, its
+arguments and the answer the producer expects. This claim from
+[the shipped example](examples/research-regression.problem.json) says the matrix
+`[[√5, 0], [0, 3]]` has rank 2 (an entry `[a, b]` means `a + b√5`):
+
+```json
+{
+  "id": "rank-q5",
+  "statement": "The supplied diagonal quadratic-field matrix has rank two.",
+  "kind": "computed",
+  "depends_on": [],
+  "check": {"kernel": "rank", "args": {"field": "Q(sqrt5)", "rows": [[[0, 1], 0], [0, 3]]}, "expect": 2}
+}
+```
+
+Foundation Math recomputes the rank and certifies the claim (output trimmed and
+wrapped):
 
 ```sh
 python3 -S -B -m fm_research check examples/research-regression.problem.json --claim rank-q5
@@ -92,13 +110,24 @@ python3 -S -B -m fm_research check examples/research-regression.problem.json --c
  "args_sha256": "2ec6140c...", "kernel_source_sha256": "a9652c11...", ...}}
 ```
 
-Change that claim's `"expect": 2` to `1` and the status becomes `refuted`, the
-verdict `FAIL`, and the exit code 1. The exit code is 0 only when every computed
-claim you asked about is certified, and 2 when the input is malformed.
+Change `"expect": 2` to `1` and the claim comes back `refuted`. Each output line
+has two results. `verdict` is the raw comparison: `PASS` if the kernel's answer
+equals `expect`, `FAIL` if not. `status` is the claim's standing:
+
+| `status` | Meaning |
+|---|---|
+| `certified` | The check passed and every claim it depends on is `certified` or `cited` |
+| `refuted` | The check failed |
+| `blocked` | The check passed, but a claim it depends on is not certified |
+| `unchecked` | The evidence was missing or did not match the claim, kernel or source |
+| `cited`, `argued` | Not computed. A cited source or an argument is passed through as labelled, never upgraded |
+
+The exit code is 0 only when every computed claim you asked about is `certified`,
+1 otherwise, and 2 when the input is malformed.
 
 ## Install and run
 
-You need Python 3.10 or newer (CI uses 3.12). Nothing is installed.
+You need Python 3.10 or newer; CI tests on 3.12 only. Nothing is installed.
 
 ```sh
 git clone https://github.com/Akilleez-QA/foundation-math
@@ -115,7 +144,7 @@ argument nobody checked, which stays labelled as such). The test suite ends with
 
 | Module | What it checks | Contract |
 |---|---|---|
-| `fm_research/` | Problem files of claims, using exact kernels: matrix rank over Q, Q(√5) and prime fields, characters of the finite group SL2(F5), and cohomology dimensions of supplied split bundles on a projective line | [Source binding](docs/SOURCE-BINDING.md) |
+| `fm_research/` | Problem files of claims (the kernels come from algebra research; the other modules are general linear checks), using exact kernels: matrix rank over Q, Q(√5) and prime fields, characters of the finite group SL2(F5), and cohomology dimensions of supplied split bundles on a projective line | [Source binding](docs/SOURCE-BINDING.md) |
 | `fm_certificates/` | Supplied proofs that linear inequalities imply another inequality, or have no solution | [Affine certificates](docs/AFFINE-CERTIFICATES.md) |
 | `fm_identifiability/` | Supplied witnesses that a linear query does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
@@ -137,8 +166,9 @@ installation is used.
   writes is marked `draft_not_scientifically_accepted`.
 - `fm_control` is arithmetic for one step of a scalar model. It commands nothing,
   converts no units and is not a controller or simulator.
-- This repository has no stdio bridge or Cstack adapter. Cstack vendors an older
-  copy (v0.14). Python 3.10 and 3.11 are untested, and twelve implemented
+- This repository is the newer standalone version. It has no stdio bridge or
+  Cstack adapter; Cstack currently runs an older copy (v0.14) through its own
+  adapter. Python 3.10 and 3.11 are untested, and twelve implemented
   behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
 
 Status: source candidate `numerical-enclosures-v1-20261105` (from `PACKAGE.json`),
