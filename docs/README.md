@@ -1,15 +1,17 @@
 # Documentation
 
-Control documents carry their own baseline commits. Reading or indexing them does not create a new verification result. Classification: self-assessed Class E analog, not safety-critical; this is not a NASA compliance determination or certification (see the [software management plan](plan/software-management-plan.md#1-software-classification-self-assessed)).
+Start with the task you have. Foundation Math checks mathematical claims and
+certificates exactly; the [README](../README.md) explains what it is and shows an
+example.
 
 ## Start here
 
-| Need | Document |
+| I want to | Read |
 |---|---|
-| Run it for the first time | [Tutorial: your first finite check](guides/tutorials/first-check.md) |
-| Do a specific task | [Build and verify a source package](guides/how-to/source-package.md) · [Troubleshoot errors and exit codes](guides/how-to/troubleshooting.md) |
-| Look up commands, calls, fields, units, limits | [Process ICD](icd/icd-stdio.md) · [Python API ICD](icd/icd-python-api.md) · [Data dictionary](data/data-dictionary.md) |
-| Understand the design and limits | [Design](architecture/architecture.md) · [Limitations and safety-relevant use](guides/explanation/limitations.md) |
+| Learn: run it for the first time | [Tutorial: your first finite check](guides/tutorials/first-check.md) |
+| Do: a specific task | [Build and verify a source package](guides/how-to/source-package.md) · [Troubleshoot errors and exit codes](guides/how-to/troubleshooting.md) |
+| Look up: commands, calls, fields, units, limits | [Command-line reference](icd/icd-stdio.md) · [Python API reference](icd/icd-python-api.md) · [Data dictionary](data/data-dictionary.md) |
+| Understand: the design and limits | [Design](architecture/architecture.md) · [Limitations and safety-relevant use](guides/explanation/limitations.md) |
 | Where each user-manual topic lives | [User manual map](guides/SUM-MAP.md) |
 
 ## Mathematical contracts (reference)
@@ -25,7 +27,10 @@ These keep their uppercase names for inbound links.
 - [Release checklist](RELEASE-CHECKLIST.md)
 - [Historical candidate verification, 2026-10-30](VERIFICATION.md) (historical record; not current evidence)
 
-## Control documents
+## Engineering records
+
+Control documents carry their own baseline commits. Reading or indexing them does not create a new verification result. Classification: self-assessed Class E analog, not safety-critical; this is not a NASA compliance determination or certification (see the [software management plan](plan/software-management-plan.md#1-software-classification-self-assessed)).
+
 
 | Document | ID | SWEHB | Path |
 |---|---|---|---|
