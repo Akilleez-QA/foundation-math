@@ -2,10 +2,10 @@
 
 # Foundation Math
 
-Foundation Math checks proofs of mathematical claims exactly: you hand it a claim
-plus the evidence for it, and it verifies or recomputes the claim with whole
-numbers and fractions, never floating point, using only the Python standard
-library.
+Foundation Math checks supplied proofs of specific kinds of mathematical claims,
+mostly about linear inequalities: you hand it a claim plus the evidence for it,
+and it verifies the claim exactly with whole numbers and fractions, never floating
+point, using only the Python standard library.
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
@@ -20,12 +20,14 @@ certificate checks out. Otherwise it is rejected.
 Most of it is a Python library for linear problems: proofs that inequalities
 imply other inequalities, that a system has no solution, that a quantity has a
 single value, and exact error bounds. A smaller command-line part checks claims
-about one finite group, SL2(F5), from the project's original research use.
+about one finite group, SL2(F5), from the project's original research use. The
+modules were added one at a time as exact checks were needed, and each works on
+its own.
 
 ### What a Foundation is
 
-A Foundation is a read-only checker for one subject. Another program, the
-producer, makes a result; the Foundation judges it and reports what it found. It
+A Foundation is a read-only checker for one subject. Another program (we call it
+the producer: a person, a script or an AI agent) makes a result; the Foundation judges it and reports what it found. It
 changes nothing and controls nothing. Producers never grade their own work.
 Foundation Math is the maths Foundation in the Cstack family (code name
 Mjölnir). [Cstack](https://github.com/Akilleez-QA/cstack) is a host that keeps a
@@ -58,10 +60,10 @@ repository root:
 python3 -S -B - <<'EOF'
 from fm_certificates import AffineSystem, InvalidCertificate, make_implication
 
-# Each row (a, b, c) means a*x + b*y + c <= 0.
+# A label, the number of variables (x, y), then rows (a, b, c) meaning a*x + b*y + c <= 0.
 box = AffineSystem("demo", 2, ((1, 0, -2), (-1, 0, 0), (0, 1, -3), (0, -1, 0)))
 
-# The witness: 1 times (x <= 2) plus 2 times (y <= 3).
+# One multiplier per row, in order: 1 times (x <= 2) plus 2 times (y <= 3).
 make_implication(box, target=(1, 2, -9), multipliers=(1, 0, 2, 0))
 print("x + 2y <= 9: accepted")
 
@@ -91,7 +93,8 @@ cd foundation-math
 python3 -S -B -m unittest discover -s tests -t .
 ```
 
-The test suite ends with `OK`. Then paste the example above. The `-S` and `-B`
+The test suite ends with `OK`. Then paste the example above. There is no package
+to install, so run Python from the repository root (or put it on `PYTHONPATH`). The `-S` and `-B`
 flags are optional; they prove that only the standard library loads and keep
 `.pyc` files out of the tree. Next, follow the
 [first-check tutorial](docs/guides/tutorials/first-check.md).
@@ -105,8 +108,8 @@ flags are optional; they prove that only the standard library loads and keep
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
 | `fm_control/` | One-step safe-action intervals for a scalar linear model | [Scalar control](docs/SCALAR-CONTROL.md) |
 | `fm_research/` | Command line: claims files checked by exact kernels for matrix rank over Q, Q(√5) and prime fields, characters of SL2(F5), and cohomology dimensions of supplied split bundles | [Source binding](docs/SOURCE-BINDING.md) |
-| `fm_mapper/` | Command line: turns your own judgment of each claim into a draft paper whose wording matches the support. It reports; it does not judge | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
-| `vendor/foundation-math-v014/` | Character and split-bundle sources used by `fm_research` | [Provenance](PROVENANCE.md) |
+| `fm_mapper/` | Command line: takes your own verdict on each claim (`supports`, `refutes` or `inconclusive`) and writes a draft paper whose wording matches that support. It reports; it does not judge | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
+| `vendor/foundation-math-v014/` | The SL2(F5) character and split-bundle code that `fm_research` imports, kept byte-for-byte from release v0.14 | [Provenance](PROVENANCE.md) |
 
 `tests/` holds synthetic standard-library tests; `tools/` holds the source
 packager, manifest refresh and documentation trace check. No network,
