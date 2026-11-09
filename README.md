@@ -5,9 +5,10 @@
 Foundation Math checks specific kinds of mathematical claims exactly: you hand it
 a claim plus the evidence for it, and it recomputes or verifies the claim with
 whole numbers and fractions, never floating point, using only the Python standard
-library. It has two parts: general checkers for proofs about linear inequalities
-and linear systems, and a command-line checker for the claims of one algebra
-research project.
+library. It has two parts. The general part checks proofs about linear inequalities and
+linear systems, and is what most people will use. The research part is a
+command-line checker kept from earlier Foundation Math work on the finite group
+SL2(F5); its kernels only fit claims of those specific kinds.
 
 [<img alt="License: GPL-3.0-only" src="https://img.shields.io/badge/license-GPL--3.0--only-2400FF?style=flat-square&amp;labelColor=000000">](LICENSE)
 
@@ -174,7 +175,7 @@ argument nobody checked, which stays labelled as such). The test suite ends with
 |---|---|---|
 | `fm_research/` | Problem files of claims, using exact kernels: matrix rank over Q, Q(√5) and prime fields, characters of the finite group SL2(F5), and cohomology dimensions of supplied split bundles on a projective line | [Source binding](docs/SOURCE-BINDING.md) |
 | `vendor/foundation-math-v014/` | Selected historical character and split-bundle sources used by `fm_research` | [Provenance](PROVENANCE.md) |
-| `fm_mapper/` | Turns evidence judgments you supply into a draft report with qualified wording | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
+| `fm_mapper/` | Reads a JSON bundle of claims, hashed source files and your judgment of each claim; writes a JSON summary and a draft paper whose wording matches the support | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
 
 **Supporting:** `tests/` holds synthetic standard-library tests ([test plan](docs/verification/test-plan.md)); `tools/` holds the source packager, manifest refresh and documentation trace check.
 
@@ -191,9 +192,8 @@ installation is used.
   writes is marked `draft_not_scientifically_accepted`.
 - `fm_control` is arithmetic for one step of a scalar model. It commands nothing,
   converts no units and is not a controller or simulator.
-- Use this repository; it is the current source. It has no stdio bridge or Cstack
-  adapter of its own. Cstack still runs a pinned older subset (v0.14) through its
-  own adapter. Python 3.10 and 3.11 are untested, and twelve implemented
+- There is no stdio bridge or Cstack adapter in this repository. Python 3.10 and
+  3.11 are untested, and twelve implemented
   behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
 
 Status: source candidate `numerical-enclosures-v1-20261105` (from `PACKAGE.json`),
@@ -225,7 +225,7 @@ because `.git` is not on its file list.
 
 | Repository | Role |
 |---|---|
-| [Cstack](https://github.com/Akilleez-QA/cstack) | Host; runs Foundations from byte-pinned copies |
+| [Cstack](https://github.com/Akilleez-QA/cstack) | Host; runs Foundations from byte-pinned copies. It currently pins an older subset (v0.14) of this code |
 | [EndoForge](https://github.com/Akilleez-QA/endoforge) | Workshop for running coding agents with checks and receipts |
 | [POODO](https://github.com/Akilleez-QA/poodo) | Reasoning skill that shows evidence before it acts |
 | [Foundation Engine](https://github.com/Akilleez-QA/foundation-engine) | Browser games framework, with read-only validators |
