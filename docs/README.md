@@ -9,7 +9,7 @@ example.
 | I want to | Read |
 |---|---|
 | Learn: run it for the first time | [Tutorial: your first finite check](guides/tutorials/first-check.md) |
-| Do: a specific task | [Build and verify a source package](guides/how-to/source-package.md) · [Troubleshoot errors and exit codes](guides/how-to/troubleshooting.md) |
+| Do: a specific task | [Check research claims and write them up](guides/how-to/research-claims.md) · [Build and verify a source package](guides/how-to/source-package.md) · [Troubleshoot errors and exit codes](guides/how-to/troubleshooting.md) |
 | Look up: commands, calls, fields, units, limits | [Command-line reference](icd/icd-stdio.md) · [Python API reference](icd/icd-python-api.md) · [Data dictionary](data/data-dictionary.md) |
 | Understand: the design and limits | [Design](architecture/architecture.md) · [Limitations and safety-relevant use](guides/explanation/limitations.md) |
 | Where each user-manual topic lives | [User manual map](guides/SUM-MAP.md) |

@@ -19,16 +19,13 @@ certificate checks out. Otherwise it is rejected.
 
 Most of it is a Python library for linear problems: proofs that inequalities
 imply other inequalities, that a system has no solution, that a quantity has a
-single value, and exact error bounds. A smaller command-line part checks claims
-about one finite group, SL2(F5), from the project's original research use. The
-modules were added one at a time as exact checks were needed, and each works on
-its own.
+single value, and exact error bounds. Each module works on its own.
 
 ### What a Foundation is
 
-A Foundation is a read-only checker for one subject. Another program (we call it
-the producer: a person, a script or an AI agent) makes a result; the Foundation judges it and reports what it found. It
-changes nothing and controls nothing. Producers never grade their own work.
+A Foundation is a read-only checker for one subject. Another program (the
+producer: a person, a script or an AI agent) makes a result; the Foundation judges
+it and reports what it found. It changes nothing and controls nothing. Producers never grade their own work.
 Foundation Math is the maths Foundation in the Cstack family (code name
 Mjölnir). [Cstack](https://github.com/Akilleez-QA/cstack) is a host that keeps a
 hash-pinned copy of each Foundation and refuses to run one whose files changed.
@@ -40,8 +37,8 @@ currently pins an older subset (v0.14) of it.
 ```mermaid
 flowchart LR
     P["Producer<br/>person, script or AI agent"] -->|"claim + evidence"| K["Exact check<br/>integers and fractions only"]
-    K -->|"checks out"| A["accepted<br/>True / certificate / certified"]
-    K -->|"does not"| R["rejected<br/>False / InvalidCertificate / refuted"]
+    K -->|"checks out"| A["accepted<br/>True / certificate record"]
+    K -->|"does not"| R["rejected<br/>False / InvalidCertificate"]
 ```
 
 The producer supplies a claim and a witness, for example the multipliers that
@@ -54,8 +51,7 @@ kind of claim needs a new module or kernel, with tests.
 
 Check a proof that `x + 2y <= 9` on the box `0 <= x <= 2`, `0 <= y <= 3`, and
 watch the same proof fail for the false claim `x + 2y <= 7` (on that box
-`x + 2y` reaches 8). Run from the
-repository root:
+`x + 2y` reaches 8). Run from the repository root:
 
 ```sh
 python3 -S -B - <<'EOF'
@@ -97,11 +93,9 @@ cd foundation-math
 python3 -S -B -m unittest discover -s tests -t .
 ```
 
-The test suite ends with `OK`. Then paste the example above. There is no package
-to install, so run Python from the repository root (or put it on `PYTHONPATH`). The `-S` and `-B`
-flags are optional; they prove that only the standard library loads and keep
-`.pyc` files out of the tree. Next, follow the
-[first-check tutorial](docs/guides/tutorials/first-check.md).
+The tests end with `OK`; then paste the example above. With no package to install,
+run Python from the repository root (or put it on `PYTHONPATH`). `-S` and `-B` are
+optional: only the standard library loads, and no `.pyc` files are written.
 
 ## What is inside
 
@@ -110,99 +104,28 @@ flags are optional; they prove that only the standard library loads and keep
 | `fm_certificates/` | Supplied proofs that linear inequalities imply another inequality, or have no solution | [Affine certificates](docs/AFFINE-CERTIFICATES.md) |
 | `fm_identifiability/` | Supplied witnesses that a linear quantity does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
-| `fm_control/` | One-step safe-action intervals for a scalar linear model | [Scalar control](docs/SCALAR-CONTROL.md) |
-| `fm_research/` | Command line: claims files checked by exact kernels for matrix rank over Q, Q(√5) and prime fields, characters of SL2(F5), and cohomology dimensions of supplied split bundles | [Source binding](docs/SOURCE-BINDING.md) |
-| `fm_mapper/` | Command line: takes your own verdict on each claim (`supports`, `refutes` or `inconclusive`) and writes a draft paper whose wording matches that support. It is the write-up step after checking: it reports, it does not judge | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
-| `vendor/foundation-math-v014/` | The SL2(F5) character and split-bundle code that `fm_research` imports, kept byte-for-byte from release v0.14 | [Provenance](PROVENANCE.md) |
 
-`tests/` holds synthetic standard-library tests; `tools/` holds the source
-packager, manifest refresh and documentation trace check. No network,
-credentials, external solver or package installation is used.
-
-## The research command line
-
-`fm_research` reads a problem file of claims. Each computed claim names a kernel,
-its arguments and the answer the producer expects. This one, from
-[the shipped example](examples/research-regression.problem.json), says the matrix
-`[[√5, 0], [0, 3]]` has rank 2 (a plain number is rational; a pair `[a, b]` means
-`a + b√5`):
-
-```json
-{
-  "id": "rank-q5",
-  "statement": "The supplied diagonal quadratic-field matrix has rank two.",
-  "kind": "computed",
-  "depends_on": [],
-  "check": {"kernel": "rank", "args": {"field": "Q(sqrt5)", "rows": [[[0, 1], 0], [0, 3]]}, "expect": 2}
-}
-```
-
-```sh
-python3 -S -B -m fm_research check examples/research-regression.problem.json --claim rank-q5
-```
-
-```text
-{"claim_id": "rank-q5", "status": "certified", "evidence": {"kernel": "rank",
- "expected": 2, "observed": {"rank": 2, "certificate": {"field": "Q(sqrt5)",
- "pivot_rows": [0, 1], "pivot_cols": [0, 1], ...}}, "verdict": "PASS",
- "args_sha256": "2ec6140c...", "kernel_source_sha256": "a9652c11...", ...}}
-```
-
-(Output trimmed and wrapped.) The command runs the kernel, records the
-arguments hash, the observed answer and a hash of the kernel source, then grades
-the claim. `verdict` is the raw comparison with `expect`; `status` is the claim's
-standing. Change `"expect": 2` to `1` and it comes back `refuted`.
-
-| `status` | Meaning |
-|---|---|
-| `certified` | The check passed and every claim it depends on is `certified` or `cited` |
-| `refuted` | The check failed |
-| `blocked` | The check passed, but a claim it depends on is not certified |
-| `unchecked` | The recorded evidence did not match the claim or the current source files |
-| `cited`, `argued` | Not computed: a cited source or an argument, passed through as labelled and never upgraded |
-
-The exit code is 0 only when every computed claim you asked about is `certified`,
-1 otherwise (including when you asked only about `cited` or `argued` claims), and
-2 when the input is malformed. Run the whole example file to see three
-`certified` claims and one `argued`.
-
+**Also included:** a command line for SL2(F5) research claims (`fm_research`), a draft-paper writer (`fm_mapper`) and
+a scalar one-step control helper (`fm_control`); see [research claims and write-ups](docs/guides/how-to/research-claims.md).
+No network, credentials, external solver or package installation is used.
 
 ## Limitations
 
-- A pass is a conditional statement about the inputs you supplied. `certified`
-  means one finite check passed under its stated assumptions. It does not prove
-  surrounding prose, approve an engineering design or make a safety decision.
-- `fm_mapper` reports support under the judgments you supplied. Every report it
-  writes is marked `draft_not_scientifically_accepted`.
-- `fm_control` is arithmetic for one step of a scalar model. It commands nothing,
-  converts no units and is not a controller or simulator.
-- There is no long-running JSON-RPC bridge or Cstack adapter in this repository;
-  the command lines run once and exit. Python 3.10 and
-  3.11 are untested, and twelve implemented behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
+- A pass is a conditional statement about the inputs you supplied, checked under
+  stated assumptions. It does not prove surrounding prose, approve an engineering
+  design or make a safety decision.
+- There is no long-running JSON-RPC bridge or Cstack adapter in this repository.
+  Python 3.10 and 3.11 are untested, and twelve implemented behaviours have no test ([gaps](docs/requirements/requirements.md#9-untested-behaviour-requirement-gaps)).
 
 Status: unreleased source candidate, no release tag (candidate name in `PACKAGE.json`). Full list: [limitations and safety-relevant use](docs/guides/explanation/limitations.md).
 
 ## Where to go next
 
-- [Tutorial: your first finite check](docs/guides/tutorials/first-check.md)
+- [Tutorial: your first finite check](docs/guides/tutorials/first-check.md) (uses the research command line)
 - [Troubleshoot errors and exit codes](docs/guides/how-to/troubleshooting.md)
 - [Python API reference](docs/icd/icd-python-api.md) and [command-line reference](docs/icd/icd-stdio.md)
-- [Design](docs/architecture/architecture.md)
+- [Research claims and write-ups](docs/guides/how-to/research-claims.md) and [design](docs/architecture/architecture.md)
 - [Documentation index](docs/README.md)
-
-Before changing code, run both test modes (`-O` repeats the suite with
-assertions stripped). Both include the documentation trace check
-(`tests/test_trace.py`):
-
-```sh
-python3 -S -B -m unittest discover -s tests -t .
-python3 -S -B -O -m unittest discover -s tests -t .
-```
-
-After changing a shipped file, run `python3 -S -B -m tools.refresh_manifest`.
-To build a source ZIP, follow the [source packaging guide](docs/guides/how-to/source-package.md).
-Run the packager on a clean export (`git archive`), not on the clone itself,
-because `.git` is not on its file list.
 
 ## Related projects
 
@@ -220,9 +143,8 @@ because `.git` is not on its file list.
 
 ## Contributing
 
-See [Contributing](CONTRIBUTING.md), [Support](SUPPORT.md) and the
-[Code of conduct](CODE_OF_CONDUCT.md). Report security issues through
-[Security](SECURITY.md).
+See [Contributing](CONTRIBUTING.md) (tests, trace check, manifest refresh), [Support](SUPPORT.md),
+the [Code of conduct](CODE_OF_CONDUCT.md) and [Security](SECURITY.md).
 
 ## Engineering records
 
