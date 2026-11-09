@@ -32,8 +32,8 @@ changes nothing and controls nothing. Producers never grade their own work.
 Foundation Math is the maths Foundation in the Cstack family (code name
 Mjölnir). [Cstack](https://github.com/Akilleez-QA/cstack) is a host that keeps a
 hash-pinned copy of each Foundation and refuses to run one whose files changed.
-For maths it currently pins an older subset (v0.14) of this code; this repository
-is the current source and can be used on its own.
+You don't need Cstack: use this repository directly as a library. Cstack
+currently pins an older subset (v0.14) of it.
 
 ## How it works
 
@@ -53,7 +53,8 @@ kind of claim needs a new module or kernel, with tests.
 ## Example
 
 Check a proof that `x + 2y <= 9` on the box `0 <= x <= 2`, `0 <= y <= 3`, and
-watch the same proof fail for the false claim `x + 2y <= 7`. Run from the
+watch the same proof fail for the false claim `x + 2y <= 7` (on that box
+`x + 2y` reaches 8). Run from the
 repository root:
 
 ```sh
@@ -63,6 +64,7 @@ from fm_certificates import AffineSystem, InvalidCertificate, make_implication
 # A label, the number of variables (x, y), then rows (a, b, c) meaning a*x + b*y + c <= 0.
 box = AffineSystem("demo", 2, ((1, 0, -2), (-1, 0, 0), (0, 1, -3), (0, -1, 0)))
 
+# The target x + 2y - 9 <= 0 uses the same (a, b, c) form.
 # One multiplier per row, in order: 1 times (x <= 2) plus 2 times (y <= 3).
 make_implication(box, target=(1, 2, -9), multipliers=(1, 0, 2, 0))
 print("x + 2y <= 9: accepted")
@@ -108,7 +110,7 @@ flags are optional; they prove that only the standard library loads and keep
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
 | `fm_control/` | One-step safe-action intervals for a scalar linear model | [Scalar control](docs/SCALAR-CONTROL.md) |
 | `fm_research/` | Command line: claims files checked by exact kernels for matrix rank over Q, Q(√5) and prime fields, characters of SL2(F5), and cohomology dimensions of supplied split bundles | [Source binding](docs/SOURCE-BINDING.md) |
-| `fm_mapper/` | Command line: takes your own verdict on each claim (`supports`, `refutes` or `inconclusive`) and writes a draft paper whose wording matches that support. It reports; it does not judge | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
+| `fm_mapper/` | Command line: takes your own verdict on each claim (`supports`, `refutes` or `inconclusive`) and writes a draft paper whose wording matches that support. It is the write-up step after checking: it reports, it does not judge | [Evidence mapper](docs/EVIDENCE-PAPER.md) |
 | `vendor/foundation-math-v014/` | The SL2(F5) character and split-bundle code that `fm_research` imports, kept byte-for-byte from release v0.14 | [Provenance](PROVENANCE.md) |
 
 `tests/` holds synthetic standard-library tests; `tools/` holds the source
