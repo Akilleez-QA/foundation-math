@@ -92,9 +92,9 @@
       "sha256": "6521753c10f4e7d328da9bf97b8d6584b5ad18dbd2a3d0fbac59a01f497c77bc"
     },
     {
-      "bytes": 14322,
+      "bytes": 14320,
       "path": "docs/architecture/architecture.md",
-      "sha256": "05ca31baf6c06f81d4f03127a24701772c6ab6905a8a0b28e4a0fc01fc72c8d1"
+      "sha256": "9ca5bf887c27e63ec60d5349f0f1888b4591a5939b740aef3fc230a039f5f024"
     },
     {
       "bytes": 7701,
@@ -107,9 +107,9 @@
       "sha256": "93db475043d0505e158fe255f5c87a2a62cbf1de39a3f80a790bf560aed0137a"
     },
     {
-      "bytes": 31882,
+      "bytes": 32123,
       "path": "docs/data/data-dictionary.md",
-      "sha256": "5244b68bc1335725a4ad9c44453519a32a7d9814ca9dbcd08e2189331e202b24"
+      "sha256": "0ceb40174400fed87083731e38bb35950385dcf667b85f14e83daba54b50ffad"
     },
     {
       "bytes": 4356,
@@ -172,9 +172,9 @@
       "sha256": "7cc1721303f83968d2839d3d730f306b6bd8d2c9b9cc67c22d1426399e613536"
     },
     {
-      "bytes": 21022,
+      "bytes": 22101,
       "path": "docs/requirements/requirements.md",
-      "sha256": "a1f40bab59c6fe034678dd922fff3755c1533def70aadbb10f2433ef74164a00"
+      "sha256": "d3a13092c6969a6fa89b081cd9e9ef78e1bf786a20e6aa49ccd89505cfa9cc95"
     },
     {
       "bytes": 511,
@@ -192,9 +192,9 @@
       "sha256": "3ec68da791ed8a8863d31cb45c0276118517c52eec926c4c5818fa9ec1b4d50d"
     },
     {
-      "bytes": 22925,
+      "bytes": 20614,
       "path": "docs/verification/verification-matrix.md",
-      "sha256": "39c69af5e0a5f870caf7f469b8dc8d348d0a04cd571bb307cad1f9b4d028a45f"
+      "sha256": "572878b369f0dd8650b5efa81482e1372981000c34ecaf67913abda3b6d9ed27"
     },
     {
       "byte_preserved": true,

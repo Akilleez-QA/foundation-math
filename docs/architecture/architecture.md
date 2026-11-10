@@ -106,7 +106,7 @@ Paths come from `git ls-files`. "Infrastructure" marks plumbing that implements 
 | Packaging | `tools/package_source.py`, `SOURCE-MANIFEST.json`, `PACKAGE.json` | Exact file-set and hash check; deterministic stored ZIP outside the tree | source tree → ZIP | REQ-MATH-012, REQ-MATH-028 |
 | Documentation tools | `tools/check_trace.py`, `tests/test_trace.py` | Requirement, design, test, data-dictionary and link consistency | docs + tests → problem list | REQ-MATH-027 |
 | Manifest refresh | `tools/refresh_manifest.py` | Rehash manifest rows from `git ls-files`; refuses to change a byte-preserved row | committed files → manifest | infrastructure |
-| Release record generator | `tools/gen_release_docs.py` | Runs suites, trace check, coverage, scans and packaging; writes the STR and VDD | clean checkout → two Markdown files | infrastructure |
+| Release record generator | `tools/gen_release_docs.py` | Runs suites, trace check, coverage, scans and packaging; writes the STR and VDD | clean checkout → two Markdown files | REQ-MATH-029 |
 | Package markers | `fm_*/__init__.py`, `tools/__init__.py`, `tests/__init__.py` | Re-exports and package markers | — | infrastructure |
 | Test helpers and fixtures | `tests/mapper_helpers.py`, `tests/fixtures/`, `examples/` | Synthetic inputs for tests and the quickstart | — | infrastructure |
 

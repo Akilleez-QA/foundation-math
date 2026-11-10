@@ -303,6 +303,16 @@ The research layer, mapper and selected vendor modules shall load from this sour
 - Verification: T — see verification matrix
 - Status: Baselined
 
+### REQ-MATH-029 — Release record success condition
+
+`tools/gen_release_docs.py` shall report a release record as passing, and exit 0, only when both unittest suites exit 0 with every test run, parsed and `ok` (no skipped, failed, errored, expected-failure or unexpected-success outcome), the trace check reports no problem, the coverage run exits 0, the Gitleaks scan was run and exits 0, and the source package rebuilds byte-identically from the tree and from its extracted ZIP; otherwise it shall list each deviation in the STR summary and problems table and exit 1.
+
+- Rationale: A release record must never say "all automated checks passed" over a skipped test, a detected secret or a missing scan (2026-11-09 backfill review finding).
+- Derivation: `tools/gen_release_docs.py` (`deviations`, `str_report`, `main`), `tests/test_gen_release_docs.py`
+- Allocated to: SDD §4 Release record generator
+- Verification: T — see verification matrix
+- Status: Baselined
+
 ## 4. Interface requirements
 
 ### REQ-MATH-008 — Research CLI
@@ -381,3 +391,4 @@ These behaviours exist in the code but no test checks them. They are not require
 | 1.0 | 2026-10-30 | `1a610cf` | Initial requirements table REQ-MATH-001 to 013 | PR #4 |
 | 1.1 | 2026-10-30 | `2afa06b` | Linked requirements to the architecture | PR #13 |
 | 2.0 | 2026-11-08 | `53a58dd` | Family standard format; added REQ-MATH-014 to 028 for affine certificates, query witnesses, enclosures, local loading, trace check and stdlib-only; added untested-gap list | PR #30 |
+| 2.1 | 2026-11-10 | review backfill | Added REQ-MATH-029, the release record success condition | PR #33 |
