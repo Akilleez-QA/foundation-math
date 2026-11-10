@@ -48,7 +48,7 @@ def unit_run(optimized):
         if match:
             name, dotted, outcome = match.groups()
             module, cls, method = dotted.rsplit('.', 2)
-            outcomes[(module.replace('.', '/') + '.py', cls, method)] = outcome.split()[0]
+            outcomes[(module.replace('.', '/') + '.py', cls, method)] = 'skipped' if outcome.startswith('skipped') else outcome
     total = re.search(r'^Ran (\d+) tests?', result.stderr, flags=re.M)
     return {
         'command': ' '.join(['python3' if c == sys.executable else c for c in command]),
@@ -242,13 +242,38 @@ def severity_counts(issues, state):
     return counts
 
 
+def deviations(d):
+    rows = []
+    for label, suite in (('Normal suite', d['normal']), ('Optimized suite', d['optimized'])):
+        if suite['exit']:
+            rows.append((label, f'exit {suite["exit"]}', 'Investigate'))
+        if not suite['ran'] or len(suite['outcomes']) != suite['ran']:
+            rows.append((label, f'{len(suite["outcomes"])} parsed outcomes for {suite["ran"]} tests run', 'Investigate'))
+        for ref, outcome in sorted(suite['outcomes'].items()):
+            if outcome != 'ok':
+                rows.append((label, f'`{ref[0]}::{ref[1]}.{ref[2]}` {outcome}', 'Investigate'))
+    rows += [('Trace check', p, 'Fix docs') for p in d['trace_problems']]
+    if d['coverage']['exit']:
+        rows.append(('Coverage run', f'exit {d["coverage"]["exit"]}', 'Investigate'))
+    if d['gitleaks'] is None:
+        rows.append(('Secret scan', 'not run; gitleaks binary not supplied', 'Run the scan'))
+    elif d['gitleaks']['exit']:
+        rows.append(('Secret scan', f'exit {d["gitleaks"]["exit"]}: {d["gitleaks"]["summary"]}', 'Investigate'))
+    if not d['package']['rebuild_identical']:
+        rows.append(('Source package', 'rebuild from the same tree was not byte-identical', 'Investigate'))
+    if not d['package']['extracted_rebuild_identical']:
+        rows.append(('Source package', 'rebuild from the extracted ZIP was not byte-identical', 'Investigate'))
+    return rows
+
+
 def str_report(d, pr):
     c = d['commit']
     n, o = d['normal'], d['optimized']
     passed = lambda run_: sum(v == 'ok' for v in run_['outcomes'].values())
-    failed = lambda run_: sum(v in ('FAIL', 'ERROR') for v in run_['outcomes'].values())
+    failed = lambda run_: sum(v in ('FAIL', 'ERROR', 'unexpected success') for v in run_['outcomes'].values())
     skipped = lambda run_: sum(v == 'skipped' for v in run_['outcomes'].values())
-    ok = n['exit'] == 0 and o['exit'] == 0 and not d['trace_problems']
+    found = deviations(d)
+    ok = not found
     lines = [header(f'test report STR-{d["candidate"]}', f'FMATH-STR-{d["candidate"]}', c, d['commit_date'],
                     f'foundation-math source candidate `{d["candidate"]}` at commit `{c[:7]}` (no release tag exists)', pr)]
     lines += ['## 1. Summary', '',
@@ -272,13 +297,11 @@ def str_report(d, pr):
         reqs = ', '.join(sorted(d['requirement_by_test'].get(ref, ()))) or 'supporting'
         lines.append(f'| `{ref[0]}::{ref[1]}.{ref[2]}` | {reqs} | {n["outcomes"].get(ref, "not run")} | {o["outcomes"].get(ref, "not run")} |')
     lines += ['', '## 4. Problems and deviations', '']
-    problems = [f'| Normal suite | exit {n["exit"]} | — | Investigate |'] if n['exit'] else []
-    problems += [f'| Optimized suite | exit {o["exit"]} | — | Investigate |'] if o['exit'] else []
-    problems += [f'| Trace check | {p} | — | Fix docs |' for p in d['trace_problems']]
+    problems = [f'| {item} | {text} | — | {disposition} |' for item, text, disposition in found]
     if problems:
         lines += ['| Item | Description | Issue | Disposition |', '|---|---|---|---|', *problems]
     else:
-        lines.append('None. No test failed, errored or was skipped, and the trace check reported no problems.')
+        lines.append('None. Every test passed in both suites, the trace check reported no problems, the coverage run and secret scan exited 0, and both source-package rebuilds were byte-identical.')
     cov = d['coverage']
     issues = d['issues']
     open_sev = severity_counts(issues, 'OPEN')
@@ -309,7 +332,8 @@ def str_report(d, pr):
     if r and r['findings']:
         lines += ['', 'Ruff findings (recorded, not fixed in this record):', '', '```text', *r['findings'], '```']
     lines += ['', '## 6. Rationale for decisions', '',
-              'No failure was accepted. Results apply only to the commit and environment above; they do not transfer to a later tree. '
+              ('No failure was accepted. ' if ok else 'This record does not pass: the deviations in section 4 are open and none is accepted. ') +
+              'Results apply only to the commit and environment above; they do not transfer to a later tree. '
               'Author tests are not independent review or mathematical acceptance.', '', history(d['commit_date'], c, pr)]
     return '\n'.join(lines)
 
@@ -370,6 +394,7 @@ def main(argv=None):
     parser.add_argument('--gitleaks', default=shutil.which('gitleaks'), help='gitleaks binary (optional)')
     args = parser.parse_args(argv)
     data = collect(args)
+    found = deviations(data)
     str_path = ROOT / f'docs/verification/reports/STR-{data["candidate"]}.md'
     vdd_path = ROOT / f'docs/releases/VDD-{data["candidate"]}.md'
     str_path.parent.mkdir(parents=True, exist_ok=True)
@@ -383,8 +408,8 @@ def main(argv=None):
         index.write_text('\n'.join(lines + [row]) + '\n', encoding='utf-8')
     print(json.dumps({'str': str_path.relative_to(ROOT).as_posix(), 'vdd': vdd_path.relative_to(ROOT).as_posix(),
                       'normal_exit': data['normal']['exit'], 'optimized_exit': data['optimized']['exit'],
-                      'trace_problems': len(data['trace_problems'])}, sort_keys=True))
-    return 0 if data['normal']['exit'] == 0 and data['optimized']['exit'] == 0 and not data['trace_problems'] else 1
+                      'trace_problems': len(data['trace_problems']), 'deviations': len(found)}, sort_keys=True))
+    return 0 if not found else 1
 
 
 if __name__ == '__main__':
