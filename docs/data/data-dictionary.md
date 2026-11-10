@@ -39,7 +39,7 @@ Not applicable: channelization, rate-group, raw or calibrated sensor, telemetry,
 | `python3 -S -B tools/package_source.py OUTPUT` | Build the source ZIP | `OUTPUT` fresh path outside the tree | JSON `{"bytes", "file_count", "sha256"}` on stdout | Fails in a Git checkout (`.git` is not allowlisted) | `tools/package_source.py` |
 | `python3 -S -B -m tools.check_trace` | Documentation trace check | `--root DIR` (default: repository) | Problems on stderr, JSON summary on stdout; exit 1 on any problem | — | `tools/check_trace.py` |
 | `python3 -S -B -m tools.refresh_manifest` | Rehash `SOURCE-MANIFEST.json` from `git ls-files` | `--check` report only, exit 1 if anything would change | Lines `added`, `updated`, `removed` | Refuses to change a `byte_preserved` row | `tools/refresh_manifest.py` |
-| `python3 -S -B -m tools.gen_release_docs --pr N` | Write the STR and VDD | `--pr` reviewing PR number; `--repo`; `--ruff PATH`; `--gitleaks PATH` | Two Markdown files under `docs/` | Clean working tree required; queries GitHub with `gh` when present | `tools/gen_release_docs.py` |
+| `python3 -S -B -m tools.gen_release_docs --pr N` | Write the STR and VDD | `--pr` reviewing PR number; `--repo`; `--ruff PATH`; `--gitleaks PATH` | Two Markdown files under `docs/`; JSON on stdout with `str`, `vdd`, `normal_exit`, `optimized_exit`, `trace_problems` and `deviations` (the number of deviations, REQ-MATH-029) | Clean working tree required; queries GitHub with `gh` when present; exit 1 when any deviation is found, including a skipped test or a Gitleaks scan that was not run | `tools/gen_release_docs.py` |
 
 ### 1.2 ProblemSpec kernels (`KERNELS` in `fm_research/problem.py`)
 

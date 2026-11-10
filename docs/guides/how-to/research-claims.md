@@ -12,8 +12,9 @@ or newer and nothing installed.
 | `fm_control` (Python) | One-step safe-action intervals for a scalar linear model | [Scalar control](../../SCALAR-CONTROL.md) |
 
 `vendor/foundation-math-v014/` holds the SL2(F5) character and split-bundle code
-that `fm_research` imports, kept byte-for-byte from release v0.14
-([provenance](../../../PROVENANCE.md)).
+that `fm_research` imports, taken from release v0.14. Four of its files are byte-for-byte copies; the other five
+had code comments removed after import. `SOURCE-MANIFEST.json` records which (`byte_preserved`) and keeps each
+file's original `source_sha256` ([provenance](../../../PROVENANCE.md#correction-note-2026-11-08)).
 
 ## Check a claims file with `fm_research`
 
