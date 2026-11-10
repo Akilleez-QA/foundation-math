@@ -192,9 +192,9 @@
       "sha256": "3ec68da791ed8a8863d31cb45c0276118517c52eec926c4c5818fa9ec1b4d50d"
     },
     {
-      "bytes": 22934,
+      "bytes": 22925,
       "path": "docs/verification/verification-matrix.md",
-      "sha256": "04deeb384fc81bf7fbe12017aeda4c28aceed80447c8f4159cc908e523e4fd2f"
+      "sha256": "39c69af5e0a5f870caf7f469b8dc8d348d0a04cd571bb307cad1f9b4d028a45f"
     },
     {
       "byte_preserved": true,
