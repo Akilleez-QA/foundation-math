@@ -57,11 +57,23 @@ T = automated test, D = demonstration by a numbered test-plan procedure. These a
 
 ## Tests without a requirement
 
-Every test method at the baseline traces to a requirement above. No test is classified as supporting only.
+Every other test method traces to a requirement above. The tests below check the release-record generator
+(`tools/gen_release_docs.py`), which produces verification records rather than product behaviour, so they are
+classified as supporting.
 
 | Test | Classification |
 |---|---|
-| none | — |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_clean_record_passes` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_reproduced_finding_skips_and_gitleaks_exit_one` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_skipped_test_is_a_deviation` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_expected_failure_and_unexpected_success_are_deviations` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_unparsed_or_empty_suite_is_a_deviation` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_failed_coverage_run_is_a_deviation` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_failed_secret_scan_is_a_deviation` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_missing_secret_scan_is_a_deviation` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_failed_reproducibility_comparison_is_a_deviation` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_unit_run_keeps_full_non_ok_outcomes` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
+| `tests/test_gen_release_docs.py::ReleaseRecordSuccessTests.test_main_exit_status_follows_deviations` | Supporting: a release record reports success only when no suite failed, nothing was skipped or unparsed, coverage and the secret scan ran and passed, and the source package rebuilt identically (2026-11-09 backfill review finding) |
 
 ## Historical mapping
 

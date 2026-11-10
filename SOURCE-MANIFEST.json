@@ -122,9 +122,9 @@
       "sha256": "ffa86291821434fd33a6d301982564df55ba1234044223b2912056192b6947fa"
     },
     {
-      "bytes": 4432,
+      "bytes": 4649,
       "path": "docs/guides/how-to/research-claims.md",
-      "sha256": "4a1269ffb7bd6b1ac40b5c68814af5099b1fbeee0443d7eb571848cfb3bc948e"
+      "sha256": "84586b1de2919ca91f3adeb8db49dee63b99a960836f12c7090313f01ae3f928"
     },
     {
       "bytes": 2030,
@@ -192,9 +192,9 @@
       "sha256": "3ec68da791ed8a8863d31cb45c0276118517c52eec926c4c5818fa9ec1b4d50d"
     },
     {
-      "bytes": 19080,
+      "bytes": 22934,
       "path": "docs/verification/verification-matrix.md",
-      "sha256": "3b33e0e5fd27dd837692ac02c1c93dc0058d8a42dd8cbf481da6f97eff18fcde"
+      "sha256": "04deeb384fc81bf7fbe12017aeda4c28aceed80447c8f4159cc908e523e4fd2f"
     },
     {
       "byte_preserved": true,
@@ -350,6 +350,11 @@
       "sha256": "d1d3c90ec294de2987cc658b0a7078e83e9c367b2037613361c4a0134f63004d"
     },
     {
+      "bytes": 6399,
+      "path": "tests/test_gen_release_docs.py",
+      "sha256": "2a52d8fd942fc54707184b319895e8ca5ac7bd8ea253e6bad9112361a4c39a65"
+    },
+    {
       "bytes": 7738,
       "path": "tests/test_identifiability.py",
       "sha256": "b455df4e2fb6b3ecf1f0e240a3705fe38e35c8f4407307c71842da30b91900b8"
@@ -409,9 +414,9 @@
       "sha256": "faa6a18e55c9407ecb809a1a01815d3bfd7051f93763cf9dbc2c8fe08bce0ce7"
     },
     {
-      "bytes": 24554,
+      "bytes": 25987,
       "path": "tools/gen_release_docs.py",
-      "sha256": "069ff96333a9212c5e07700701a5c231241c086f13027d19228419e4b9d5b992"
+      "sha256": "78a23b13b2afab83e9dae680de03cc2245dcb7fa86124e2c84e32308ae60355e"
     },
     {
       "bytes": 2626,
