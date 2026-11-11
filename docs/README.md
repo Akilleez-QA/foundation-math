@@ -26,6 +26,7 @@ These keep their uppercase names for inbound links.
 - [Exact numerical residual and error enclosures](NUMERICAL-ENCLOSURES.md)
 - [Exact quadratic minimax certificates](QUADRATIC-MINIMAX.md)
 - [Correlated quadratic supplied certificates](CORRELATED-QUADRATIC.md)
+- [Exact linear optimization certificates](DUAL-REPAIR.md)
 - [Evidence mapper schema and API](EVIDENCE-PAPER.md)
 - [Scalar one-step certificates](SCALAR-CONTROL.md)
 - [Research source binding](SOURCE-BINDING.md)

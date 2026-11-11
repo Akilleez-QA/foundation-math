@@ -15,7 +15,8 @@ The format is based on Keep a Changelog.
   coverage and receipt verification (PR #22).
 - `fm_paths`: exact continuous path bounds, integral bands and finite proof
   verification (PR #23).
-
+- `fm_optimization`: exact linear optimization dual repair, upper-bound and
+  attainment certificates (PR #26).
 - `fm_certificates`: exact affine implication, infeasibility and composition
   certificates (#21).
 - `fm_identifiability`: exact affine-query pair and constancy witnesses (#24).

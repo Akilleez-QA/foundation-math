@@ -14,10 +14,11 @@ is needed for the documented workflow.
 - `fm_mapper/` maps supplied evidence judgments and renders qualified draft reports.
 - `fm_control/` provides exact, model-conditional scalar one-step certificates.
 - `fm_certificates/`, `fm_identifiability/`, `fm_enclosures/`, `fm_minimax/`,
-  `fm_correlated/`, `fm_intervals/` and `fm_paths/` provide exact affine
-  certificates, affine-query witnesses, interval residual enclosures, quadratic
-  minimax problem admission and witnesses, correlated quadratic certificates,
-  interval histories and continuous path bounds.
+  `fm_correlated/`, `fm_intervals/`, `fm_paths/` and `fm_optimization/` provide
+  exact affine certificates, affine-query witnesses, interval residual
+  enclosures, quadratic minimax problem admission and witnesses, correlated
+  quadratic certificates, interval histories, continuous path bounds and linear
+  optimization certificates.
 - `vendor/foundation-math-v014/` contains only the selected historical source subset.
 - `tests/` uses synthetic fixtures and Python's `unittest` runner.
 

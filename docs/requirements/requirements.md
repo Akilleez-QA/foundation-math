@@ -21,7 +21,7 @@ This document states what Foundation Math does, as inspected in the code at the 
 
 ### 1.2 Scope
 
-In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), continuous path bounds (`fm_paths`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
+In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), continuous path bounds (`fm_paths`), linear optimization certificates (`fm_optimization`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
 
 Out of scope: any stdio JSON-RPC bridge or Cstack adapter (none exists in this repository), installation as a wheel, physical or engineering validation, and scientific acceptance of any claim.
 
@@ -29,7 +29,7 @@ Trust assumptions: one trusted local operator runs the code on files they chose.
 
 ### 1.3 System overview
 
-Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and ten Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
+Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and eleven Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
 
 ## 2. Requirement record format
 
@@ -537,7 +537,89 @@ Path construction shall reject invalid pair budgets with `ValueError` and return
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.11 Source tree, packaging and documentation integrity
+### 3.11 Linear optimization certificates
+
+### REQ-MATH-050 — Program input admission
+
+`LinearProgram` shall admit exact tuple-based problems with nonblank context labels of at most 128 characters, dimensions 1 through 16, at most 128 inequalities and 64 equalities, and coefficients of at most 256 numerator and denominator bits, raising `Unsupported` for invalid types, shapes or limits.
+
+- Rationale: Keep problem inputs exact and bounded.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-051 — Program statement binding
+
+`program_digest` shall normalize equal rational values while binding the context, dimension, ordered constraint rows, objective and offset, with changed statements rejected by certificate verification.
+
+- Rationale: Prevent transfer of a certificate to another problem.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-052 — Dual bound verification
+
+`verify_dual_bound` shall return True only for a bound tied to the expected problem whose nonnegative inequality multipliers and signed equality multipliers reproduce the objective and reported signed upper bound exactly, returning False for malformed or false certificates.
+
+- Rationale: Check the supplied weak-duality identity.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-053 — Attainment verification
+
+`verify_attainment` shall return True only when a verified dual bound is attained by an exact supplied point satisfying all inequalities and equalities.
+
+- Rationale: A dual bound alone does not establish nonemptiness or optimality.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-054 — Candidate correction and residual repair
+
+`repair_dual` shall clamp negative inequality candidates to zero, add supplied signed equality corrections, recompute the residual and construct a verified bound using the signed support of an explicit box when supplied.
+
+- Rationale: Retain signed constants after candidate changes.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-055 — Box intersection binding
+
+Box augmentation shall append upper-coordinate rows followed by lower-coordinate rows and bind the repaired certificate to the explicit intersection with that box.
+
+- Rationale: Box containment in the original problem is not established by repair.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-056 — Box-free residual rejection
+
+`repair_dual` shall raise `InvalidCertificate` for a nonzero residual without an explicit box.
+
+- Rationale: Failure of these candidates is not evidence of objective unboundedness.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-057 — Repair input validation
+
+`repair_dual` shall raise `Unsupported` for malformed candidates, corrections or boxes, witness values exceeding 4,096 numerator or denominator bits, reversed box endpoints or augmentation exceeding 128 inequality rows.
+
+- Rationale: Reject unsupported repair inputs without a mathematical conclusion.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.12 Source tree, packaging and documentation integrity
 
 ### REQ-MATH-012 — Deterministic source packaging
 
@@ -579,7 +661,7 @@ The research layer, mapper and selected vendor modules shall load from this sour
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.12 Quadratic minimax certificates
+### 3.13 Quadratic minimax certificates
 
 ### REQ-MATH-070 — Problem admission
 
@@ -703,7 +785,7 @@ Mapper file handling shall reject artifact root escapes and refuse existing, dup
 - Verification: T — see verification matrix
 - Status: Baselined
 
-The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-040 to REQ-MATH-046, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
+The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-040 to REQ-MATH-046, REQ-MATH-050 to REQ-MATH-057, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
 
 ## 5. Non-functional requirements
 

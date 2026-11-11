@@ -58,11 +58,12 @@ flowchart LR
   cmain[fm_correlated __main__ CLI] --> corr[fm_correlated.quadratic]
   intervals[fm_intervals.history]
   paths[fm_paths.bounds]
+  opt[fm_optimization.dual]
   pkg[tools/package_source] -.manifest.-> manifest[(SOURCE-MANIFEST.json)]
   trace[tools/check_trace] -.reads.-> docs[(docs/)]
 ```
 
-The eight certificate packages (`fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`) import nothing from the rest of the repository.
+The nine certificate packages (`fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`) import nothing from the rest of the repository.
 
 Runtime (data flow) view of the research CLI:
 
@@ -111,6 +112,7 @@ Paths come from `git ls-files`. "Infrastructure" marks plumbing that implements 
 | Correlated quadratic certificates | `fm_correlated/quadratic.py`, `fm_correlated/__main__.py` | Model admission, row feasibility, upper, lower and offset witnesses, scoped exclusion and non-global probes | JSON text or bytes, file or stdin → conditional receipt dict | REQ-MATH-080, REQ-MATH-081, REQ-MATH-082, REQ-MATH-083, REQ-MATH-084, REQ-MATH-085, REQ-MATH-086, REQ-MATH-087, REQ-MATH-088, REQ-MATH-089, REQ-MATH-090 |
 | Interval histories | `fm_intervals/history.py` | Exact interval intersections, horizon partition, coverage, consistency and receipt recomputation | horizon, observations → dict receipt; receipt → bool | REQ-MATH-030, REQ-MATH-031, REQ-MATH-032, REQ-MATH-033, REQ-MATH-034, REQ-MATH-035, REQ-MATH-036, REQ-MATH-037 |
 | Path bounds | `fm_paths/bounds.py` | Exact continuous envelopes, integral extrema, band witnesses and finite proof verification | interval records, horizon, directed rates, optional integral band → receipt dict or bool | REQ-MATH-040, REQ-MATH-041, REQ-MATH-042, REQ-MATH-043, REQ-MATH-044, REQ-MATH-045, REQ-MATH-046 |
+| Linear optimization certificates | `fm_optimization/dual.py` | Problem admission and digest; dual repair, bound and attainment checks | `LinearProgram` + candidates or certificate → `DualBound` or bool | REQ-MATH-050, REQ-MATH-051, REQ-MATH-052, REQ-MATH-053, REQ-MATH-054, REQ-MATH-055, REQ-MATH-056, REQ-MATH-057 |
 | Packaging | `tools/package_source.py`, `SOURCE-MANIFEST.json`, `PACKAGE.json` | Exact file-set and hash check; deterministic stored ZIP outside the tree | source tree → ZIP | REQ-MATH-012, REQ-MATH-028 |
 | Documentation tools | `tools/check_trace.py`, `tests/test_trace.py` | Requirement, design, test, data-dictionary and link consistency | docs + tests → problem list | REQ-MATH-027 |
 | Manifest refresh | `tools/refresh_manifest.py` | Rehash manifest rows from `git ls-files`; refuses to change a byte-preserved row | committed files → manifest | infrastructure |
