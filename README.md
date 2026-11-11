@@ -105,6 +105,8 @@ optional: only the standard library loads, and no `.pyc` files are written.
 | `fm_identifiability/` | Supplied witnesses that a linear quantity does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
 
+| `fm_minimax/` | Exact quadratic minimax problem admission, equality obstructions and common row reduction | [Quadratic minimax problem admission](docs/QUADRATIC-MINIMAX.md) |
+
 **Also included:** a command line for SL2(F5) research claims (`fm_research`), a draft-paper writer (`fm_mapper`) and
 a scalar one-step control helper (`fm_control`); see [research claims and write-ups](docs/guides/how-to/research-claims.md).
 No network, credentials, external solver or package installation is used.

@@ -10,7 +10,7 @@ distribution. This is not an "or later" grant. The complete license is in LICENS
 The software is supplied without warranty; see LICENSE sections 15 and 16.
 
 Covered first-party paths are `fm_research/`, `fm_mapper/`, `fm_control/`,
-`fm_certificates/`, `fm_identifiability/`, `fm_enclosures/`, the nine selected
+`fm_certificates/`, `fm_identifiability/`, `fm_enclosures/`, `fm_minimax/`, the nine selected
 runtime files under `vendor/foundation-math-v014/`, `tests/`, `examples/`, `tools/`,
 `docs/`, and the first-party root documentation and metadata, as enumerated in
 `SOURCE-MANIFEST.json`. The root manifest itself is included in that scope.
