@@ -18,6 +18,7 @@
 | Side | Entity | Owns |
 |---|---|---|
 | Caller | Python code running in the same interpreter, with the repository root on `sys.path` | Choosing the expected model or system, retaining it independently of witnesses, resource limits, interpretation |
+| Foundation Math | Packages `fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax` | Validation, exact computation, result records |
 | Foundation Math | Packages `fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_correlated` | Validation, exact computation, result records |
 
 The caller is trusted. These APIs are not sandboxes: Python reflection can bypass frozen dataclasses, and monkey-patching is outside the trust boundary.
@@ -48,6 +49,7 @@ Field types, units and limits for every name below are in the [data dictionary](
 | | `compose_implications(system, inner, outer)` | `Implication` | same |
 | `fm_identifiability` | `Model(C, z, L, h, q, d=0)`, `verify_pair(model, PairWitness(...))`, `verify_constancy(model, ConstancyWitness(...))` | `PairResult`, `ConstancyResult` | [query identifiability](../QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures` | `enclose_linear_residual(matrix, candidate, rhs)`, `verify_linear_residual(result, matrix, candidate, rhs)` | `LinearResidualEnclosure`, bool | [numerical enclosures](../NUMERICAL-ENCLOSURES.md) |
+| `fm_minimax` | `certify(problem, witness=None)` | dict with status `feasible`, `infeasible`, `unresolved` or `invalid_input`; separate `row_feasibility` and optional `exact_threshold` | [quadratic minimax certificates](../QUADRATIC-MINIMAX.md) |
 | `fm_correlated` | `verify(json_text_or_bytes)`; exports `Invalid` and its `Limit` subclass | Conditional receipt dict with upper/lower bounds, represented gap, point admission, separate exact-target and outer-image exclusion flags, offset nonnegativity and non-global probes; CLI `python3 -S -B -m fm_correlated INPUT.json` (`-` for stdin), exit 0 on success or 2 with `rejected_or_unresolved` JSON on recognized failure | [correlated quadratic certificates](../CORRELATED-QUADRATIC.md) |
 
 ## 4. Errors and result semantics
@@ -73,7 +75,7 @@ Each certificate family binds its statement with its own versioned digest: `fm-a
 
 ## 6. Security and input bounds
 
-Exact types only (`int`, `Fraction`; booleans and subclasses rejected), immutable tuples where stated, and fixed bit, row and dimension caps (data dictionary §6). No network, solver or subprocess use in the five certificate packages; the correlated CLI reads a named file or stdin.
+Exact types only (`int`, `Fraction`; booleans and subclasses rejected), immutable tuples where stated, and fixed bit, row and dimension caps (data dictionary §6). No network, file, solver or subprocess use in the six certificate packages; the correlated CLI reads a named file or stdin.
 
 ## 7. Requirements addressed
 
@@ -85,6 +87,7 @@ Exact types only (`int`, `Fraction`; booleans and subclasses rejected), immutabl
 | REQ-MATH-014 to REQ-MATH-018 | §3, §4 affine rows, §5 |
 | REQ-MATH-019 to REQ-MATH-021 | §3, §4 query rows, §5 |
 | REQ-MATH-022 to REQ-MATH-025 | §3, §4 enclosure rows |
+| REQ-MATH-070 to REQ-MATH-079 | §3 minimax row; JSON CLI in the linked contract |
 
 ## 8. Change acceptance
 

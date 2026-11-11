@@ -104,6 +104,7 @@ optional: only the standard library loads, and no `.pyc` files are written.
 | `fm_certificates/` | Supplied proofs that linear inequalities imply another inequality, or have no solution | [Affine certificates](docs/AFFINE-CERTIFICATES.md) |
 | `fm_identifiability/` | Supplied witnesses that a linear quantity does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
+| `fm_minimax/` | Exact quadratic minimax point, dual and Farkas witnesses, KKT thresholds and JSON CLI | [Quadratic minimax certificates](docs/QUADRATIC-MINIMAX.md) |
 | `fm_correlated/` | Exact correlated quadratic upper, lower and offset witnesses, scoped exclusion and non-global probes; CLI and [synthetic example](examples/correlated-quadratic.json) | [Correlated quadratic certificates](docs/CORRELATED-QUADRATIC.md) |
 
 **Also included:** a command line for SL2(F5) research claims (`fm_research`), a draft-paper writer (`fm_mapper`) and

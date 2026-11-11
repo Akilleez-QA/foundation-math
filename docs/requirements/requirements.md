@@ -21,7 +21,7 @@ This document states what Foundation Math does, as inspected in the code at the 
 
 ### 1.2 Scope
 
-In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), correlated quadratic certificates (`fm_correlated`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
+In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
 
 Out of scope: any stdio JSON-RPC bridge or Cstack adapter (none exists in this repository), installation as a wheel, physical or engineering validation, and scientific acceptance of any claim.
 
@@ -29,7 +29,7 @@ Trust assumptions: one trusted local operator runs the code on files they chose.
 
 ### 1.3 System overview
 
-Foundation Math is a Python 3.10+ standard-library source tree. It exposes three command-line programs and seven Python packages. The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
+Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and eight Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
 
 ## 2. Requirement record format
 
@@ -425,6 +425,108 @@ The research layer, mapper and selected vendor modules shall load from this sour
 - Verification: T — see verification matrix
 - Status: Baselined
 
+### 3.10 Quadratic minimax certificates
+
+### REQ-MATH-070 — Problem admission
+
+`certify(problem, witness=None)` shall return `invalid_input` for invalid exact scalar forms, non-SPD or malformed metrics, empty scenario lists, duplicate scenario IDs, unsupported problem keys and mismatched row dimensions.
+
+- Rationale: Admit only the declared exact quadratic problem class.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-071 — Exact arithmetic limits
+
+Exact arithmetic limits shall produce `unresolved` for oversized input integers, rational text and scenario counts or an exhausted operation budget, and raise the internal limit exception for oversized intermediate rationals.
+
+- Rationale: Keep resource exhaustion distinct from mathematical impossibility.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-072 — Equality obstructions
+
+`certify(problem, witness=None)` shall return `infeasible` for disagreeing common equality targets or a target outside the equality matrix range, with a left-null multiplier having nonzero target pairing for the range obstruction.
+
+- Rationale: Identify exact obstructions to the declared equalities.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-073 — Empty dimension
+
+`certify(problem, witness=None)` shall support exact thresholds and strict Farkas row-emptiness certificates for the unique empty vector in zero-dimensional problems.
+
+- Rationale: Retain the unique empty-vector case within witness verification.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-074 — Common row reduction
+
+`certify(problem, witness=None)` shall compute each tightened common row bound exactly as the supplied bound minus the maximum scenario row offset.
+
+- Rationale: Reduce the shared finite-scenario inequalities exactly.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-075 — Strict dual level exclusion
+
+`certify(problem, witness=None)` shall exclude a queried level with a valid dual bound only when the bound is strictly greater than the level, leaving equality unresolved without a point and row feasibility `not_established` for a dual alone.
+
+- Rationale: A lower bound equal to the queried level does not establish feasibility.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-076 — Point witness isolation
+
+`certify(problem, witness=None)` shall leave failed or malformed point candidates unresolved and retain feasibility established by a valid point when an optional dual has invalid scenario weights.
+
+- Rationale: A failed candidate is not an exclusion, and independent valid evidence remains usable.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-077 — Exact threshold verification
+
+`certify(problem, witness=None)` shall emit `exact_threshold` only for a row/equality-feasible point and valid dual satisfying exact stationarity, scenario and row complementarity, and equality of primal cost and dual bound.
+
+- Rationale: Matching feasible primal and dual values certify the optimum without a constraint qualification.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-078 — Strict Farkas witness
+
+`certify(problem, witness=None)` shall report `infeasible` with row feasibility `proved_empty` for nonnegative row multipliers and unrestricted equality multipliers whose combined normal is zero and whose combined bound is strictly negative.
+
+- Rationale: A zero combined bound is not a contradiction.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-079 — Minimax JSON command line
+
+`python -m fm_minimax` shall read a JSON request containing `problem` and optional `witness`, emit schema `fm-quadratic-minimax/1` with rational values as strings, reject duplicate keys and malformed JSON as `invalid_input`, and return `unresolved` for input exceeding 131,072 bytes.
+
+- Rationale: Expose the local checker through a bounded JSON input interface.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
 ## 4. Interface requirements
 
 ### REQ-MATH-008 — Research CLI
@@ -447,7 +549,7 @@ Mapper file handling shall reject artifact root escapes and refuse existing, dup
 - Verification: T — see verification matrix
 - Status: Baselined
 
-The Python library interfaces of REQ-MATH-013 to REQ-MATH-025 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
+The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
 
 ## 5. Non-functional requirements
 
