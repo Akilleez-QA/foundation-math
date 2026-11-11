@@ -1,80 +1,137 @@
-# Exact quadratic minimax problem admission
+# Exact quadratic minimax certificates
 
-`fm_minimax` admits a finite rational quadratic minimax problem, checks equality
-consistency and reduces shared inequalities. It uses Python's standard library
-and performs no optimization search. Witness verification is not part of this
-version of the document or implementation. Results concern only the declared
-finite system; they are not scientific acceptance or real-world safety approval.
+`fm_minimax` checks supplied rational witnesses for a finite convex minimax
+problem. It performs no optimization search and uses only Python's standard
+library. This is a standalone local API and JSON CLI, not an extension of the
+research dispatcher. Source-package hashes cover its bytes; its result is not an
+authenticated or source-bound research receipt.
 
 ## Declared problem
 
 Choose a common point x in R^n. The shared rational matrix M must be symmetric
 positive definite. For each scenario i, supply a constant c_i, center k_i,
-equality target r_i and row offset b_i. The declared problem is
+equality target r_i and row offset b_i. The problem is
 
     minimize J(x) = max_i [c_i + (x-k_i)^T M(x-k_i)]
     subject to N(x-k_i) = r_i and b_i + Lx <= beta for every i.
 
-The level E asks whether such an x exists with J(x) <= E. Constants and E may be
-negative. N and L may have dependent or zero rows. Dimension zero uses the unique
-empty vector and vacuously positive-definite empty metric.
+The queried level E asks whether such an x exists with J(x) <= E. Constants and
+E may be negative. Matrices N and L may have dependent or zero rows. Dimension
+zero uses the unique empty vector and vacuously positive-definite empty metric.
 
-All h_i = r_i + Nk_i must agree on h. Disagreement proves the equalities
-incompatible. Exact elimination also detects h outside the range of N and checks
-a computed left-null multiplier z with z^T N = 0 and z^T h != 0.
-The common inequalities reduce exactly to Lx <= d, where
+All h_i = r_i + Nk_i must agree on h. The checker rejects incompatible h_i or
+checks a left-null witness z with z^T N = 0 and z^T h != 0 if h is outside the
+range of N. The common inequalities reduce exactly to Lx <= d, where
 
     d_j = beta_j - max_i b_ij.
 
-This reduction uses the same L for every scenario. It does not establish row
-feasibility. No uncertainty beyond the finite scenario list is inferred.
+This reduction uses the same L for every scenario. No uncertainty beyond the
+finite declared scenario list is inferred.
 
-## Python interface and results
+## Supplied witnesses and proof
 
-Call `from fm_minimax import certify`, then `certify(problem)`.
+A `point` witness is checked directly against every original equality,
+inequality and quadratic value. A failed point is not a global exclusion.
+
+A `dual` witness supplies lambda >= 0 with sum(lambda) = 1, mu >= 0 and unrestricted
+nu. Write kbar = sum_i lambda_i k_i, g = L^T mu + N^T nu, and
+
+    v = kbar - (M^-1 g)/2,
+    D = sum_i lambda_i (c_i + k_i^T M k_i)
+        - mu^T d - nu^T h - v^T M v.
+
+The checker solves M times a vector equals g by exact elimination, rather than
+accepting a supplied inverse. Completing the square gives
+
+    sum_i lambda_i f_i(x) + mu^T(Lx-d) + nu^T(Nx-h)
+        = (x-v)^T M(x-v) + D.
+
+On the feasible set this is at most J(x), hence D is a global lower bound.
+Only D > E excludes the queried level. D = E alone neither proves feasibility
+nor excludes it. A dual bound does not establish that the row/equality set is
+nonempty.
+
+An `exact_threshold` is emitted only with a row/equality-feasible point and a
+valid dual, after checking all of:
+
+    2M(x-kbar) + L^T mu + N^T nu = 0,
+    lambda_i (f_i(x)-J(x)) = 0 for each i,
+    mu_j (L_j x-d_j) = 0 for each j,
+    J(x) = D.
+
+These sufficient certificate conditions do not require a constraint
+qualification or a strictly feasible point. No claim that the checker will find
+such witnesses is made.
+
+A `farkas` witness supplies mu >= 0 and unrestricted nu with
+
+    L^T mu + N^T nu = 0 and mu^T d + nu^T h < 0.
+
+Their weighted sum proves the row/equality set empty. Equality at zero is
+insufficient. These are classical quadratic duality and Farkas certificates,
+not new theorem claims or formal proof-assistant verification.
+
+## Python and JSON interfaces
+
+Call `from fm_minimax import certify`, then `certify(problem, witness=None)`.
 Problem dictionaries require exactly:
 
-- `metric`: n by n M; `equalities`: q by n N; `rows`: m by n L.
-- `bounds`: length-m beta; `level`: E.
-- `scenarios`: nonempty list of dictionaries with exactly `id`, `constant`,
-  `center`, `target`, `row_offset`; vector lengths are n, q and m respectively.
+- `metric`: n by n M.
+- `equalities`: q by n N.
+- `rows`: m by n L.
+- `bounds`: length-m beta.
+- `level`: E.
+- `scenarios`: nonempty list of dictionaries, each with exactly `id`, `constant`,
+  `center`, `target`, `row_offset`. Vector lengths are n, q and m respectively.
 
 IDs are unique nonempty strings of at most 128 characters. Containers are built-in
-lists/dictionaries. Scalars are built-in integers, `Fraction` values or exact
+lists/dictionaries. Scalars are exact built-in integers, `Fraction` values or
 integer/rational strings such as `"-3/7"`. Floats, booleans, unsupported keys,
-invalid shapes and non-SPD metrics are rejected. Returned rationals are `Fraction`
-values. Every result contains `status`, `reason`, `arithmetic_operations`,
-`schema` (`fm-quadratic-minimax/1`), `scope` (`declared finite rational quadratic
-system`) and `optimization_search` (`not_performed`).
+invalid matrix shapes and non-SPD metrics are rejected.
 
-- `infeasible`: equality incompatibility or an equality-range obstruction.
-- `unresolved`: equality checks complete without obstruction, or a resource cap.
+The optional witness dictionary may contain:
+
+- `point`: length-n vector.
+- `dual`: exactly `scenario_weights`, `row_multipliers`, `equality_multipliers`,
+  with lengths equal to the number of scenarios, m and q.
+- `farkas`: exactly `row_multipliers`, `equality_multipliers`.
+
+Run `python3 -S -B -m fm_minimax < request.json`. The JSON object has `problem`
+and optionally `witness`. Duplicate keys are rejected. Output rational values
+are strings, and output schema is `fm-quadratic-minimax/1`. Process exit alone
+is not a proof: inspect the complete result and its `status`.
+
+- `feasible`: a supplied point proves J(x) <= E under all declared constraints.
+- `infeasible`: exact equality contradiction, strict Farkas certificate, or
+  strict dual lower bound excludes that condition.
+- `unresolved`: no decisive valid witness, including missing/invalid witnesses
+  and resource caps. A failed candidate never proves infeasibility.
 - `invalid_input`: malformed problem or unsupported mathematical class.
 
-After admission, results also contain `level`, parsed `scenarios`,
-`common_equality_targets` and `row_feasibility` (`not_established` or
-`proved_empty`). Equality failures include `obstruction`, containing either
-`kind: incompatible_common_equalities` and `targets`, or `kind: equality_range`,
-`left_null_multiplier` and `target_pairing`. Otherwise `tightened_common_rows`
-contains d and the reason is `no witness verification in this version`.
-Malformed or resource-capped inputs may return only the universal result fields.
+`row_feasibility` separately distinguishes `proved_nonempty`, `proved_empty`,
+and `not_established`. `exact_threshold` concerns the minimax optimum and may
+exceed E. Invalid optional components do not erase other independently valid
+components; exhausting the shared arithmetic cap returns unresolved.
 
-## Exact arithmetic and limits
+## Bounds and execution
 
 At most 8 coordinates, 8 equality rows, 8 scenarios and 16 inequality rows.
 Input rational numerator/denominator sizes are at most 512 bits, intermediate
 sizes at most 4096 bits, rational text at most 320 characters and counted
-arithmetic operations at most 150,000. Unsupported size is unresolved, not
-mathematical impossibility. Arithmetic uses exact fractions; metric positivity
-and elimination use explicit checks that remain active under -O.
+arithmetic operations at most 150,000. The CLI reads at most 131,072 bytes.
+Unsupported size is a resource failure, not mathematical impossibility.
 
-This is a trusted local Python API. It installs no operating-system CPU,
-wall-time or memory limits and imposes no serialized byte cap.
+This is a trusted local Python API, not a hardened arbitrary-code sandbox.
+For external JSON, use a bounded subprocess with CPU, wall-time and memory
+limits; this module does not install operating-system limits. Interrupted or
+incomplete output is unresolved. The direct API does not impose a serialized
+byte cap. All runtime decisions use explicit checks and remain active under -O.
 
 ## Synthetic verification
 
-`tests/test_minimax.py` covers incompatible equalities, equality-range
-obstructions, empty dimension, invalid metrics/scalars/shapes/keys, resource
-limits, exact row-offset reduction and unresolved well-formed problems.
-Tests check software behavior, not the truth of supplied premises or arbitrary
-mathematical statements.
+`tests/test_minimax.py` covers a nondiagonal two-active-scenario optimum of 24,
+strict level comparisons, equality multiplier signs, negative constants and
+levels, nonoptimal/failed points, Farkas strictness, redundant constraints,
+zero dimension, coordinate congruence and malformed/resource-capped inputs.
+It includes 96 newly constructed scalar boundary optima. Tests check software
+behavior, not arbitrary mathematical statements or the truth of supplied premises.

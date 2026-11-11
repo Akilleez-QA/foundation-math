@@ -7,7 +7,7 @@ The format is based on Keep a Changelog.
 
 ### Added
 
-- `fm_minimax`: exact quadratic minimax problem admission, arithmetic limits, equality obstructions and common row reduction (PR #34).
+- `fm_minimax`: exact quadratic minimax admission, arithmetic limits, equality obstructions, common row reduction, point, dual and Farkas witnesses, KKT thresholds and JSON CLI (PRs #34 and #35)
 
 - `fm_certificates`: exact affine implication, infeasibility and composition
   certificates (#21).
