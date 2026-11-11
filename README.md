@@ -104,6 +104,10 @@ optional: only the standard library loads, and no `.pyc` files are written.
 | `fm_certificates/` | Supplied proofs that linear inequalities imply another inequality, or have no solution | [Affine certificates](docs/AFFINE-CERTIFICATES.md) |
 | `fm_identifiability/` | Supplied witnesses that a linear quantity does or does not have a single value on a solution set | [Query identifiability](docs/QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures/` | Exact interval bounds on the residual of an approximate linear solve | [Numerical enclosures](docs/NUMERICAL-ENCLOSURES.md) |
+| `fm_minimax/` | Exact quadratic minimax point, dual and Farkas witnesses, KKT thresholds and JSON CLI | [Quadratic minimax certificates](docs/QUADRATIC-MINIMAX.md) |
+| `fm_correlated/` | Exact correlated quadratic upper, lower and offset witnesses, scoped exclusion and non-global probes; CLI and [synthetic example](examples/correlated-quadratic.json) | [Correlated quadratic certificates](docs/CORRELATED-QUADRATIC.md) |
+| `fm_intervals/` | Exact pointwise consistency and coverage of supplied interval histories | [Interval histories](docs/INTERVAL-HISTORY.md) |
+| `fm_paths/` | Exact continuous path bounds and integral bands under supplied interval and rate premises | [Path bounds](docs/PATH-BOUNDS.md) |
 | `fm_optimization/` | Supplied rational upper bounds and attaining points for linear optimization problems | [Linear optimization certificates](docs/DUAL-REPAIR.md) |
 
 **Also included:** a command line for SL2(F5) research claims (`fm_research`), a draft-paper writer (`fm_mapper`) and
