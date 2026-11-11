@@ -48,7 +48,7 @@ Field types, units and limits for every name below are in the [data dictionary](
 | | `compose_implications(system, inner, outer)` | `Implication` | same |
 | `fm_identifiability` | `Model(C, z, L, h, q, d=0)`, `verify_pair(model, PairWitness(...))`, `verify_constancy(model, ConstancyWitness(...))` | `PairResult`, `ConstancyResult` | [query identifiability](../QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures` | `enclose_linear_residual(matrix, candidate, rhs)`, `verify_linear_residual(result, matrix, candidate, rhs)` | `LinearResidualEnclosure`, bool | [numerical enclosures](../NUMERICAL-ENCLOSURES.md) |
-| `fm_correlated` | `verify(json_text_or_bytes)`; exports `Invalid` and its `Limit` subclass | Conditional receipt dict for model admission, row feasibility and realized-pair probes; no upper or lower bounds | [correlated quadratic admission and probes](../CORRELATED-QUADRATIC.md) |
+| `fm_correlated` | `verify(json_text_or_bytes)`; exports `Invalid` and its `Limit` subclass | Conditional receipt dict with upper/lower bounds, represented gap, point admission, separate exact-target and outer-image exclusion flags, offset nonnegativity and non-global probes; CLI `python3 -S -B -m fm_correlated INPUT.json` (`-` for stdin), exit 0 on success or 2 with `rejected_or_unresolved` JSON on recognized failure | [correlated quadratic certificates](../CORRELATED-QUADRATIC.md) |
 
 ## 4. Errors and result semantics
 
@@ -73,7 +73,7 @@ Each certificate family binds its statement with its own versioned digest: `fm-a
 
 ## 6. Security and input bounds
 
-Exact types only (`int`, `Fraction`; booleans and subclasses rejected), immutable tuples where stated, and fixed bit, row and dimension caps (data dictionary §6). No network, file, solver or subprocess use in the four certificate packages.
+Exact types only (`int`, `Fraction`; booleans and subclasses rejected), immutable tuples where stated, and fixed bit, row and dimension caps (data dictionary §6). No network, solver or subprocess use in the five certificate packages; the correlated CLI reads a named file or stdin.
 
 ## 7. Requirements addressed
 

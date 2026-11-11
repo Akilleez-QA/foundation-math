@@ -30,19 +30,19 @@
       "sha256": "38683912788320a17c636515d4e2eced2666c1c3f3f4392e0a1854d68d13c36b"
     },
     {
-      "bytes": 750,
+      "bytes": 800,
       "path": "PACKAGE.json",
-      "sha256": "291e7fb6d0fa3e3e0a44de79dddbe6403acc3918d0d7c2e3602e02a70e690536"
+      "sha256": "98fc108cceb5178efbf2e9a1d5e56cf24d07171eae205f0059b54f965b0ba237"
     },
     {
-      "bytes": 5101,
+      "bytes": 5578,
       "path": "PROVENANCE.md",
-      "sha256": "dad067eaa6b8b80f54dfd9658b9981d070ed1a8acf01bf771259c3d574a2de0e"
+      "sha256": "cd4f23d3d991494b6b2a09da8f8beb90bf40de998292bd23efd1c9259d4eeccf"
     },
     {
-      "bytes": 9491,
+      "bytes": 9549,
       "path": "README.md",
-      "sha256": "8ad667b41123518ca0c0f7a36fc80b133bab1b65011aabaced539d52bac00e12"
+      "sha256": "425211a3e404ec77331e9ae726b987f10498424f6f5aaac619d1eba780c25740"
     },
     {
       "bytes": 5169,
@@ -50,9 +50,9 @@
       "sha256": "9f0458d08e8854cfc88da3703f72e935af2085ce2f8f8c7293e767b14fbd2175"
     },
     {
-      "bytes": 4563,
+      "bytes": 8205,
       "path": "docs/CORRELATED-QUADRATIC.md",
-      "sha256": "daeb07b31b7407bfed94e54396b202ccbfc57ebb1470c6a5b60277d18b0bb137"
+      "sha256": "51cf5e1beb06ac2a7936f020220322114df4096b32aa48eb43f38dd4496e68e1"
     },
     {
       "byte_preserved": false,
@@ -72,9 +72,9 @@
       "sha256": "e6a7a513faae67b53de5afa1be251dbc8e207c5cfd9eac1d1793d712e6dcfbf6"
     },
     {
-      "bytes": 4043,
+      "bytes": 4049,
       "path": "docs/README.md",
-      "sha256": "9eb1bddcd62377cfbf0e9fd5222309202465c180c80dc848af53fa04c24c8f41"
+      "sha256": "59e0476a0bef5053795608632f2c5058ba2775bc4f522d8827b5a836a6eae1ca"
     },
     {
       "bytes": 1828,
@@ -97,9 +97,9 @@
       "sha256": "6521753c10f4e7d328da9bf97b8d6584b5ad18dbd2a3d0fbac59a01f497c77bc"
     },
     {
-      "bytes": 14716,
+      "bytes": 14837,
       "path": "docs/architecture/architecture.md",
-      "sha256": "2662775fdc18bb7b03d7b3125f75669bf79f93a1bee93f6298172f4dfc7b377d"
+      "sha256": "f15c0ad8646e0bdf1302df836d7a4ef77c6d610c559e81e97ef688990f6ade91"
     },
     {
       "bytes": 7701,
@@ -147,9 +147,9 @@
       "sha256": "e95b0b827854242a0583fd693ddd8a07865f229187b1fc34d46da47cd814a297"
     },
     {
-      "bytes": 8441,
+      "bytes": 8690,
       "path": "docs/icd/icd-python-api.md",
-      "sha256": "933435c6a3fddf55a5cae26e38df2bf57ffd0d1a7f8ae63929ed9016fd26c949"
+      "sha256": "fb68f9f627a339005e608138ea8544c915c3ba15302c5897a4bc8eed55d0f1ea"
     },
     {
       "bytes": 8454,
@@ -177,9 +177,9 @@
       "sha256": "7cc1721303f83968d2839d3d730f306b6bd8d2c9b9cc67c22d1426399e613536"
     },
     {
-      "bytes": 25927,
+      "bytes": 28464,
       "path": "docs/requirements/requirements.md",
-      "sha256": "024f464fae461f4b46706b7df0b979b23047dba855ad8cb8d00ffe38c2238005"
+      "sha256": "ec1f9d2933007ac211a0cdbe1f8c03bddbf0ba0607d05a0a95ad570d23327557"
     },
     {
       "bytes": 511,
@@ -197,9 +197,14 @@
       "sha256": "3ec68da791ed8a8863d31cb45c0276118517c52eec926c4c5818fa9ec1b4d50d"
     },
     {
-      "bytes": 22422,
+      "bytes": 23190,
       "path": "docs/verification/verification-matrix.md",
-      "sha256": "1436b2f9036a62ba489c21db3a72b5132ed5fd28cea9e32e4285541d1890a748"
+      "sha256": "1690b6f1a91e57a6efc95813e5882fe7b4329de5a173cdad009ae93eb5b2ec97"
+    },
+    {
+      "bytes": 1105,
+      "path": "examples/correlated-quadratic.json",
+      "sha256": "e42ccfde4da76358ca2f898ce8c8e4a94df263ff2cbbf420b3690229901885cf"
     },
     {
       "byte_preserved": true,
@@ -246,9 +251,14 @@
       "sha256": "aa1d6e86ff92e27a8eb79bf21fcdb919d4876f7317954411dcba8d664ba97d60"
     },
     {
-      "bytes": 9270,
+      "bytes": 54,
+      "path": "fm_correlated/__main__.py",
+      "sha256": "3bf79ef45a8e3917766ec92034759b9fa18e921d57d4b762233000278ddac45f"
+    },
+    {
+      "bytes": 13633,
       "path": "fm_correlated/quadratic.py",
-      "sha256": "7f2e8aa2b4ae8a2351f757dbfc7f977ba39f33a901db050fe1a5ac04d79e4187"
+      "sha256": "9b4d52fe4ef9fb07b7cca27d9432ac49f18f260bf840eab5a61765b8742f80b6"
     },
     {
       "bytes": 272,
@@ -365,9 +375,9 @@
       "sha256": "d1d3c90ec294de2987cc658b0a7078e83e9c367b2037613361c4a0134f63004d"
     },
     {
-      "bytes": 4515,
+      "bytes": 7618,
       "path": "tests/test_correlated.py",
-      "sha256": "273d6ca4b367d52a98b503955815d8d4b4ce3c1e0f3f84228d49f8d548019ef0"
+      "sha256": "0b7f64faea49c077a1b9c7767107168ab06ab8274c2c4ff4a4527796f61a4acf"
     },
     {
       "bytes": 6399,

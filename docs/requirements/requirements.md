@@ -21,7 +21,7 @@ This document states what Foundation Math does, as inspected in the code at the 
 
 ### 1.2 Scope
 
-In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), correlated quadratic model admission and probes (`fm_correlated`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
+In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), correlated quadratic certificates (`fm_correlated`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
 
 Out of scope: any stdio JSON-RPC bridge or Cstack adapter (none exists in this repository), installation as a wheel, physical or engineering validation, and scientific acceptance of any claim.
 
@@ -29,7 +29,7 @@ Trust assumptions: one trusted local operator runs the code on files they chose.
 
 ### 1.3 System overview
 
-Foundation Math is a Python 3.10+ standard-library source tree. It exposes two command-line programs and seven Python packages. The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
+Foundation Math is a Python 3.10+ standard-library source tree. It exposes three command-line programs and seven Python packages. The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
 
 ## 2. Requirement record format
 
@@ -271,7 +271,7 @@ The enclosure shall report `bounded` with forward error R/β only when the unifo
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.8 Correlated quadratic admission and probes
+### 3.8 Correlated quadratic certificates
 
 ### REQ-MATH-080 — JSON and rational decoding
 
@@ -279,7 +279,7 @@ The enclosure shall report `bounded` with forward error R/β only when the unifo
 
 - Rationale: Keep decoding bounded and avoid approximate scalar inputs.
 - Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
-- Allocated to: SDD §4 Correlated quadratic probes
+- Allocated to: SDD §4 Correlated quadratic certificates
 - Verification: T — see verification matrix
 - Status: Baselined
 
@@ -289,7 +289,7 @@ Correlated quadratic arithmetic shall raise `Limit` when the counted rational-op
 
 - Rationale: Reject arithmetic outside the resource boundary.
 - Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
-- Allocated to: SDD §4 Correlated quadratic probes
+- Allocated to: SDD §4 Correlated quadratic certificates
 - Verification: T — see verification matrix
 - Status: Baselined
 
@@ -299,47 +299,87 @@ Correlated quadratic definiteness checks shall distinguish positive semidefinite
 
 - Rationale: Metric admission requires strict positive definiteness.
 - Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
-- Allocated to: SDD §4 Correlated quadratic probes
+- Allocated to: SDD §4 Correlated quadratic certificates
 - Verification: T — see verification matrix
 - Status: Baselined
 
 ### REQ-MATH-083 — Model and realized-pair admission
 
-`fm_correlated.verify` shall reject malformed model, point and probe shapes or fields, a non-positive-definite metric, an unsupported scope, an empty scenario list, an exceeded probe count, an invalid scenario index, an out-of-ball preimage or a pair inconsistent with its common latent preimage.
+`fm_correlated.verify` shall reject unknown root fields outside `schema`, `model`, `budget`, `point`, `upper`, `lower`, `probes` and `offset_nonnegative`, malformed model or witness shapes, a non-positive-definite metric, unsupported scope, invalid realized-pair indices or preimages, invalid upper or lower bounds, failed lower stationarity or simplex identities, and offset-nonnegativity witnesses with positive bounds.
 
 - Rationale: Admit only structured models and represented offset/center pairs.
 - Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
-- Allocated to: SDD §4 Correlated quadratic probes
+- Allocated to: SDD §4 Correlated quadratic certificates
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### REQ-MATH-084 — Supplied-point row feasibility
+### REQ-MATH-084 — Row-constrained lower witness
 
-`fm_correlated.verify` shall reject a supplied point that fails B w <= d before issuing a row-feasibility receipt.
+`fm_correlated.verify` shall check supplied-point feasibility B w <= d and certify a global lower bound D only from common-preimage pairs with nonnegative weights summing to one, nonnegative row multipliers mu, M v = M cbar - B^T mu / 2 and D <= sum_i weight_i (a_i + c_i^T M c_i) - mu^T d - v^T M v.
 
-- Rationale: The supplied point establishes nonemptiness of the row-feasible set.
+- Rationale: The feasible point establishes nonemptiness; the row-dual identity supports the represented global lower bound.
 - Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
-- Allocated to: SDD §4 Correlated quadratic probes
+- Allocated to: SDD §4 Correlated quadratic certificates
 - Verification: T — see verification matrix
 - Status: Baselined
 
 ### REQ-MATH-085 — Dimensional and metric evaluation
 
-`fm_correlated.verify` shall evaluate realized-pair costs exactly for empty decision and latent spaces, differing scenario latent dimensions and nonidentity metrics.
+`fm_correlated.verify` shall evaluate upper witnesses exactly for empty decision and latent spaces, differing scenario latent dimensions and nonidentity metrics.
 
 - Rationale: Preserve the model meaning in the supported dimensional cases.
 - Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
-- Allocated to: SDD §4 Correlated quadratic probes
+- Allocated to: SDD §4 Correlated quadratic certificates
 - Verification: T — see verification matrix
 - Status: Baselined
 
 ### REQ-MATH-086 — Scoped probe receipt
 
-`fm_correlated.verify` shall return only the receipt fields `schema`, `status`, `scope`, `budget`, `row_feasible_point`, `probes`, `operations` and `premises`, with each probe reporting its exact cost, a strict cost-greater-than-budget supplied-point defeat, the declared scope and `global_exclusion` set to false.
+`fm_correlated.verify` shall report each probe with its exactly reconstructed common-preimage cost, strict cost-greater-than-budget supplied-point defeat, declared scope and `global_exclusion` set to false.
 
 - Rationale: A represented-pair probe does not establish global exclusion or a bound.
 - Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
-- Allocated to: SDD §4 Correlated quadratic probes
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-087 — Supplied upper witnesses
+
+`fm_correlated.verify` shall certify each supplied scenario upper bound only when lambda >= 0, K = lambda I - H is positive semidefinite, K y = g and bound >= q + lambda + g^T y, returning the maximum scenario bound.
+
+- Rationale: The range identity permits singular K without assuming a pseudoinverse.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-088 — Bound and offset receipt
+
+`fm_correlated.verify` shall report matching upper and lower bounds with zero `represented_bound_gap`, admit the point when the upper bound is at most the budget, and set `offsets_proved_nonnegative` when every supplied negated-offset upper witness verifies with bound at most zero.
+
+- Rationale: Matching bounds and optional offset witnesses give conditional conclusions about the represented model.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-089 — Scoped global exclusion
+
+`fm_correlated.verify` shall set `target_globally_excluded` for a lower bound strictly above budget only under `exact_joint_image`, and set only `outer_image_globally_excluded` for that bound under `outer_joint_image`.
+
+- Rationale: Outer-image exclusion does not establish target exclusion.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-090 — Correlated command line
+
+`python3 -S -B -m fm_correlated INPUT.json` shall read a file or stdin when the argument is `-`, emit a receipt and exit 0 on success, or emit `rejected_or_unresolved` JSON and exit 2 on recognized input failures.
+
+- Rationale: The command line exposes the bounded verifier to local callers.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
 - Verification: T — see verification matrix
 - Status: Baselined
 
@@ -407,7 +447,7 @@ Mapper file handling shall reject artifact root escapes and refuse existing, dup
 - Verification: T — see verification matrix
 - Status: Baselined
 
-The Python library interfaces of REQ-MATH-013 to REQ-MATH-025 and REQ-MATH-080 to REQ-MATH-086 are defined in the [Python API ICD](../icd/icd-python-api.md).
+The Python library interfaces of REQ-MATH-013 to REQ-MATH-025 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
 
 ## 5. Non-functional requirements
 

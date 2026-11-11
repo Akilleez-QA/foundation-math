@@ -7,8 +7,9 @@ The format is based on Keep a Changelog.
 
 ### Added
 
-- `fm_correlated`: bounded JSON decoding, exact arithmetic, correlated quadratic
-  model admission, supplied-point row feasibility and realized-pair probes (PR #36).
+- `fm_correlated`: bounded exact correlated quadratic model admission, row feasibility,
+  upper, lower and offset witnesses, scoped exclusion, non-global probes, CLI and
+  synthetic example (PRs #36 and #37).
 
 - `fm_certificates`: exact affine implication, infeasibility and composition
   certificates (#21).

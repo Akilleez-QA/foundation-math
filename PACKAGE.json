@@ -13,7 +13,8 @@
     "exact_scalar_one_step_certificates",
     "exact_affine_implication_certificates",
     "exact_affine_query_witnesses",
-    "exact_numerical_residual_enclosures"
+    "exact_numerical_residual_enclosures",
+    "supplied_correlated_quadratic_certificates"
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Refrigeration AI, Inc.",

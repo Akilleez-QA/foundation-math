@@ -17,7 +17,7 @@
 
 This document explains how Foundation Math meets its [requirements](../requirements/requirements.md), for a reader about to change the code. Foundation Math is a Python 3.10+ source tree that uses only the standard library and a selected local vendor subset. It implements finite exact checks, supplied-evidence mapping, and four standalone exact certificate APIs.
 
-The boundary is the repository. There is no bridge package, stdio JSON-RPC server or Cstack adapter here. Callers use two command-line programs or import the Python packages. Nothing reads the network, starts a solver or writes outside paths the caller names.
+The boundary is the repository. There is no bridge package, stdio JSON-RPC server or Cstack adapter here. Callers use three command-line programs or import the Python packages. Nothing reads the network, starts a solver or writes outside paths the caller names.
 
 ## 2. Design decisions and trade-offs
 
@@ -54,7 +54,7 @@ flowchart LR
   cert[fm_certificates.affine]
   ident[fm_identifiability]
   encl[fm_enclosures.numerical]
-  corr[fm_correlated.quadratic]
+  cmain[fm_correlated __main__ CLI] --> corr[fm_correlated.quadratic]
   pkg[tools/package_source] -.manifest.-> manifest[(SOURCE-MANIFEST.json)]
   trace[tools/check_trace] -.reads.-> docs[(docs/)]
 ```
@@ -104,7 +104,7 @@ Paths come from `git ls-files`. "Infrastructure" marks plumbing that implements 
 | Affine certificates | `fm_certificates/affine.py` | System admission, digest, implication, infeasibility and composition checks | `AffineSystem` + multipliers → certificate or bool | REQ-MATH-014, REQ-MATH-015, REQ-MATH-016, REQ-MATH-017, REQ-MATH-018 |
 | Affine-query witnesses | `fm_identifiability/__init__.py` | Model admission and digest; two-point and constancy witness checks | `Model` + witness → result record | REQ-MATH-019, REQ-MATH-020, REQ-MATH-021 |
 | Interval enclosures | `fm_enclosures/numerical.py` | Residual enclosure, dominance margin, forward bound, recompute verification | interval matrix, candidate, rhs → `LinearResidualEnclosure` | REQ-MATH-022, REQ-MATH-023, REQ-MATH-024, REQ-MATH-025 |
-| Correlated quadratic probes | `fm_correlated/quadratic.py` | Model admission, supplied-point row feasibility and realized-pair checks with bounded exact arithmetic | JSON text or bytes → conditional receipt dict without upper or lower bounds | REQ-MATH-080, REQ-MATH-081, REQ-MATH-082, REQ-MATH-083, REQ-MATH-084, REQ-MATH-085, REQ-MATH-086 |
+| Correlated quadratic certificates | `fm_correlated/quadratic.py`, `fm_correlated/__main__.py` | Model admission, row feasibility, upper, lower and offset witnesses, scoped exclusion and non-global probes | JSON text or bytes, file or stdin → conditional receipt dict | REQ-MATH-080, REQ-MATH-081, REQ-MATH-082, REQ-MATH-083, REQ-MATH-084, REQ-MATH-085, REQ-MATH-086, REQ-MATH-087, REQ-MATH-088, REQ-MATH-089, REQ-MATH-090 |
 | Packaging | `tools/package_source.py`, `SOURCE-MANIFEST.json`, `PACKAGE.json` | Exact file-set and hash check; deterministic stored ZIP outside the tree | source tree → ZIP | REQ-MATH-012, REQ-MATH-028 |
 | Documentation tools | `tools/check_trace.py`, `tests/test_trace.py` | Requirement, design, test, data-dictionary and link consistency | docs + tests → problem list | REQ-MATH-027 |
 | Manifest refresh | `tools/refresh_manifest.py` | Rehash manifest rows from `git ls-files`; refuses to change a byte-preserved row | committed files → manifest | infrastructure |
