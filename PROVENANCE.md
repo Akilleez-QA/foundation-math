@@ -67,6 +67,34 @@ The addition contains generic rational mathematics and synthetic tests.
 Existing runtime modules and their source-binding scheme remain unchanged.
 The accompanying contract states the finite checks and their limitations.
 
+## Quadratic minimax problem admission (2026-11-11)
+
+Built on public main commit `84fadd3`. This first stage contains generic rational mathematics, problem admission and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
+## Quadratic minimax witness verification (2026-11-11)
+
+Built on the problem-admission stage of the same package. This second stage adds exact point, dual and Farkas witness verification and the command line. It contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
+## Correlated quadratic model admission (2026-11-11)
+
+Built on public main commit `84fadd3`. This first stage contains generic exact rational mathematics, model admission, supplied-pair probes and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
+## Correlated quadratic witness verification (2026-11-11)
+
+Built on the model-admission stage of the same package. This second stage adds exact upper-bound, offset-nonnegativity and global lower-bound witness verification, the command line and a synthetic example. It contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
+## Exact rational interval histories (2026-11-11)
+
+Built on public main commit `84fadd3`. The addition contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
+## Exact continuous path bounds (2026-11-11)
+
+Built on public main commit `84fadd3`. The addition contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
+## Exact linear optimization certificates (2026-11-11)
+
+Built on public main commit `84fadd3`. The addition contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
 ## Exact fixed-prefix continuation (2026-11-11)
 
 Built on public main commit `84fadd3`. The addition contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.

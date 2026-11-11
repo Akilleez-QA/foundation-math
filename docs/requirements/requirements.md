@@ -21,7 +21,7 @@ This document states what Foundation Math does, as inspected in the code at the 
 
 ### 1.2 Scope
 
-In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), fixed-prefix continuation (`fm_prefix`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
+In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), continuous path bounds (`fm_paths`), linear optimization certificates (`fm_optimization`), fixed-prefix continuation (`fm_prefix`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
 
 Out of scope: any stdio JSON-RPC bridge or Cstack adapter (none exists in this repository), installation as a wheel, physical or engineering validation, and scientific acceptance of any claim.
 
@@ -29,7 +29,7 @@ Trust assumptions: one trusted local operator runs the code on files they chose.
 
 ### 1.3 System overview
 
-Foundation Math is a Python 3.10+ standard-library source tree. It exposes two command-line programs and seven Python packages. The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
+Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and twelve Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`, `fm_prefix`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
 
 ## 2. Requirement record format
 
@@ -271,7 +271,355 @@ The enclosure shall report `bounded` with forward error R/β only when the unifo
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.8 Fixed-prefix continuation
+### 3.8 Correlated quadratic certificates
+
+### REQ-MATH-080 — JSON and rational decoding
+
+`fm_correlated.verify` shall accept JSON text or UTF-8 bytes with exact integer or rational-string scalars and reject duplicate keys, noninteger JSON numbers, invalid rational syntax, booleans, oversized input rationals and exceeded decoding limits.
+
+- Rationale: Keep decoding bounded and avoid approximate scalar inputs.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-081 — Exact arithmetic limits
+
+Correlated quadratic arithmetic shall raise `Limit` when the counted rational-operation cap or intermediate numerator/denominator bit cap is exceeded.
+
+- Rationale: Reject arithmetic outside the resource boundary.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-082 — Matrix definiteness
+
+Correlated quadratic definiteness checks shall distinguish positive semidefinite matrices from positive-definite matrices using exact rational pivots, including zero pivots.
+
+- Rationale: Metric admission requires strict positive definiteness.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-083 — Model and realized-pair admission
+
+`fm_correlated.verify` shall reject unknown root fields outside `schema`, `model`, `budget`, `point`, `upper`, `lower`, `probes` and `offset_nonnegative`, malformed model or witness shapes, a non-positive-definite metric, unsupported scope, invalid realized-pair indices or preimages, invalid upper or lower bounds, failed lower stationarity or simplex identities, and offset-nonnegativity witnesses with positive bounds.
+
+- Rationale: Admit only structured models and represented offset/center pairs.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-084 — Row-constrained lower witness
+
+`fm_correlated.verify` shall check supplied-point feasibility B w <= d and certify a global lower bound D only from common-preimage pairs with nonnegative weights summing to one, nonnegative row multipliers mu, M v = M cbar - B^T mu / 2 and D <= sum_i weight_i (a_i + c_i^T M c_i) - mu^T d - v^T M v.
+
+- Rationale: The feasible point establishes nonemptiness; the row-dual identity supports the represented global lower bound.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-085 — Dimensional and metric evaluation
+
+`fm_correlated.verify` shall evaluate upper witnesses exactly for empty decision and latent spaces, differing scenario latent dimensions and nonidentity metrics.
+
+- Rationale: Preserve the model meaning in the supported dimensional cases.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-086 — Scoped probe receipt
+
+`fm_correlated.verify` shall report each probe with its exactly reconstructed common-preimage cost, strict cost-greater-than-budget supplied-point defeat, declared scope and `global_exclusion` set to false.
+
+- Rationale: A represented-pair probe does not establish global exclusion or a bound.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-087 — Supplied upper witnesses
+
+`fm_correlated.verify` shall certify each supplied scenario upper bound only when lambda >= 0, K = lambda I - H is positive semidefinite, K y = g and bound >= q + lambda + g^T y, returning the maximum scenario bound.
+
+- Rationale: The range identity permits singular K without assuming a pseudoinverse.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-088 — Bound and offset receipt
+
+`fm_correlated.verify` shall report matching upper and lower bounds with zero `represented_bound_gap`, admit the point when the upper bound is at most the budget, and set `offsets_proved_nonnegative` when every supplied negated-offset upper witness verifies with bound at most zero.
+
+- Rationale: Matching bounds and optional offset witnesses give conditional conclusions about the represented model.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-089 — Scoped global exclusion
+
+`fm_correlated.verify` shall set `target_globally_excluded` for a lower bound strictly above budget only under `exact_joint_image`, and set only `outer_image_globally_excluded` for that bound under `outer_joint_image`.
+
+- Rationale: Outer-image exclusion does not establish target exclusion.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-090 — Correlated command line
+
+`python3 -S -B -m fm_correlated INPUT.json` shall read a file or stdin when the argument is `-`, emit a receipt and exit 0 on success, or emit `rejected_or_unresolved` JSON and exit 2 on recognized input failures.
+
+- Rationale: The command line exposes the bounded verifier to local callers.
+- Derivation: `fm_correlated/quadratic.py`, `docs/CORRELATED-QUADRATIC.md`
+- Allocated to: SDD §4 Correlated quadratic certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.9 Exact interval histories
+
+### REQ-MATH-030 — Exact interval operations
+
+`interval` and `intersection` shall return exact `Fraction` endpoints, retaining singleton intersections and returning `None` for empty intersections.
+
+- Rationale: Distinguish a singleton feasible set from an empty intersection.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-031 — Interval rational admission
+
+Interval endpoints shall reject Boolean, floating-point and malformed rational inputs, rational text longer than 160 characters, and normalized numerators or denominators exceeding 256 bits with `ValueError`.
+
+- Rationale: Keep admitted quantities exact and bounded.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-032 — Interval container admission
+
+Interval operations and history analysis shall reject malformed containers, reversed endpoints, empty intersection families, and families exceeding 128 intervals or observations with `ValueError`.
+
+- Rationale: Restrict inputs to the finite interval and observation shapes.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-033 — Pointwise history classification
+
+`analyze_history` shall classify cells by the exact intersection of active closed value intervals, distinguish missing coverage from contradiction, report coverage as `none`, `partial` or `full`, and report overall consistency as `contradictory` if any cell contradicts, otherwise `undetermined` if any cell is missing, otherwise `consistent`.
+
+- Rationale: Pointwise compatibility does not establish temporal coupling or external validity.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-034 — Horizon restriction
+
+`analyze_history` shall restrict coverage and cell construction to the supplied horizon, clipping overlapping time intervals and leaving uncovered gaps missing.
+
+- Rationale: Constraints outside the horizon do not establish coverage inside it.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-035 — Exact history partition
+
+`analyze_history` shall emit ordered point cells at distinct clipped endpoints and open cells between them with exact midpoint witnesses, including histories with 128 observations.
+
+- Rationale: Separate closed endpoints from open interiors without approximate sampling.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-036 — History receipt input binding
+
+`verify_history` shall accept JSON round trips of canonical receipts only against the supplied horizon and ordered observations, returning `False` for changed or invalid inputs.
+
+- Rationale: Recomputation binds the result to caller-supplied inputs without source authentication.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-037 — History receipt verification
+
+`verify_history` shall reject receipts with altered fields, missing or extra fields, reordered or missing cells, noncanonical rationals, or substituted field types.
+
+- Rationale: Compare the exact canonical receipt shape and values.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.10 Continuous path bounds
+
+### REQ-MATH-040 — Path input admission
+
+`certify_path_bounds` shall accept exact `int`, `Fraction` and rational-string inputs within the contract bounds and raise `ValueError` for malformed problem inputs or nonrational text.
+
+- Rationale: Keep path premises exact and validate their shape and bounds.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-041 — Sharp path envelopes
+
+Path certification shall return exact piecewise-affine lower and upper envelopes and sharp integral extrema under the supplied interval constraints and directed rate premises, including uncovered times, zero rates and a zero horizon.
+
+- Rationale: Rate premises propagate bounds across gaps without adding observations.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-042 — Path contradiction witnesses
+
+Infeasible path certification shall return a rational time and indexed conflicting propagated bounds for contradictions at closed endpoints or across disjoint singleton constraints.
+
+- Rationale: A strict crossing excludes every path satisfying the supplied premises.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-043 — Integral band attainment
+
+A feasible receipt with an attainable integral band shall include a convex-combination path with an exact target integral inside the band, including coincident integral extrema.
+
+- Rationale: The linear integral functional attains every value between the envelope integrals.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-044 — Integral band exclusion
+
+A feasible receipt for an integral band disjoint from the sharp integral interval shall report `integral_status` as `excluded` while retaining path status `feasible`.
+
+- Rationale: Band exclusion is distinct from infeasibility of the path premises.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-045 — Path construction budget
+
+Path construction shall reject invalid pair budgets with `ValueError` and return `resource_unresolved` when the supplied pair budget is insufficient, with that outcome rejected as a certificate by the verifier.
+
+- Rationale: A construction limit proves neither feasibility nor infeasibility.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-046 — Path receipt verification
+
+`verify_path_bounds` shall check the finite envelope or contradiction proof against the supplied premises, accepting generated exact rationals and raising `ValueError` for altered proof fields, missing envelope crossings or an omitted band for a band receipt.
+
+- Rationale: Finite proof checks prevent unchecked extrema or integral claims from being accepted.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.11 Linear optimization certificates
+
+### REQ-MATH-050 — Program input admission
+
+`LinearProgram` shall admit exact tuple-based problems with nonblank context labels of at most 128 characters, dimensions 1 through 16, at most 128 inequalities and 64 equalities, and coefficients of at most 256 numerator and denominator bits, raising `Unsupported` for invalid types, shapes or limits.
+
+- Rationale: Keep problem inputs exact and bounded.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-051 — Program statement binding
+
+`program_digest` shall normalize equal rational values while binding the context, dimension, ordered constraint rows, objective and offset, with changed statements rejected by certificate verification.
+
+- Rationale: Prevent transfer of a certificate to another problem.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-052 — Dual bound verification
+
+`verify_dual_bound` shall return True only for a bound tied to the expected problem whose nonnegative inequality multipliers and signed equality multipliers reproduce the objective and reported signed upper bound exactly, returning False for malformed or false certificates.
+
+- Rationale: Check the supplied weak-duality identity.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-053 — Attainment verification
+
+`verify_attainment` shall return True only when a verified dual bound is attained by an exact supplied point satisfying all inequalities and equalities.
+
+- Rationale: A dual bound alone does not establish nonemptiness or optimality.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-054 — Candidate correction and residual repair
+
+`repair_dual` shall clamp negative inequality candidates to zero, add supplied signed equality corrections, recompute the residual and construct a verified bound using the signed support of an explicit box when supplied.
+
+- Rationale: Retain signed constants after candidate changes.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-055 — Box intersection binding
+
+Box augmentation shall append upper-coordinate rows followed by lower-coordinate rows and bind the repaired certificate to the explicit intersection with that box.
+
+- Rationale: Box containment in the original problem is not established by repair.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-056 — Box-free residual rejection
+
+`repair_dual` shall raise `InvalidCertificate` for a nonzero residual without an explicit box.
+
+- Rationale: Failure of these candidates is not evidence of objective unboundedness.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-057 — Repair input validation
+
+`repair_dual` shall raise `Unsupported` for malformed candidates, corrections or boxes, witness values exceeding 4,096 numerator or denominator bits, reversed box endpoints or augmentation exceeding 128 inequality rows.
+
+- Rationale: Reject unsupported repair inputs without a mathematical conclusion.
+- Derivation: `fm_optimization/dual.py`, `docs/DUAL-REPAIR.md`
+- Allocated to: SDD §4 Linear optimization certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.12 Fixed-prefix continuation
 
 ### REQ-MATH-060 — Fixed-prefix accounting
 
@@ -373,7 +721,7 @@ The enclosure shall report `bounded` with forward error R/β only when the unifo
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### REQ-MATH-070 — Supported dimension and degree
+### REQ-MATH-091 — Supported dimension and degree
 
 `Continuation` shall support a four-state nilpotent chain with a cubic moment polynomial in exact minimum tail and future calculations.
 
@@ -383,7 +731,7 @@ The enclosure shall report `bounded` with forward error R/β only when the unifo
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### REQ-MATH-071 — Prefix moment memory
+### REQ-MATH-092 — Prefix moment memory
 
 `Continuation` shall retain the moment residual when equal prefix states and spent costs arise from different fixed prefixes, yielding distinct conditional terminal centers.
 
@@ -393,7 +741,7 @@ The enclosure shall report `bounded` with forward error R/β only when the unifo
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### REQ-MATH-072 — Prefix input rejection
+### REQ-MATH-093 — Prefix input rejection
 
 `fm_prefix` shall raise `ValueError` for unsupported scalar types or input bit sizes, malformed dimensions, nonnilpotent dynamics, invalid norms, time or budget bounds, incomplete or overlapping prefixes, excessive polynomial degree or piece count, and malformed target or row queries.
 
@@ -403,7 +751,7 @@ The enclosure shall report `bounded` with forward error R/β only when the unifo
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.9 Source tree, packaging and documentation integrity
+### 3.13 Source tree, packaging and documentation integrity
 
 ### REQ-MATH-012 — Deterministic source packaging
 
@@ -445,6 +793,108 @@ The research layer, mapper and selected vendor modules shall load from this sour
 - Verification: T — see verification matrix
 - Status: Baselined
 
+### 3.14 Quadratic minimax certificates
+
+### REQ-MATH-070 — Problem admission
+
+`certify(problem, witness=None)` shall return `invalid_input` for invalid exact scalar forms, non-SPD or malformed metrics, empty scenario lists, duplicate scenario IDs, unsupported problem keys and mismatched row dimensions.
+
+- Rationale: Admit only the declared exact quadratic problem class.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-071 — Exact arithmetic limits
+
+Exact arithmetic limits shall produce `unresolved` for oversized input integers, rational text and scenario counts or an exhausted operation budget, and raise the internal limit exception for oversized intermediate rationals.
+
+- Rationale: Keep resource exhaustion distinct from mathematical impossibility.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-072 — Equality obstructions
+
+`certify(problem, witness=None)` shall return `infeasible` for disagreeing common equality targets or a target outside the equality matrix range, with a left-null multiplier having nonzero target pairing for the range obstruction.
+
+- Rationale: Identify exact obstructions to the declared equalities.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-073 — Empty dimension
+
+`certify(problem, witness=None)` shall support exact thresholds and strict Farkas row-emptiness certificates for the unique empty vector in zero-dimensional problems.
+
+- Rationale: Retain the unique empty-vector case within witness verification.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-074 — Common row reduction
+
+`certify(problem, witness=None)` shall compute each tightened common row bound exactly as the supplied bound minus the maximum scenario row offset.
+
+- Rationale: Reduce the shared finite-scenario inequalities exactly.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-075 — Strict dual level exclusion
+
+`certify(problem, witness=None)` shall exclude a queried level with a valid dual bound only when the bound is strictly greater than the level, leaving equality unresolved without a point and row feasibility `not_established` for a dual alone.
+
+- Rationale: A lower bound equal to the queried level does not establish feasibility.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-076 — Point witness isolation
+
+`certify(problem, witness=None)` shall leave failed or malformed point candidates unresolved and retain feasibility established by a valid point when an optional dual has invalid scenario weights.
+
+- Rationale: A failed candidate is not an exclusion, and independent valid evidence remains usable.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-077 — Exact threshold verification
+
+`certify(problem, witness=None)` shall emit `exact_threshold` only for a row/equality-feasible point and valid dual satisfying exact stationarity, scenario and row complementarity, and equality of primal cost and dual bound.
+
+- Rationale: Matching feasible primal and dual values certify the optimum without a constraint qualification.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-078 — Strict Farkas witness
+
+`certify(problem, witness=None)` shall report `infeasible` with row feasibility `proved_empty` for nonnegative row multipliers and unrestricted equality multipliers whose combined normal is zero and whose combined bound is strictly negative.
+
+- Rationale: A zero combined bound is not a contradiction.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-079 — Minimax JSON command line
+
+`python -m fm_minimax` shall read a JSON request containing `problem` and optional `witness`, emit schema `fm-quadratic-minimax/1` with rational values as strings, reject duplicate keys and malformed JSON as `invalid_input`, and return `unresolved` for input exceeding 131,072 bytes.
+
+- Rationale: Expose the local checker through a bounded JSON input interface.
+- Derivation: `fm_minimax/core.py`, `docs/QUADRATIC-MINIMAX.md`
+- Allocated to: SDD §4 Quadratic minimax certificates
+- Verification: T — see verification matrix
+- Status: Baselined
+
 ## 4. Interface requirements
 
 ### REQ-MATH-008 — Research CLI
@@ -467,7 +917,7 @@ Mapper file handling shall reject artifact root escapes and refuse existing, dup
 - Verification: T — see verification matrix
 - Status: Baselined
 
-The Python library interfaces of REQ-MATH-013 to REQ-MATH-072 are defined in the [Python API ICD](../icd/icd-python-api.md).
+The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-040 to REQ-MATH-046, REQ-MATH-050 to REQ-MATH-057, REQ-MATH-060 to REQ-MATH-069, REQ-MATH-070 to REQ-MATH-079, REQ-MATH-080 to REQ-MATH-093 are defined in the [Python API ICD](../icd/icd-python-api.md).
 
 ## 5. Non-functional requirements
 
