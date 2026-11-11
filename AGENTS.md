@@ -13,10 +13,11 @@ is needed for the documented workflow.
 - `fm_research/` checks structured claims with exact kernels and dependency statuses.
 - `fm_mapper/` maps supplied evidence judgments and renders qualified draft reports.
 - `fm_control/` provides exact, model-conditional scalar one-step certificates.
-- `fm_certificates/`, `fm_identifiability/`, `fm_enclosures/`, `fm_minimax/` and
-  `fm_correlated/` provide exact affine certificates, affine-query witnesses,
-  interval residual enclosures, quadratic minimax problem admission and
-  witnesses, and correlated quadratic certificates.
+- `fm_certificates/`, `fm_identifiability/`, `fm_enclosures/`, `fm_minimax/`,
+  `fm_correlated/` and `fm_intervals/` provide exact affine certificates,
+  affine-query witnesses, interval residual enclosures, quadratic minimax
+  problem admission and witnesses, correlated quadratic certificates and
+  interval histories.
 - `vendor/foundation-math-v014/` contains only the selected historical source subset.
 - `tests/` uses synthetic fixtures and Python's `unittest` runner.
 

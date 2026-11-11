@@ -11,6 +11,8 @@ The format is based on Keep a Changelog.
 - `fm_correlated`: bounded exact correlated quadratic model admission, row feasibility,
   upper, lower and offset witnesses, scoped exclusion, non-global probes, CLI and
   synthetic example (PRs #36 and #37).
+- `fm_intervals`: exact rational interval histories with pointwise consistency,
+  coverage and receipt verification (PR #22).
 
 - `fm_certificates`: exact affine implication, infeasibility and composition
   certificates (#21).

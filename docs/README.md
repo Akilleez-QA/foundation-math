@@ -18,6 +18,8 @@ example.
 
 These keep their uppercase names for inbound links.
 
+- [Exact rational interval histories](INTERVAL-HISTORY.md)
+
 - [Affine certificates](AFFINE-CERTIFICATES.md)
 - [Exact affine-query witnesses](QUERY-IDENTIFIABILITY.md)
 - [Exact numerical residual and error enclosures](NUMERICAL-ENCLOSURES.md)

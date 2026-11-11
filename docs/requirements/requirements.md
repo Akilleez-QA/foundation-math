@@ -21,7 +21,7 @@ This document states what Foundation Math does, as inspected in the code at the 
 
 ### 1.2 Scope
 
-In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
+In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
 
 Out of scope: any stdio JSON-RPC bridge or Cstack adapter (none exists in this repository), installation as a wheel, physical or engineering validation, and scientific acceptance of any claim.
 
@@ -29,7 +29,7 @@ Trust assumptions: one trusted local operator runs the code on files they chose.
 
 ### 1.3 System overview
 
-Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and eight Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
+Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and nine Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
 
 ## 2. Requirement record format
 
@@ -383,7 +383,89 @@ Correlated quadratic definiteness checks shall distinguish positive semidefinite
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.9 Source tree, packaging and documentation integrity
+### 3.9 Exact interval histories
+
+### REQ-MATH-030 — Exact interval operations
+
+`interval` and `intersection` shall return exact `Fraction` endpoints, retaining singleton intersections and returning `None` for empty intersections.
+
+- Rationale: Distinguish a singleton feasible set from an empty intersection.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-031 — Interval rational admission
+
+Interval endpoints shall reject Boolean, floating-point and malformed rational inputs, rational text longer than 160 characters, and normalized numerators or denominators exceeding 256 bits with `ValueError`.
+
+- Rationale: Keep admitted quantities exact and bounded.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-032 — Interval container admission
+
+Interval operations and history analysis shall reject malformed containers, reversed endpoints, empty intersection families, and families exceeding 128 intervals or observations with `ValueError`.
+
+- Rationale: Restrict inputs to the finite interval and observation shapes.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-033 — Pointwise history classification
+
+`analyze_history` shall classify cells by the exact intersection of active closed value intervals, distinguish missing coverage from contradiction, report coverage as `none`, `partial` or `full`, and report overall consistency as `contradictory` if any cell contradicts, otherwise `undetermined` if any cell is missing, otherwise `consistent`.
+
+- Rationale: Pointwise compatibility does not establish temporal coupling or external validity.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-034 — Horizon restriction
+
+`analyze_history` shall restrict coverage and cell construction to the supplied horizon, clipping overlapping time intervals and leaving uncovered gaps missing.
+
+- Rationale: Constraints outside the horizon do not establish coverage inside it.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-035 — Exact history partition
+
+`analyze_history` shall emit ordered point cells at distinct clipped endpoints and open cells between them with exact midpoint witnesses, including histories with 128 observations.
+
+- Rationale: Separate closed endpoints from open interiors without approximate sampling.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-036 — History receipt input binding
+
+`verify_history` shall accept JSON round trips of canonical receipts only against the supplied horizon and ordered observations, returning `False` for changed or invalid inputs.
+
+- Rationale: Recomputation binds the result to caller-supplied inputs without source authentication.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-037 — History receipt verification
+
+`verify_history` shall reject receipts with altered fields, missing or extra fields, reordered or missing cells, noncanonical rationals, or substituted field types.
+
+- Rationale: Compare the exact canonical receipt shape and values.
+- Derivation: `fm_intervals/history.py`, `docs/INTERVAL-HISTORY.md`
+- Allocated to: SDD §4 Interval histories
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.10 Source tree, packaging and documentation integrity
 
 ### REQ-MATH-012 — Deterministic source packaging
 
@@ -425,7 +507,7 @@ The research layer, mapper and selected vendor modules shall load from this sour
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.10 Quadratic minimax certificates
+### 3.11 Quadratic minimax certificates
 
 ### REQ-MATH-070 — Problem admission
 
@@ -549,7 +631,7 @@ Mapper file handling shall reject artifact root escapes and refuse existing, dup
 - Verification: T — see verification matrix
 - Status: Baselined
 
-The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
+The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
 
 ## 5. Non-functional requirements
 

@@ -56,11 +56,12 @@ flowchart LR
   encl[fm_enclosures.numerical]
   minmain[fm_minimax __main__ CLI] --> minimax[fm_minimax.core]
   cmain[fm_correlated __main__ CLI] --> corr[fm_correlated.quadratic]
+  intervals[fm_intervals.history]
   pkg[tools/package_source] -.manifest.-> manifest[(SOURCE-MANIFEST.json)]
   trace[tools/check_trace] -.reads.-> docs[(docs/)]
 ```
 
-The six certificate packages (`fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`) import nothing from the rest of the repository.
+The seven certificate packages (`fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`) import nothing from the rest of the repository.
 
 Runtime (data flow) view of the research CLI:
 
@@ -107,6 +108,7 @@ Paths come from `git ls-files`. "Infrastructure" marks plumbing that implements 
 | Interval enclosures | `fm_enclosures/numerical.py` | Residual enclosure, dominance margin, forward bound, recompute verification | interval matrix, candidate, rhs → `LinearResidualEnclosure` | REQ-MATH-022, REQ-MATH-023, REQ-MATH-024, REQ-MATH-025 |
 | Quadratic minimax certificates | `fm_minimax/core.py`, `fm_minimax/__main__.py` | Exact admission, equality obstructions, common row reduction, point/dual/Farkas checks, KKT thresholds and JSON CLI | problem dict + optional witness → result dict; stdin JSON → stdout JSON | REQ-MATH-070, REQ-MATH-071, REQ-MATH-072, REQ-MATH-073, REQ-MATH-074, REQ-MATH-075, REQ-MATH-076, REQ-MATH-077, REQ-MATH-078, REQ-MATH-079 |
 | Correlated quadratic certificates | `fm_correlated/quadratic.py`, `fm_correlated/__main__.py` | Model admission, row feasibility, upper, lower and offset witnesses, scoped exclusion and non-global probes | JSON text or bytes, file or stdin → conditional receipt dict | REQ-MATH-080, REQ-MATH-081, REQ-MATH-082, REQ-MATH-083, REQ-MATH-084, REQ-MATH-085, REQ-MATH-086, REQ-MATH-087, REQ-MATH-088, REQ-MATH-089, REQ-MATH-090 |
+| Interval histories | `fm_intervals/history.py` | Exact interval intersections, horizon partition, coverage, consistency and receipt recomputation | horizon, observations → dict receipt; receipt → bool | REQ-MATH-030, REQ-MATH-031, REQ-MATH-032, REQ-MATH-033, REQ-MATH-034, REQ-MATH-035, REQ-MATH-036, REQ-MATH-037 |
 | Packaging | `tools/package_source.py`, `SOURCE-MANIFEST.json`, `PACKAGE.json` | Exact file-set and hash check; deterministic stored ZIP outside the tree | source tree → ZIP | REQ-MATH-012, REQ-MATH-028 |
 | Documentation tools | `tools/check_trace.py`, `tests/test_trace.py` | Requirement, design, test, data-dictionary and link consistency | docs + tests → problem list | REQ-MATH-027 |
 | Manifest refresh | `tools/refresh_manifest.py` | Rehash manifest rows from `git ls-files`; refuses to change a byte-preserved row | committed files → manifest | infrastructure |

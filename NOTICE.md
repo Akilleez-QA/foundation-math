@@ -11,7 +11,7 @@ The software is supplied without warranty; see LICENSE sections 15 and 16.
 
 Covered first-party paths are `fm_research/`, `fm_mapper/`, `fm_control/`,
 `fm_certificates/`, `fm_identifiability/`, `fm_enclosures/`, `fm_minimax/`,
-`fm_correlated/`, the nine selected
+`fm_correlated/`, `fm_intervals/`, the nine selected
 runtime files under `vendor/foundation-math-v014/`, `tests/`, `examples/`, `tools/`,
 `docs/`, and the first-party root documentation and metadata, as enumerated in
 `SOURCE-MANIFEST.json`. The root manifest itself is included in that scope.
@@ -51,4 +51,7 @@ exact interval algebra, synthetic tests and documentation under GPL-3.0-only.
 It includes no private application implementation or physical property data.
 
 The numerical-enclosures addition supplies generic exact rational mathematics,
+synthetic tests and documentation under the same GPL-3.0-only terms.
+
+The interval-history addition supplies generic exact rational mathematics,
 synthetic tests and documentation under the same GPL-3.0-only terms.
