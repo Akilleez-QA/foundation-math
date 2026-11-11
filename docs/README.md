@@ -19,6 +19,7 @@ example.
 These keep their uppercase names for inbound links.
 
 - [Exact rational interval histories](INTERVAL-HISTORY.md)
+- [Exact continuous path bounds](PATH-BOUNDS.md)
 
 - [Affine certificates](AFFINE-CERTIFICATES.md)
 - [Exact affine-query witnesses](QUERY-IDENTIFIABILITY.md)

@@ -107,6 +107,7 @@ optional: only the standard library loads, and no `.pyc` files are written.
 | `fm_minimax/` | Exact quadratic minimax point, dual and Farkas witnesses, KKT thresholds and JSON CLI | [Quadratic minimax certificates](docs/QUADRATIC-MINIMAX.md) |
 | `fm_correlated/` | Exact correlated quadratic upper, lower and offset witnesses, scoped exclusion and non-global probes; CLI and [synthetic example](examples/correlated-quadratic.json) | [Correlated quadratic certificates](docs/CORRELATED-QUADRATIC.md) |
 | `fm_intervals/` | Exact pointwise consistency and coverage of supplied interval histories | [Interval histories](docs/INTERVAL-HISTORY.md) |
+| `fm_paths/` | Exact continuous path bounds and integral bands under supplied interval and rate premises | [Path bounds](docs/PATH-BOUNDS.md) |
 
 **Also included:** a command line for SL2(F5) research claims (`fm_research`), a draft-paper writer (`fm_mapper`) and
 a scalar one-step control helper (`fm_control`); see [research claims and write-ups](docs/guides/how-to/research-claims.md).

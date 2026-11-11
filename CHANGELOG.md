@@ -13,6 +13,8 @@ The format is based on Keep a Changelog.
   synthetic example (PRs #36 and #37).
 - `fm_intervals`: exact rational interval histories with pointwise consistency,
   coverage and receipt verification (PR #22).
+- `fm_paths`: exact continuous path bounds, integral bands and finite proof
+  verification (PR #23).
 
 - `fm_certificates`: exact affine implication, infeasibility and composition
   certificates (#21).

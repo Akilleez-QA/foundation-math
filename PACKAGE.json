@@ -16,7 +16,8 @@
     "exact_numerical_residual_enclosures",
     "exact_quadratic_minimax_certificates",
     "supplied_correlated_quadratic_certificates",
-    "exact_rational_interval_histories"
+    "exact_rational_interval_histories",
+    "exact_continuous_path_bounds"
   ],
   "scientific_acceptance": false,
   "copyright": "Copyright (c) 2026 Refrigeration AI, Inc.",

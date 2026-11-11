@@ -21,7 +21,7 @@ This document states what Foundation Math does, as inspected in the code at the 
 
 ### 1.2 Scope
 
-In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
+In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), continuous path bounds (`fm_paths`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
 
 Out of scope: any stdio JSON-RPC bridge or Cstack adapter (none exists in this repository), installation as a wheel, physical or engineering validation, and scientific acceptance of any claim.
 
@@ -29,7 +29,7 @@ Trust assumptions: one trusted local operator runs the code on files they chose.
 
 ### 1.3 System overview
 
-Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and nine Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
+Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and ten Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
 
 ## 2. Requirement record format
 
@@ -465,7 +465,79 @@ Interval operations and history analysis shall reject malformed containers, reve
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.10 Source tree, packaging and documentation integrity
+### 3.10 Continuous path bounds
+
+### REQ-MATH-040 — Path input admission
+
+`certify_path_bounds` shall accept exact `int`, `Fraction` and rational-string inputs within the contract bounds and raise `ValueError` for malformed problem inputs or nonrational text.
+
+- Rationale: Keep path premises exact and validate their shape and bounds.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-041 — Sharp path envelopes
+
+Path certification shall return exact piecewise-affine lower and upper envelopes and sharp integral extrema under the supplied interval constraints and directed rate premises, including uncovered times, zero rates and a zero horizon.
+
+- Rationale: Rate premises propagate bounds across gaps without adding observations.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-042 — Path contradiction witnesses
+
+Infeasible path certification shall return a rational time and indexed conflicting propagated bounds for contradictions at closed endpoints or across disjoint singleton constraints.
+
+- Rationale: A strict crossing excludes every path satisfying the supplied premises.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-043 — Integral band attainment
+
+A feasible receipt with an attainable integral band shall include a convex-combination path with an exact target integral inside the band, including coincident integral extrema.
+
+- Rationale: The linear integral functional attains every value between the envelope integrals.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-044 — Integral band exclusion
+
+A feasible receipt for an integral band disjoint from the sharp integral interval shall report `integral_status` as `excluded` while retaining path status `feasible`.
+
+- Rationale: Band exclusion is distinct from infeasibility of the path premises.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-045 — Path construction budget
+
+Path construction shall reject invalid pair budgets with `ValueError` and return `resource_unresolved` when the supplied pair budget is insufficient, with that outcome rejected as a certificate by the verifier.
+
+- Rationale: A construction limit proves neither feasibility nor infeasibility.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-046 — Path receipt verification
+
+`verify_path_bounds` shall check the finite envelope or contradiction proof against the supplied premises, accepting generated exact rationals and raising `ValueError` for altered proof fields, missing envelope crossings or an omitted band for a band receipt.
+
+- Rationale: Finite proof checks prevent unchecked extrema or integral claims from being accepted.
+- Derivation: `fm_paths/bounds.py`, `docs/PATH-BOUNDS.md`
+- Allocated to: SDD §4 Path bounds
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.11 Source tree, packaging and documentation integrity
 
 ### REQ-MATH-012 — Deterministic source packaging
 
@@ -507,7 +579,7 @@ The research layer, mapper and selected vendor modules shall load from this sour
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.11 Quadratic minimax certificates
+### 3.12 Quadratic minimax certificates
 
 ### REQ-MATH-070 — Problem admission
 
@@ -631,7 +703,7 @@ Mapper file handling shall reject artifact root escapes and refuse existing, dup
 - Verification: T — see verification matrix
 - Status: Baselined
 
-The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
+The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-040 to REQ-MATH-046, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
 
 ## 5. Non-functional requirements
 

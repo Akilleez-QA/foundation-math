@@ -87,6 +87,10 @@ Built on the model-admission stage of the same package. This second stage adds e
 
 Built on public main commit `84fadd3`. The addition contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
 
+## Exact continuous path bounds (2026-11-11)
+
+Built on public main commit `84fadd3`. The addition contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
 ## Correction note (2026-11-08)
 
 The summary at the top of this file predates PR #5 (2026-10-30), which removed
