@@ -1,26 +1,32 @@
 from fractions import Fraction
 import json
 import re
+import sys
 
 SCHEMA = "fm-correlated-quadratic/1"
 LIMITS = {"bytes": 65536, "depth": 16, "nodes": 4096, "dimension": 4,
-          "latent": 4, "scenarios": 6, "rows": 8,
+          "latent": 4, "scenarios": 6, "rows": 8, "pairs": 12,
           "probes": 12, "input_bits": 96, "intermediate_bits": 4096,
           "operations": 200000}
+
 
 class Invalid(ValueError):
     pass
 
+
 class Limit(Invalid):
     pass
+
 
 def require(condition, message):
     if not condition:
         raise Invalid(message)
 
+
 def keys(obj, expected, label):
     require(type(obj) is dict and set(obj) == set(expected.split()),
             label + ": unexpected or missing fields")
+
 
 class Arithmetic:
     def __init__(self):
@@ -83,6 +89,7 @@ class Arithmetic:
                     a[k][j] = a[j][k]
         return True
 
+
 def rational(value):
     require(type(value) in (int, str), "rational must be an integer or fraction string")
     if type(value) is int:
@@ -96,21 +103,26 @@ def rational(value):
         raise Limit("input rational size limit")
     return Fraction(n, d)
 
+
 def vector(value, n, label):
     require(type(value) is list and len(value) == n, label + ": vector shape")
     return [rational(x) for x in value]
+
 
 def matrix(value, m, n, label):
     require(type(value) is list and len(value) == m, label + ": matrix shape")
     return [vector(row, n, label) for row in value]
 
+
 def reject_number(_):
     raise Invalid("only integer JSON numbers are permitted")
+
 
 def parse_integer(token):
     if len(token) > 30:
         raise Limit("JSON integer length limit")
     return int(token)
+
 
 def unique_object(items):
     result = {}
@@ -118,6 +130,7 @@ def unique_object(items):
         require(k not in result, "duplicate JSON field")
         result[k] = v
     return result
+
 
 def decode(data):
     require(type(data) in (str, bytes), "input must be JSON text or bytes")
@@ -158,12 +171,14 @@ def decode(data):
             pending.extend(item)
     return value
 
+
 def textq(value):
     return str(value)
 
+
 def verify(data):
     obj = decode(data)
-    keys(obj, "schema model budget point probes", "root")
+    keys(obj, "schema model budget point upper lower probes offset_nonnegative", "root")
     require(obj["schema"] == SCHEMA, "unsupported schema")
     model = obj["model"]
     keys(model, "metric B d scenarios scope", "model")
@@ -201,8 +216,36 @@ def verify(data):
         q = ar.add(a0, ar.quad(metric, z))
         scenarios.append(dict(p=p, L=L, a0=a0, b=b, Q=Q, k=k, H=H, g=g, q=q))
 
-    def full_pair(raw):
-        keys(raw, "scenario u a c", "realized pair")
+    def bound_witness(raw, q, g, H):
+        keys(raw, "lambda y bound", "upper witness")
+        k = len(g)
+        lam, y, bound = rational(raw["lambda"]), vector(raw["y"], k, "y"), rational(raw["bound"])
+        require(lam >= 0, "lambda must be nonnegative")
+        K = [[ar.sub(lam if i == j else Fraction(0), H[i][j]) for j in range(k)] for i in range(k)]
+        require(ar.psd(K), "lambda I-H is not PSD")
+        require(ar.mv(K, y) == g, "singular range/linear-system witness fails")
+        value = ar.add(ar.add(q, lam), ar.dot(g, y))
+        require(bound >= value, "upper bound understates witness")
+        return bound
+
+    upper = None
+    if obj["upper"] is not None:
+        require(type(obj["upper"]) is list and len(obj["upper"]) == len(scenarios), "one upper per scenario required")
+        upper = max(bound_witness(raw, s["q"], s["g"], s["H"])
+                    for raw, s in zip(obj["upper"], scenarios))
+    offsets_checked = False
+    if obj["offset_nonnegative"] is not None:
+        raw_offsets = obj["offset_nonnegative"]
+        require(type(raw_offsets) is list and len(raw_offsets) == len(scenarios), "one offset witness per scenario required")
+        for raw, s in zip(raw_offsets, scenarios):
+            neg = lambda x: ar.sub(Fraction(0), x)
+            value = bound_witness(raw, neg(s["a0"]), [neg(x) for x in s["b"]],
+                                  [[neg(x) for x in row] for row in s["Q"]])
+            require(value <= 0, "offset nonnegativity not certified")
+        offsets_checked = True
+
+    def full_pair(raw, weighted=False):
+        keys(raw, "scenario u a c weight" if weighted else "scenario u a c", "realized pair")
         index = raw["scenario"]
         require(type(index) is int and 0 <= index < len(scenarios), "scenario index")
         s = scenarios[index]
@@ -223,7 +266,57 @@ def verify(data):
         _, _, cost = full_pair(raw)
         probe_results.append({"cost": textq(cost), "defeats_supplied_point": cost > budget,
                               "scope": model["scope"], "global_exclusion": False})
+    lower = None
+    if obj["lower"] is not None:
+        raw = obj["lower"]
+        keys(raw, "pairs mu v bound", "lower witness")
+        pairs = raw["pairs"]
+        require(type(pairs) is list and 1 <= len(pairs) <= LIMITS["pairs"], "lower pair count")
+        mu, v = vector(raw["mu"], nr, "mu"), vector(raw["v"], n, "v")
+        require(all(x >= 0 for x in mu), "row multipliers must be nonnegative")
+        cbar, constant, weight_sum = [Fraction(0) for _ in range(n)], Fraction(0), Fraction(0)
+        for pair in pairs:
+            a, c, _ = full_pair(pair, weighted=True)
+            weight = rational(pair["weight"])
+            require(weight >= 0, "simplex weights must be nonnegative")
+            weight_sum = ar.add(weight_sum, weight)
+            cbar = [ar.add(x, ar.mul(weight, cc)) for x, cc in zip(cbar, c)]
+            constant = ar.add(constant, ar.mul(weight, ar.add(a, ar.quad(metric, c))))
+        require(weight_sum == 1, "simplex weights must sum exactly to one")
+        correction = [ar.div(ar.dot([row[j] for row in rows], mu), Fraction(2)) for j in range(n)]
+        rhs = [ar.sub(mc, corr) for mc, corr in zip(ar.mv(metric, cbar), correction)]
+        require(ar.mv(metric, v) == rhs, "global lower stationarity identity fails")
+        value = ar.sub(ar.sub(constant, ar.dot(mu, bounds)), ar.quad(metric, v))
+        lower = rational(raw["bound"])
+        require(lower <= value, "lower bound overstates witness")
+    exact = model["scope"] == "exact_joint_image"
+    gap = None if upper is None or lower is None else ar.sub(upper, lower)
+    require(gap is None or gap >= 0, "inconsistent verified bounds")
     return {"schema": SCHEMA + "/receipt", "status": "verified_conditional_algebra",
             "scope": model["scope"], "budget": textq(budget), "row_feasible_point": True,
-            "probes": probe_results, "operations": ar.operations,
-            "premises": "Image exactness or outer coverage and the interpretation of fixed coordinates, metric and rows are caller premises. Only model admission, point row feasibility and supplied realized-pair probes are checked; no application validity or optimizer computation is established."}
+            "upper": None if upper is None else textq(upper),
+            "lower": None if lower is None else textq(lower),
+            "point_admitted_by_upper": upper is not None and upper <= budget,
+            "target_globally_excluded": exact and lower is not None and lower > budget,
+            "outer_image_globally_excluded": not exact and lower is not None and lower > budget,
+            "represented_bound_gap": None if gap is None else textq(gap),
+            "offsets_proved_nonnegative": offsets_checked, "probes": probe_results,
+            "operations": ar.operations,
+            "premises": "Image exactness or outer coverage and fixed coordinates, metric and rows are caller premises. No application validity or optimizer computation is established."}
+
+
+def main():
+    try:
+        require(len(sys.argv) == 2, "usage: python -m fm_correlated INPUT.json (or - for stdin)")
+        if sys.argv[1] == "-":
+            data = sys.stdin.buffer.read(LIMITS["bytes"] + 1)
+        else:
+            with open(sys.argv[1], "rb") as handle:
+                data = handle.read(LIMITS["bytes"] + 1)
+        result = verify(data)
+    except (Invalid, OSError, UnicodeError, json.JSONDecodeError, RecursionError) as error:
+        print(json.dumps({"status": "rejected_or_unresolved", "reason": str(error)}, sort_keys=True))
+        return 2
+    print(json.dumps(result, sort_keys=True, indent=2))
+    return 0
+

@@ -1,0 +1,88 @@
+{
+  "schema": "fm-correlated-quadratic/1",
+  "model": {
+    "metric": [
+      [
+        1
+      ]
+    ],
+    "B": [],
+    "d": [],
+    "scope": "exact_joint_image",
+    "scenarios": [
+      {
+        "p": [
+          0
+        ],
+        "L": [
+          [
+            1
+          ]
+        ],
+        "a0": 1,
+        "b": [
+          0
+        ],
+        "Q": [
+          [
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  "budget": 2,
+  "point": [
+    0
+  ],
+  "upper": [
+    {
+      "lambda": 1,
+      "y": [
+        0
+      ],
+      "bound": 2
+    }
+  ],
+  "lower": {
+    "pairs": [
+      {
+        "scenario": 0,
+        "u": [
+          -1
+        ],
+        "a": 1,
+        "c": [
+          -1
+        ],
+        "weight": "1/2"
+      },
+      {
+        "scenario": 0,
+        "u": [
+          1
+        ],
+        "a": 1,
+        "c": [
+          1
+        ],
+        "weight": "1/2"
+      }
+    ],
+    "mu": [],
+    "v": [
+      0
+    ],
+    "bound": 2
+  },
+  "probes": [],
+  "offset_nonnegative": [
+    {
+      "lambda": 0,
+      "y": [
+        0
+      ],
+      "bound": -1
+    }
+  ]
+}

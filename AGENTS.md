@@ -16,7 +16,7 @@ is needed for the documented workflow.
 - `fm_certificates/`, `fm_identifiability/`, `fm_enclosures/`, `fm_minimax/` and
   `fm_correlated/` provide exact affine certificates, affine-query witnesses,
   interval residual enclosures, quadratic minimax problem admission and
-  witnesses, and correlated quadratic model admission and probes.
+  witnesses, and correlated quadratic certificates.
 - `vendor/foundation-math-v014/` contains only the selected historical source subset.
 - `tests/` uses synthetic fixtures and Python's `unittest` runner.
 
