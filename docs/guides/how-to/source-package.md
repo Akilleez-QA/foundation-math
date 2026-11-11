@@ -5,6 +5,8 @@ explicit file set; a working Git checkout contains extra metadata and is not a
 valid input. The commands below export committed files without `.git`.
 Uncommitted changes are not included. Review and commit the intended candidate,
 including matching sizes and hashes in `SOURCE-MANIFEST.json`, before exporting.
+Refresh the manifest from the committed file list with
+`python3 -S -B -m tools.refresh_manifest`, then commit it.
 
 ```sh
 package_work=$(mktemp -d)

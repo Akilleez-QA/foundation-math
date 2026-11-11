@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "dual-repair-main-reconciled-20261107",
+  "candidate": "numerical-enclosures-v1-20261105",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],

@@ -13,6 +13,9 @@ is needed for the documented workflow.
 - `fm_research/` checks structured claims with exact kernels and dependency statuses.
 - `fm_mapper/` maps supplied evidence judgments and renders qualified draft reports.
 - `fm_control/` provides exact, model-conditional scalar one-step certificates.
+- `fm_certificates/`, `fm_identifiability/`, `fm_enclosures/` and `fm_optimization/`
+  verify exact affine certificates, affine-query witnesses, interval residual
+  enclosures and linear optimization certificates.
 - `vendor/foundation-math-v014/` contains only the selected historical source subset.
 - `tests/` uses synthetic fixtures and Python's `unittest` runner.
 
@@ -33,8 +36,14 @@ python3 -S -B -m unittest discover -s tests -t .
 python3 -S -B -O -m unittest discover -s tests -t .
 ```
 
+Both suites run the documentation trace check (`tests/test_trace.py`; alone:
+`python3 -S -B -m tools.check_trace`). After changing any shipped file, run
+`python3 -S -B -m tools.refresh_manifest` and commit `SOURCE-MANIFEST.json`.
+Behaviour changes update the SRS, verification matrix and data dictionary
+(`docs/README.md` lists them).
+
 CI uses Python 3.12 and runs normal and optimized tests, a Gitleaks job, and a
-conditional manifest-generation step. See [the workflow](.github/workflows/ci.yml).
+source-package check. See [the workflow](.github/workflows/ci.yml).
 Record the candidate commit, commands, resource limits, exit statuses, failures,
 and unrun scope. Missing, stale, or interrupted checks do not pass. Author tests
 are distinct from independent review and mathematical acceptance.
