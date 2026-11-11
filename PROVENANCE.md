@@ -75,6 +75,10 @@ Built on public main commit `84fadd3`. This first stage contains generic rationa
 
 Built on the problem-admission stage of the same package. This second stage adds exact point, dual and Farkas witness verification and the command line. It contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
 
+## Correlated quadratic model admission (2026-11-11)
+
+Built on public main commit `84fadd3`. This first stage contains generic exact rational mathematics, model admission, supplied-pair probes and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
 ## Correction note (2026-11-08)
 
 The summary at the top of this file predates PR #5 (2026-10-30), which removed
