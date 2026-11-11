@@ -23,11 +23,29 @@ Limit testing to systems and data you own or are authorized to assess. This poli
 does not authorize third-party testing or disruptive research workloads. Discuss
 disclosure with the maintainer before publishing working exploit details.
 
-Support is best effort; this policy promises no supported-version window,
-response deadline, or bounty. Identify the exact commit rather than assuming
-an older candidate is covered. Ordinary correctness defects without sensitive
+## Supported versions
+
+Derived from `git tag --list`, which is empty at 2026-11-08: no release tag exists.
+
+| Version | Supported |
+|---|---|
+| Latest `main` commit | Yes, best effort |
+| Any earlier commit or source candidate | No |
+
+Support is best effort; this policy promises no response deadline or bounty.
+Identify the exact commit rather than assuming an older candidate is covered. Ordinary correctness defects without sensitive
 security implications can use the bug report form.
 
 Finite check receipts and model-conditional certificates have the limits described
 in [README.md](README.md). A passing check is not scientific acceptance or
 physical equipment-safety approval.
+
+## Security posture
+
+Foundation Math has no network access, credentials, plugins or external solvers.
+The CLIs read only caller-named files and create only fresh caller-named outputs;
+mapper artifact paths cannot escape their root. JSON inputs reject floats,
+nonfinite numbers and (for the mapper) duplicate keys, and all inputs have size
+and bit limits. The Python APIs trust their in-process caller and are not
+sandboxes. CI runs Gitleaks on every push and pull request. Details:
+[software management plan §7](docs/plan/software-management-plan.md#7-security-privacy-and-secure-coding).

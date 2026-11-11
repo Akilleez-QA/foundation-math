@@ -31,3 +31,38 @@ body:
     attributes:
       label: Evidence and scope
       description: Include relevant output and failed or unrun checks. Distinguish computed results from supplied judgments and model assumptions.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity (your assessment)
+      description: Definitions are in docs/plan/software-management-plan.md section 9. Report security issues privately per SECURITY.md.
+      options:
+        - S1 wrong result presented as valid, data loss or security exposure
+        - S2 feature unusable, no workaround
+        - S3 degraded, workaround exists
+        - S4 cosmetic or documentation
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Any way to avoid the problem, or "none known".
+  - type: dropdown
+    id: found_during
+    attributes:
+      label: Found during
+      options:
+        - use
+        - development
+        - test
+        - review
+        - release audit
+  - type: textarea
+    id: impact
+    attributes:
+      label: Safety or security impact
+      description: '"None known" is a valid answer.'
+  - type: markdown
+    attributes:
+      value: 'Maintainer closure record: the closing pull request names the assignee, the disposition (accepted, rejected or duplicate), the corrective action, the verifying test and the commit or candidate that contains the fix.'

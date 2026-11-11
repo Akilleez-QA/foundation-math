@@ -67,13 +67,19 @@ The addition contains generic rational mathematics and synthetic tests.
 Existing runtime modules and their source-binding scheme remain unchanged.
 The accompanying contract states the finite checks and their limitations.
 
-## Additive public reconciliation (2026-11-07)
+## Exact fixed-prefix continuation (2026-11-11)
 
-This candidate combines the preceding public addition with public main commit
-`53a58dde072b1d3f92836a1365f88f364b880a33`. Existing mathematical source, tests,
-contracts and community files are retained byte-for-byte. Only shared overview,
-license-scope and package metadata are reconciled. Earlier dated descriptions
-and verification statements above retain their historical scope; they do not
-certify this combined candidate. Its exact source set is pinned separately by
-`SOURCE-MANIFEST.json`; author checks, independent review and scientific
-acceptance remain distinct.
+Built on public main commit `84fadd3`. The addition contains generic rational mathematics and synthetic tests. Existing runtime modules and their source-binding scheme remain unchanged. The accompanying contract states the finite checks and their limitations.
+
+## Correction note (2026-11-08)
+
+The summary at the top of this file predates PR #5 (2026-10-30), which removed
+code comments from several retained files. `SOURCE-MANIFEST.json` is the
+authority for byte preservation. At commit `53a58dd` it marks these selected
+files `byte_preserved: true`: five `fm_research` modules (`__init__`, `field`,
+`p1`, `twoi`, `vendor`), `fm_mapper/__init__.py`, and four vendor files
+(both `__init__.py` files, `character_ring/catalog.json`,
+`character_ring/producer.py`). `fm_research/rank.py`, `fm_research/problem.py`,
+`fm_mapper/core.py`, `fm_mapper/__main__.py` and the other five vendor files
+are `byte_preserved: false`; their rows keep the original `source_sha256`.
+The earlier sections are kept as written.
