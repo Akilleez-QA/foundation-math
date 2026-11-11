@@ -21,6 +21,7 @@ These keep their uppercase names for inbound links.
 - [Affine certificates](AFFINE-CERTIFICATES.md)
 - [Exact affine-query witnesses](QUERY-IDENTIFIABILITY.md)
 - [Exact numerical residual and error enclosures](NUMERICAL-ENCLOSURES.md)
+- [Correlated quadratic model admission](CORRELATED-QUADRATIC.md)
 - [Evidence mapper schema and API](EVIDENCE-PAPER.md)
 - [Scalar one-step certificates](SCALAR-CONTROL.md)
 - [Research source binding](SOURCE-BINDING.md)
