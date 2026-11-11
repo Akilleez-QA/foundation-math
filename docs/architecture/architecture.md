@@ -15,9 +15,9 @@
 
 ## 1. Purpose and design boundary
 
-This document explains how Foundation Math meets its [requirements](../requirements/requirements.md), for a reader about to change the code. Foundation Math is a Python 3.10+ source tree that uses only the standard library and a selected local vendor subset. It implements finite exact checks, supplied-evidence mapping, and four standalone exact certificate APIs.
+This document explains how Foundation Math meets its [requirements](../requirements/requirements.md), for a reader about to change the code. Foundation Math is a Python 3.10+ source tree that uses only the standard library and a selected local vendor subset. It implements finite exact checks, supplied-evidence mapping, and five standalone exact certificate APIs.
 
-The boundary is the repository. There is no bridge package, stdio JSON-RPC server or Cstack adapter here. Callers use two command-line programs or import the Python packages. Nothing reads the network, starts a solver or writes outside paths the caller names.
+The boundary is the repository. There is no bridge package, stdio JSON-RPC server or Cstack adapter here. Callers use four command-line programs or import the Python packages. Nothing reads the network, starts a solver or writes outside paths the caller names.
 
 ## 2. Design decisions and trade-offs
 
@@ -54,12 +54,15 @@ flowchart LR
   cert[fm_certificates.affine]
   ident[fm_identifiability]
   encl[fm_enclosures.numerical]
+  minmain[fm_minimax __main__ CLI] --> minimax[fm_minimax.core]
+  cmain[fm_correlated __main__ CLI] --> corr[fm_correlated.quadratic]
+  intervals[fm_intervals.history]
   paths[fm_paths.bounds]
   pkg[tools/package_source] -.manifest.-> manifest[(SOURCE-MANIFEST.json)]
   trace[tools/check_trace] -.reads.-> docs[(docs/)]
 ```
 
-The five certificate packages (`fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_paths`) import nothing from the rest of the repository.
+The eight certificate packages (`fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`) import nothing from the rest of the repository.
 
 Runtime (data flow) view of the research CLI:
 
@@ -104,6 +107,9 @@ Paths come from `git ls-files`. "Infrastructure" marks plumbing that implements 
 | Affine certificates | `fm_certificates/affine.py` | System admission, digest, implication, infeasibility and composition checks | `AffineSystem` + multipliers → certificate or bool | REQ-MATH-014, REQ-MATH-015, REQ-MATH-016, REQ-MATH-017, REQ-MATH-018 |
 | Affine-query witnesses | `fm_identifiability/__init__.py` | Model admission and digest; two-point and constancy witness checks | `Model` + witness → result record | REQ-MATH-019, REQ-MATH-020, REQ-MATH-021 |
 | Interval enclosures | `fm_enclosures/numerical.py` | Residual enclosure, dominance margin, forward bound, recompute verification | interval matrix, candidate, rhs → `LinearResidualEnclosure` | REQ-MATH-022, REQ-MATH-023, REQ-MATH-024, REQ-MATH-025 |
+| Quadratic minimax certificates | `fm_minimax/core.py`, `fm_minimax/__main__.py` | Exact admission, equality obstructions, common row reduction, point/dual/Farkas checks, KKT thresholds and JSON CLI | problem dict + optional witness → result dict; stdin JSON → stdout JSON | REQ-MATH-070, REQ-MATH-071, REQ-MATH-072, REQ-MATH-073, REQ-MATH-074, REQ-MATH-075, REQ-MATH-076, REQ-MATH-077, REQ-MATH-078, REQ-MATH-079 |
+| Correlated quadratic certificates | `fm_correlated/quadratic.py`, `fm_correlated/__main__.py` | Model admission, row feasibility, upper, lower and offset witnesses, scoped exclusion and non-global probes | JSON text or bytes, file or stdin → conditional receipt dict | REQ-MATH-080, REQ-MATH-081, REQ-MATH-082, REQ-MATH-083, REQ-MATH-084, REQ-MATH-085, REQ-MATH-086, REQ-MATH-087, REQ-MATH-088, REQ-MATH-089, REQ-MATH-090 |
+| Interval histories | `fm_intervals/history.py` | Exact interval intersections, horizon partition, coverage, consistency and receipt recomputation | horizon, observations → dict receipt; receipt → bool | REQ-MATH-030, REQ-MATH-031, REQ-MATH-032, REQ-MATH-033, REQ-MATH-034, REQ-MATH-035, REQ-MATH-036, REQ-MATH-037 |
 | Path bounds | `fm_paths/bounds.py` | Exact continuous envelopes, integral extrema, band witnesses and finite proof verification | interval records, horizon, directed rates, optional integral band → receipt dict or bool | REQ-MATH-040, REQ-MATH-041, REQ-MATH-042, REQ-MATH-043, REQ-MATH-044, REQ-MATH-045, REQ-MATH-046 |
 | Packaging | `tools/package_source.py`, `SOURCE-MANIFEST.json`, `PACKAGE.json` | Exact file-set and hash check; deterministic stored ZIP outside the tree | source tree → ZIP | REQ-MATH-012, REQ-MATH-028 |
 | Documentation tools | `tools/check_trace.py`, `tests/test_trace.py` | Requirement, design, test, data-dictionary and link consistency | docs + tests → problem list | REQ-MATH-027 |
@@ -120,7 +126,7 @@ Research CLI: `main` loads the spec, selects the requested claim (or all), adds 
 
 Mapper CLI: `load_bundle` validates the whole bundle before any artifact read. `render_paper` maps again from the original bundle and artifact bytes; it never accepts an edited map. Both output files are opened with mode `x`, so an existing file is never overwritten. The two outputs are not written atomically as a pair.
 
-Certificate APIs: each call revalidates its inputs and recomputes. Results are frozen dataclasses.
+Certificate APIs: each call revalidates its inputs and recomputes. Results are frozen dataclasses except for the minimax result dictionary.
 
 ## 6. Interfaces
 

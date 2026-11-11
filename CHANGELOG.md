@@ -7,6 +7,12 @@ The format is based on Keep a Changelog.
 
 ### Added
 
+- `fm_minimax`: exact quadratic minimax admission, arithmetic limits, equality obstructions, common row reduction, point, dual and Farkas witnesses, KKT thresholds and JSON CLI (PRs #34 and #35)
+- `fm_correlated`: bounded exact correlated quadratic model admission, row feasibility,
+  upper, lower and offset witnesses, scoped exclusion, non-global probes, CLI and
+  synthetic example (PRs #36 and #37).
+- `fm_intervals`: exact rational interval histories with pointwise consistency,
+  coverage and receipt verification (PR #22).
 - `fm_paths`: exact continuous path bounds, integral bands and finite proof
   verification (PR #23).
 

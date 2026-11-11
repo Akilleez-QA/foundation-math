@@ -14,6 +14,9 @@
     "exact_affine_implication_certificates",
     "exact_affine_query_witnesses",
     "exact_numerical_residual_enclosures",
+    "exact_quadratic_minimax_certificates",
+    "supplied_correlated_quadratic_certificates",
+    "exact_rational_interval_histories",
     "exact_continuous_path_bounds"
   ],
   "scientific_acceptance": false,

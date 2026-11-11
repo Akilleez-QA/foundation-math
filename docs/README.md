@@ -18,11 +18,14 @@ example.
 
 These keep their uppercase names for inbound links.
 
+- [Exact rational interval histories](INTERVAL-HISTORY.md)
 - [Exact continuous path bounds](PATH-BOUNDS.md)
 
 - [Affine certificates](AFFINE-CERTIFICATES.md)
 - [Exact affine-query witnesses](QUERY-IDENTIFIABILITY.md)
 - [Exact numerical residual and error enclosures](NUMERICAL-ENCLOSURES.md)
+- [Exact quadratic minimax certificates](QUADRATIC-MINIMAX.md)
+- [Correlated quadratic supplied certificates](CORRELATED-QUADRATIC.md)
 - [Evidence mapper schema and API](EVIDENCE-PAPER.md)
 - [Scalar one-step certificates](SCALAR-CONTROL.md)
 - [Research source binding](SOURCE-BINDING.md)
