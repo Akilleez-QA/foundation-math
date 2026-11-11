@@ -18,7 +18,7 @@
 | Side | Entity | Owns |
 |---|---|---|
 | Caller | Python code running in the same interpreter, with the repository root on `sys.path` | Choosing the expected model or system, retaining it independently of witnesses, resource limits, interpretation |
-| Foundation Math | Packages `fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures` | Validation, exact computation, result records |
+| Foundation Math | Packages `fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax` | Validation, exact computation, result records |
 
 The caller is trusted. These APIs are not sandboxes: Python reflection can bypass frozen dataclasses, and monkey-patching is outside the trust boundary.
 
@@ -48,6 +48,7 @@ Field types, units and limits for every name below are in the [data dictionary](
 | | `compose_implications(system, inner, outer)` | `Implication` | same |
 | `fm_identifiability` | `Model(C, z, L, h, q, d=0)`, `verify_pair(model, PairWitness(...))`, `verify_constancy(model, ConstancyWitness(...))` | `PairResult`, `ConstancyResult` | [query identifiability](../QUERY-IDENTIFIABILITY.md) |
 | `fm_enclosures` | `enclose_linear_residual(matrix, candidate, rhs)`, `verify_linear_residual(result, matrix, candidate, rhs)` | `LinearResidualEnclosure`, bool | [numerical enclosures](../NUMERICAL-ENCLOSURES.md) |
+| `fm_minimax` | `certify(problem)` | dict with status `invalid_input`, `infeasible` or `unresolved`; no witness input | [quadratic minimax problem admission](../QUADRATIC-MINIMAX.md) |
 
 ## 4. Errors and result semantics
 

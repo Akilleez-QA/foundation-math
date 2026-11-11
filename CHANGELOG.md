@@ -7,6 +7,8 @@ The format is based on Keep a Changelog.
 
 ### Added
 
+- `fm_minimax`: exact quadratic minimax problem admission, arithmetic limits, equality obstructions and common row reduction (PR #34).
+
 - `fm_certificates`: exact affine implication, infeasibility and composition
   certificates (#21).
 - `fm_identifiability`: exact affine-query pair and constancy witnesses (#24).
