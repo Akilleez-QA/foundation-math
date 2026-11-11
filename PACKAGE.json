@@ -1,6 +1,6 @@
 {
   "name": "foundation-math",
-  "candidate": "interval-history-v1-20261105-main-53a58dd-20261107",
+  "candidate": "numerical-enclosures-v1-20261105",
   "distribution": "explicit-allowlist-source-zip",
   "python_requires": ">=3.10",
   "dependencies": [],
