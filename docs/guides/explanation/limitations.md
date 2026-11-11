@@ -6,7 +6,7 @@ This page is the substitute for a hazard report (SWEHB 5.24 is not applicable be
 
 - `fm_research`: a status per claim. `certified` means a finite exact check passed under its admitted (`cited`) prerequisites. It does not prove the claim's prose, and `cited` premises are admitted, not proved.
 - `fm_mapper`: a deterministic bookkeeping report over judgments **you supplied**. `supported` means support under those judgments at the stated scope. Every paper is `draft_not_scientifically_accepted`.
-- `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`: exact checks of supplied witnesses, exact enclosures or problem admission and equality obstructions under a stated mathematical model. Each is a conditional mathematical statement about the numbers given.
+- `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`, `fm_prefix`: exact checks of supplied witnesses, exact enclosures or problem admission and equality obstructions under a stated mathematical model. Each is a conditional mathematical statement about the numbers given.
 
 None of these is an engineering approval, a safety determination, a regulatory compliance check or scientific acceptance.
 
@@ -24,7 +24,7 @@ The only embedded reference table is the SL2(F5) character catalog. Its source, 
 
 ## Use in safety, engineering or regulated decisions
 
-Do not use any output as the sole basis for such a decision. If you give `fm_control`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths` or `fm_optimization` numbers physical meaning, you must establish model validity, units and measurement uncertainty yourself and check the result against an authoritative engineering method. Such use moves your application to a higher assurance class (Class D analog or above) that this project does not provide.
+Do not use any output as the sole basis for such a decision. If you give `fm_control`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization` or `fm_prefix` numbers physical meaning, you must establish model validity, units and measurement uncertainty yourself and check the result against an authoritative engineering method. Such use moves your application to a higher assurance class (Class D analog or above) that this project does not provide.
 
 ## Misuse and security considerations
 

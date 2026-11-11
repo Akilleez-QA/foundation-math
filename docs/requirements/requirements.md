@@ -21,7 +21,7 @@ This document states what Foundation Math does, as inspected in the code at the 
 
 ### 1.2 Scope
 
-In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), continuous path bounds (`fm_paths`), linear optimization certificates (`fm_optimization`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
+In scope: the exact research kernels and ProblemSpec gate (`fm_research`), the evidence mapper (`fm_mapper`), the scalar one-step certificates (`fm_control`), affine certificates (`fm_certificates`), affine-query witnesses (`fm_identifiability`), interval residual enclosures (`fm_enclosures`), quadratic minimax certificates (`fm_minimax`), correlated quadratic certificates (`fm_correlated`), exact interval histories (`fm_intervals`), continuous path bounds (`fm_paths`), linear optimization certificates (`fm_optimization`), fixed-prefix continuation (`fm_prefix`), the selected v0.14 vendor subset, the source packager and the documentation trace check.
 
 Out of scope: any stdio JSON-RPC bridge or Cstack adapter (none exists in this repository), installation as a wheel, physical or engineering validation, and scientific acceptance of any claim.
 
@@ -29,7 +29,7 @@ Trust assumptions: one trusted local operator runs the code on files they chose.
 
 ### 1.3 System overview
 
-Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and eleven Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
+Foundation Math is a Python 3.10+ standard-library source tree. It exposes four command-line programs and twelve Python packages (`fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`, `fm_prefix`). The [design description](../architecture/architecture.md) shows the components. The [process interface ICD](../icd/icd-stdio.md) and the [Python API ICD](../icd/icd-python-api.md) define the external interfaces. The [data dictionary](../data/data-dictionary.md) defines every input and output field.
 
 ## 2. Requirement record format
 
@@ -619,7 +619,139 @@ Box augmentation shall append upper-coordinate rows followed by lower-coordinate
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.12 Source tree, packaging and documentation integrity
+### 3.12 Fixed-prefix continuation
+
+### REQ-MATH-060 — Fixed-prefix accounting
+
+`Continuation` shall compute the exact state, spent cost, moment residual, minimum tail cost and reserve for the supplied fixed prefix.
+
+- Rationale: Retain the supplied prefix in the continuation calculation.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-061 — Conditional state queries
+
+`future(t)` shall return the conditional center and shape used by `target` for exact reachability and extra cost and by `row` for containment using nonnegative signed slack and squared radius.
+
+- Rationale: Query the conditional image without irrational square roots.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-062 — Closed reachability boundaries
+
+`target` and `row` shall include the exact budget boundary, with target minimum total cost including prefix cost and targets outside the shape range reported as `outside_range`.
+
+- Rationale: Preserve closed boundaries and singular range restrictions.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-063 — Fixed-prefix budget failure
+
+`Continuation` shall report `no_continuation_budget` when the fixed prefix and minimum tail exceed the budget, retain the minimum tail representative and reject `future` queries without replacing the prefix.
+
+- Rationale: An easier prefix is a different supplied problem.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-064 — Moment range feasibility
+
+`Continuation` shall handle duplicate moment rows and report `no_continuation_moment_range` with no minimum tail cost or representative when the residual is inconsistent.
+
+- Rationale: Dependent moments need exact range checking.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-065 — Empty tail
+
+`Continuation` shall admit an empty tail with zero minimum tail cost when the prefix satisfies the moment and budget, and report moment range failure for an unsatisfied moment.
+
+- Rationale: The terminal cut leaves no input freedom.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-066 — Nilpotent state propagation
+
+`future` shall compute the conditional state image for nilpotent state dynamics, including singular shapes in target and row queries.
+
+- Rationale: Nilpotence permits exact polynomial state propagation.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-067 — Polynomial moment representative
+
+`Continuation` shall compute the minimum tail representative and conditional center for polynomial moments, with zero reserve restricting reachable targets to the center.
+
+- Rationale: An exhausted budget leaves only the minimum tail.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-068 — Multiple-input weighted norm
+
+`Continuation` shall compute minimum tail costs and representatives using the supplied symmetric positive definite input norm for multiple inputs.
+
+- Rationale: The input norm determines the moment cost.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-069 — Piecewise polynomial prefix
+
+`Continuation` shall integrate fixed prefix polynomials in absolute time across the supplied pieces for state, moment residual and spent cost.
+
+- Rationale: Piece boundaries do not reset polynomial time.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-091 — Supported dimension and degree
+
+`Continuation` shall support a four-state nilpotent chain with a cubic moment polynomial in exact minimum tail and future calculations.
+
+- Rationale: Exercise the supported state dimension and polynomial degree.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-092 — Prefix moment memory
+
+`Continuation` shall retain the moment residual when equal prefix states and spent costs arise from different fixed prefixes, yielding distinct conditional terminal centers.
+
+- Rationale: State and spent cost alone do not determine continuation under moments.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### REQ-MATH-093 — Prefix input rejection
+
+`fm_prefix` shall raise `ValueError` for unsupported scalar types or input bit sizes, malformed dimensions, nonnilpotent dynamics, invalid norms, time or budget bounds, incomplete or overlapping prefixes, excessive polynomial degree or piece count, and malformed target or row queries.
+
+- Rationale: Reject unsupported inputs without approximate arithmetic.
+- Derivation: `fm_prefix/__init__.py`, `docs/FIXED-PREFIX.md`
+- Allocated to: SDD §4 Fixed-prefix continuation
+- Verification: T — see verification matrix
+- Status: Baselined
+
+### 3.13 Source tree, packaging and documentation integrity
 
 ### REQ-MATH-012 — Deterministic source packaging
 
@@ -661,7 +793,7 @@ The research layer, mapper and selected vendor modules shall load from this sour
 - Verification: T — see verification matrix
 - Status: Baselined
 
-### 3.13 Quadratic minimax certificates
+### 3.14 Quadratic minimax certificates
 
 ### REQ-MATH-070 — Problem admission
 
@@ -785,7 +917,7 @@ Mapper file handling shall reject artifact root escapes and refuse existing, dup
 - Verification: T — see verification matrix
 - Status: Baselined
 
-The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-040 to REQ-MATH-046, REQ-MATH-050 to REQ-MATH-057, REQ-MATH-070 to REQ-MATH-079 and REQ-MATH-080 to REQ-MATH-090 are defined in the [Python API ICD](../icd/icd-python-api.md).
+The Python library interfaces of REQ-MATH-013 to REQ-MATH-025, REQ-MATH-030 to REQ-MATH-037, REQ-MATH-040 to REQ-MATH-046, REQ-MATH-050 to REQ-MATH-057, REQ-MATH-060 to REQ-MATH-069, REQ-MATH-070 to REQ-MATH-079, REQ-MATH-080 to REQ-MATH-093 are defined in the [Python API ICD](../icd/icd-python-api.md).
 
 ## 5. Non-functional requirements
 

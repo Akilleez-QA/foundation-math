@@ -18,7 +18,7 @@
 | Side | Entity | Owns |
 |---|---|---|
 | Caller | Python code running in the same interpreter, with the repository root on `sys.path` | Choosing the expected model or system, retaining it independently of witnesses, resource limits, interpretation |
-| Foundation Math | Packages `fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization` | Validation, exact computation, result records |
+| Foundation Math | Packages `fm_research`, `fm_mapper`, `fm_control`, `fm_certificates`, `fm_identifiability`, `fm_enclosures`, `fm_minimax`, `fm_correlated`, `fm_intervals`, `fm_paths`, `fm_optimization`, `fm_prefix` | Validation, exact computation, result records |
 
 The caller is trusted. These APIs are not sandboxes: Python reflection can bypass frozen dataclasses, and monkey-patching is outside the trust boundary.
 
@@ -53,6 +53,7 @@ Field types, units and limits for every name below are in the [data dictionary](
 | `fm_intervals` | `interval(bounds)`, `intersection(intervals)`, `analyze_history(horizon, observations)`, `verify_history(horizon, observations, receipt)` | tuple of `Fraction` endpoints, tuple or `None`, dict, bool | [interval histories](../INTERVAL-HISTORY.md) |
 | `fm_paths` | `certify_path_bounds(records, horizon, up, down, integral_band=None, max_pairs=200000)`, `verify_path_bounds(records, horizon, up, down, receipt, integral_band=None)` | receipt dict, bool | [path bounds](../PATH-BOUNDS.md) |
 | `fm_optimization` | `LinearProgram(context, dimension, inequalities, equalities, objective, offset=0)`, `program_digest(program)`, `augment_box(program, lower, upper)`, `repair_dual(program, inequality_candidates, equality_candidates, equality_correction=None, box=None)`, `verify_dual_bound(expected, certificate)`, `verify_attainment(expected, certificate, point)` | `LinearProgram`, str, `DualBound`, bool | [linear optimization certificates](../DUAL-REPAIR.md) |
+| `fm_prefix` | `Continuation(*, H, B, initial, R, D, moment, budget, end, cut, prefix)`, `Continuation.future(time)`, `Continuation.minimum_tail_value(time)`, `ReachableSet.target(value)`, `ReachableSet.row(coefficients, bound)` | `Continuation`, `ReachableSet`, tuple, `TargetResult`, `RowResult` | [fixed-prefix continuation](../FIXED-PREFIX.md) |
 
 ## 4. Errors and result semantics
 
@@ -92,6 +93,7 @@ Exact types only (`int`, `Fraction`; booleans and subclasses rejected), immutabl
 | REQ-MATH-030 to REQ-MATH-037 | §3 interval history row |
 | REQ-MATH-040 to REQ-MATH-046 | §3 path row |
 | REQ-MATH-050 to REQ-MATH-057 | §3 optimization row |
+| REQ-MATH-060 to REQ-MATH-069, REQ-MATH-091 to REQ-MATH-093 | §3 fixed-prefix row |
 | REQ-MATH-070 to REQ-MATH-079 | §3 minimax row; JSON CLI in the linked contract |
 
 ## 8. Change acceptance

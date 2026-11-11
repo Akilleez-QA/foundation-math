@@ -17,6 +17,9 @@ The format is based on Keep a Changelog.
   verification (PR #23).
 - `fm_optimization`: exact linear optimization dual repair, upper-bound and
   attainment certificates (PR #26).
+- `fm_prefix`: exact fixed-prefix continuation feasibility and conditional state
+  queries (PR #28).
+
 - `fm_certificates`: exact affine implication, infeasibility and composition
   certificates (#21).
 - `fm_identifiability`: exact affine-query pair and constancy witnesses (#24).
